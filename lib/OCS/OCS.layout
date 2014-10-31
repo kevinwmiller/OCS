@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="..\..\include\OCS\Components\Component.cc" open="0" top="0" tabpos="23" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1029" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Systems.hpp" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Systems\System.hpp" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1351" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Utilities\StringUtilities.hpp" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="775" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Utilities\Serializer.cc" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1263" topLine="9" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Messaging.hpp" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Utilities\FileParser.hpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="31001" topLine="823" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Systems\SystemManager.hpp" open="0" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Utilities\StringUtilities.cc" open="1" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1127" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Misc\Config.hpp" open="0" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1087" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Utilities\FileParser.cc" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="59341" topLine="1731" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Messaging\Message.cc" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1174" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Components.hpp" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Objects\ObjectManager.hpp" open="0" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1181" topLine="96" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Objects\ObjectPrototypeLoader.cc" open="0" top="0" tabpos="24" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="621" topLine="4" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\States\StateManager.hpp" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1207" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Objects\ObjectPrototypeLoader.hpp" open="0" top="0" tabpos="22" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Components\ComponentArray.hpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\States\State.cc" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1044" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\States\State.hpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1422" topLine="19" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Components\Component.hpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2148" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\States.hpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Systems\SystemManager.cc" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1245" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Utilities\Serializer.hpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6723" topLine="154" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Objects.hpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\include\OCS\Objects\Object.hpp" open="0" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1106" topLine="0" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>

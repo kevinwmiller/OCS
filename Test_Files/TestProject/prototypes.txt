@@ -1,0 +1,39 @@
+[Prototypes]
+	"Prototypes" : { "Other", "Test1", "Test2", "Test3" }
+[/Prototypes]
+
+[Test1]	
+	"Components" : {"Position", "Name"}
+	
+	"Position" : "5 65"
+	"Name" : "Test1"
+[/Test1]
+
+[Other]	
+	"Components" : {"Position", "Name"}
+	
+	"Position" : "5 65"
+	"Name" : "Other"
+[/Other]
+
+[Test2]	
+	"Components" : {"Position", "Collidable"}
+	
+	"Position" : "2 -5.76"
+	"Collidable" : "0 0 50 40"
+[/Test2]
+
+[Test3]	
+	"Components" : {"Position", "Motion"}
+	
+	"Position" : "1786 -57.53"
+	"Motion" : "650 0"
+[/Test3]
+
+[Test4]	
+	"Components" : {"Name", "Motion"}
+	
+	"Name" : "Test4"
+	"Motion" : "650 0"
+[/Test4]
+

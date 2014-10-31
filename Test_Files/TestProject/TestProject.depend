@@ -1,0 +1,514 @@
+# depslib dependency file v1.0
+1393204990 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\components\component.cc
+	"OCS/Components/Component.hpp"
+
+1393205412 c:\users\kevin\documents\programming projects\ocs\include\ocs\components\component.hpp
+	"OCS/Misc/Config.hpp"
+	"OCS/Utilities/Serializer.hpp"
+
+1393122379 c:\users\kevin\documents\programming projects\ocs\include\ocs\misc\config.hpp
+	<cstdint>
+	<memory>
+
+1393122530 c:\users\kevin\documents\programming projects\ocs\include\ocs\utilities\serializer.hpp
+	<set>
+	<sstream>
+	<string>
+
+1393136335 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\messaging\message.cc
+	<OCS/Messaging/Message.hpp>
+	<OCS/Messaging/Transceiver.hpp>
+	<OCS/Utilities/Timestamp.hpp>
+
+1393136199 c:\users\kevin\documents\programming projects\ocs\include\ocs\messaging\message.hpp
+	<cstdint>
+	<iostream>
+	<string>
+
+1393136199 c:\users\kevin\documents\programming projects\ocs\include\ocs\messaging\transceiver.hpp
+	<cstdint>
+	"OCS/Misc/Config.hpp"
+
+1393122540 c:\users\kevin\documents\programming projects\ocs\include\ocs\utilities\timestamp.hpp
+	<string>
+
+1393135788 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\messaging\messagehub.cc
+	"OCS/Messaging/Messagehub.hpp"
+
+1393136224 c:\users\kevin\documents\programming projects\ocs\include\ocs\messaging\messagehub.hpp
+	<iostream>
+	<memory>
+	<set>
+	<stack>
+	<unordered_map>
+	<vector>
+	"OCS/Messaging/Message.hpp"
+	"OCS/Messaging/Transceiver.hpp"
+	"OCS/Utilities/PackedArray.hpp"
+	"OCS/Misc/NonCopyable.hpp"
+
+1393122567 c:\users\kevin\documents\programming projects\ocs\include\ocs\utilities\packedarray.hpp
+	<vector>
+	<stacK>
+	<utility>
+	<stdint.h>
+	<initializer_list>
+	<iostream>
+
+1393122373 c:\users\kevin\documents\programming projects\ocs\include\ocs\misc\noncopyable.hpp
+
+1393205853 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\objects\objectmanager.cc
+	"OCS/Objects/Objectmanager.hpp"
+
+1393211318 c:\users\kevin\documents\programming projects\ocs\include\ocs\objects\objectmanager.hpp
+	<map>
+	<queue>
+	<utility>
+	<OCS/Components/Component.hpp>
+	<OCS/Misc/NonCopyable.hpp>
+	<OCS/Objects/Object.hpp>
+	<OCS/Components/ComponentArray.hpp>
+	<OCS/Misc/Config.hpp>
+
+1393205769 c:\users\kevin\documents\programming projects\ocs\include\ocs\objects\object.hpp
+	<unordered_map>
+	<OCS/Misc/Config.hpp>
+	<OCS/Components/ComponentArray.hpp>
+
+1393204009 c:\users\kevin\documents\programming projects\ocs\include\ocs\components\componentarray.hpp
+	<iostream>
+	<OCS/Components/Component.hpp>
+	<OCS/Utilities/PackedArray.hpp>
+
+1393211651 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\objects\objectprototypeloader.cc
+	"OCS/Objects/ObjectPrototypeLoader.hpp"
+	"OCS/Objects/ObjectManager.hpp"
+	"OCS/Test_Files/SampleComponents.hpp"
+	"OCS/Utilities/FileParser.hpp"
+
+1393211284 c:\users\kevin\documents\programming projects\ocs\include\ocs\objects\objectprototypeloader.hpp
+	<string>
+	"OCS/Objects/ObjectManager.hpp"
+
+1393122595 c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\samplecomponents.hpp
+	<sstream>
+	<string>
+	"OCS/Components/Component.hpp"
+
+1393122526 c:\users\kevin\documents\programming projects\ocs\include\ocs\utilities\fileparser.hpp
+	<string>
+	<vector>
+	<list>
+	<iostream>
+	<sstream>
+	<fstream>
+	<typeinfo>
+
+1393122479 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\states\state.cc
+	"OCS/States/State.hpp"
+
+1393122464 c:\users\kevin\documents\programming projects\ocs\include\ocs\states\state.hpp
+	"OCS/Objects/ObjectManager.hpp"
+	"OCS/Messaging/MessageHub.hpp"
+	"OCS/Systems/SystemManager.hpp"
+	"OCS/Utilities/Timer.hpp"
+
+1393133838 c:\users\kevin\documents\programming projects\ocs\include\ocs\systems\systemmanager.hpp
+	<list>
+	<queue>
+	<map>
+	"OCS/Systems/System.hpp"
+	"OCS/Misc/Config.hpp"
+	"OCS/Misc/NonCopyable.hpp"
+
+1393122494 c:\users\kevin\documents\programming projects\ocs\include\ocs\systems\system.hpp
+	"OCS/Misc/NonCopyable.hpp"
+	"OCS/Messaging/Transceiver.hpp"
+
+1393122536 c:\users\kevin\documents\programming projects\ocs\include\ocs\utilities\timer.hpp
+	<chrono>
+
+1393122469 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\states\statemanager.cc
+	"OCS/States/StateManager.hpp"
+
+1393122474 c:\users\kevin\documents\programming projects\ocs\include\ocs\states\statemanager.hpp
+	"OCS/States/State.hpp"
+
+1393133556 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\systems\systemmanager.cc
+	"OCS/Systems/SystemManager.hpp"
+	"OCS/Objects/ObjectManager.hpp"
+
+1393133587 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\main.cpp
+	"OCS/Test_Files/ObjectManager_Test.hpp"
+	"OCS/Test_Files/SystemManager_Test.hpp"
+	"OCS/Test_Files/MessageHub_Test.hpp"
+	"OCS/Test_Files/SampleSystems.hpp"
+	"OCS/Test_Files/SampleComponents.hpp"
+	"OCS/Test_Files/SampleMessages.hpp"
+	<OCS/OCS.hpp>
+	<string>
+	<stdlib.h>
+	<iostream>
+	<fstream>
+
+1393122580 c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\objectmanager_test.hpp
+
+1393133639 c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\samplesystems.hpp
+	"OCS/Systems/System.hpp"
+
+1393131746 c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\samplemessages.hpp
+	"OCS/Messaging/Message.hpp"
+	"OCS/Messaging/Transceiver.hpp"
+
+1393131842 c:\users\kevin\documents\programming projects\ocs\include\ocs\ocs.hpp
+	<OCS/States.hpp>
+	<OCS/Objects.hpp>
+	<OCS/Messaging.hpp>
+	<OCS/Components.hpp>
+	<OCS/Systems.hpp>
+
+1393122281 c:\users\kevin\documents\programming projects\ocs\include\ocs\states.hpp
+	<OCS/States/State.hpp>
+	<OCS/States/StateManager.hpp>
+
+1393122265 c:\users\kevin\documents\programming projects\ocs\include\ocs\objects.hpp
+	<OCS/Objects/Object.hpp>
+	<OCS/Objects/ObjectManager.hpp>
+	<OCS/Objects/ObjectPrototypeLoader.hpp>
+
+1393122292 c:\users\kevin\documents\programming projects\ocs\include\ocs\messaging.hpp
+	<OCS/Messaging/Message.hpp>
+	<OCS/Messaging/MessageHub.hpp>
+	<OCS/Messaging/Transceiver.hpp>
+
+1393122270 c:\users\kevin\documents\programming projects\ocs\include\ocs\components.hpp
+	<OCS/Components/Component.hpp>
+	<OCS/Components/ComponentArray.hpp>
+
+1393122275 c:\users\kevin\documents\programming projects\ocs\include\ocs\systems.hpp
+	<OCS/Systems/System.hpp>
+	<OCS/Systems/SystemManager.hpp>
+
+1393211556 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\objectmanager_test.cc
+	"ObjectManager_Test.hpp"
+	<cassert>
+	<iostream>
+	<string>
+	<OCS/OCS.hpp>
+	"OCS/Test_Files/SampleComponents.hpp"
+
+1393122612 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\samplesystems.cc
+	<OCS/Test_Files/SampleSystems.hpp>
+	<OCS/Test_Files/SampleComponents.hpp>
+	<OCS/OCS.hpp>
+	<cmath>
+	<iostream>
+
+1393135431 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\systemmanager_test.cc
+	<cassert>
+	<iostream>
+	<OCS/OCS.hpp>
+	<OCS/Test_Files/SampleSystems.hpp>
+
+1393122545 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\utilities\fileparser.cc
+	"FileParser.hpp"
+	<stdexcept>
+	<ctime>
+
+1393122549 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\utilities\serializer.cc
+	"Serializer.hpp"
+	<iostream>
+
+1393122556 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\utilities\timer.cc
+	"Timer.hpp"
+
+1393122561 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\utilities\timestamp.cc
+	"Timestamp.hpp"
+	<ctime>
+
+1393136965 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\messagehub_test.cc
+	<OCS/Test_Files/SampleSystems.hpp>
+	<OCS/Test_Files/SampleComponents.hpp>
+	<OCS/Test_Files/SampleMessages.hpp>
+	<OCS/OCS.hpp>
+	<cmath>
+	<iostream>
+	<cassert>
+
+1393130598 c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\systemmanager_test.hpp
+
+1393131469 c:\users\kevin\documents\programming projects\ocs\include\ocs\test_files\messagehub_test.hpp
+
+1393136304 source:c:\users\kevin\documents\programming projects\ocs\include\ocs\messaging\transceiver.cc
+	<OCS/Messaging/Transceiver.hpp>
+	<OCS/Messaging/MessageHub.hpp>
+
+1393181581 c:\users\kevin\documents\programming projects\ocs\include\ocs\objects\objectprototype.hpp
+	<unordered_map>
+	<OCS/Misc/Config.hpp>
+	<OCS/Components/ComponentArray.hpp>
+
+1396740961 source:c:\programming projects\ocs\test_files\main.cpp
+	"ObjectManager_Test.hpp"
+	"SystemManager_Test.hpp"
+	"MessageHub_Test.hpp"
+	"SampleSystems.hpp"
+	"SampleComponents.hpp"
+	"SampleMessages.hpp"
+	<OCS/OCS.hpp>
+	<string>
+	<stdlib.h>
+	<iostream>
+	<fstream>
+
+1397022272 source:c:\programming projects\ocs\test_files\messagehub_test.cc
+	<SampleSystems.hpp>
+	<SampleComponents.hpp>
+	<SampleMessages.hpp>
+	<OCS/OCS.hpp>
+	<cmath>
+	<iostream>
+	<cassert>
+
+1397749094 source:c:\programming projects\ocs\test_files\objectmanager_test.cc
+	"ObjectManager_Test.hpp"
+	<cassert>
+	<iostream>
+	<string>
+	<OCS/OCS.hpp>
+	"SampleComponents.hpp"
+
+1393126180 c:\programming projects\ocs\test_files\objectmanager_test.hpp
+
+1395378680 source:c:\programming projects\ocs\test_files\samplesystems.cc
+	<SampleSystems.hpp>
+	<SampleComponents.hpp>
+	<OCS/OCS.hpp>
+	<cmath>
+	<iostream>
+
+1395378879 source:c:\programming projects\ocs\test_files\systemmanager_test.cc
+	<cassert>
+	<iostream>
+	<OCS/OCS.hpp>
+	<SampleSystems.hpp>
+
+1393135442 c:\programming projects\ocs\include\ocs\ocs.hpp
+	<OCS/States.hpp>
+	<OCS/Objects.hpp>
+	<OCS/Messaging.hpp>
+	<OCS/Components.hpp>
+	<OCS/Systems.hpp>
+
+1393125881 c:\programming projects\ocs\include\ocs\states.hpp
+	<OCS/States/State.hpp>
+	<OCS/States/StateManager.hpp>
+
+1393126064 c:\programming projects\ocs\include\ocs\states\state.hpp
+	"OCS/Objects/ObjectManager.hpp"
+	"OCS/Messaging/MessageHub.hpp"
+	"OCS/Systems/SystemManager.hpp"
+	"OCS/Utilities/Timer.hpp"
+
+1397748918 c:\programming projects\ocs\include\ocs\objects\objectmanager.hpp
+	<map>
+	<queue>
+	<utility>
+	<OCS/Components/Component.hpp>
+	<OCS/Misc/NonCopyable.hpp>
+	<OCS/Objects/Object.hpp>
+	<OCS/Components/ComponentArray.hpp>
+	<OCS/Misc/Config.hpp>
+
+1397022003 c:\programming projects\ocs\include\ocs\components\component.hpp
+	"OCS/Misc/Config.hpp"
+	"OCS/Utilities/Serializer.hpp"
+
+1393125979 c:\programming projects\ocs\include\ocs\misc\config.hpp
+	<cstdint>
+	<memory>
+
+1397745923 c:\programming projects\ocs\include\ocs\utilities\serializer.hpp
+	<set>
+	<sstream>
+	<string>
+
+1393125973 c:\programming projects\ocs\include\ocs\misc\noncopyable.hpp
+
+1397151258 c:\programming projects\ocs\include\ocs\objects\object.hpp
+	<unordered_map>
+	<utility>
+	<vector>
+	<OCS/Misc/Config.hpp>
+	<OCS/Components/ComponentArray.hpp>
+
+1397142434 c:\programming projects\ocs\include\ocs\components\componentarray.hpp
+	<iostream>
+	<OCS/Components/Component.hpp>
+	<OCS/Utilities/PackedArray.hpp>
+
+1397748827 c:\programming projects\ocs\include\ocs\utilities\packedarray.hpp
+	<vector>
+	<stack>
+	<utility>
+	<stdint.h>
+	<initializer_list>
+	<iostream>
+
+1393139824 c:\programming projects\ocs\include\ocs\messaging\messagehub.hpp
+	<iostream>
+	<memory>
+	<set>
+	<stack>
+	<unordered_map>
+	<vector>
+	"OCS/Messaging/Message.hpp"
+	"OCS/Messaging/Transceiver.hpp"
+	"OCS/Utilities/PackedArray.hpp"
+	"OCS/Misc/NonCopyable.hpp"
+
+1393139799 c:\programming projects\ocs\include\ocs\messaging\message.hpp
+	<cstdint>
+	<iostream>
+	<string>
+
+1393139799 c:\programming projects\ocs\include\ocs\messaging\transceiver.hpp
+	<cstdint>
+	"OCS/Misc/Config.hpp"
+
+1393137438 c:\programming projects\ocs\include\ocs\systems\systemmanager.hpp
+	<list>
+	<queue>
+	<map>
+	"OCS/Systems/System.hpp"
+	"OCS/Misc/Config.hpp"
+	"OCS/Misc/NonCopyable.hpp"
+
+1393126094 c:\programming projects\ocs\include\ocs\systems\system.hpp
+	"OCS/Misc/NonCopyable.hpp"
+	"OCS/Messaging/Transceiver.hpp"
+
+1393126136 c:\programming projects\ocs\include\ocs\utilities\timer.hpp
+	<chrono>
+
+1395370500 c:\programming projects\ocs\include\ocs\states\statemanager.hpp
+	<memory>
+	<vector>
+	"OCS/States/State.hpp"
+
+1393125865 c:\programming projects\ocs\include\ocs\objects.hpp
+	<OCS/Objects/Object.hpp>
+	<OCS/Objects/ObjectManager.hpp>
+	<OCS/Objects/ObjectPrototypeLoader.hpp>
+
+1393214884 c:\programming projects\ocs\include\ocs\objects\objectprototypeloader.hpp
+	<string>
+	"OCS/Objects/ObjectManager.hpp"
+
+1393125892 c:\programming projects\ocs\include\ocs\messaging.hpp
+	<OCS/Messaging/Message.hpp>
+	<OCS/Messaging/MessageHub.hpp>
+	<OCS/Messaging/Transceiver.hpp>
+
+1393125870 c:\programming projects\ocs\include\ocs\components.hpp
+	<OCS/Components/Component.hpp>
+	<OCS/Components/ComponentArray.hpp>
+
+1393125875 c:\programming projects\ocs\include\ocs\systems.hpp
+	<OCS/Systems/System.hpp>
+	<OCS/Systems/SystemManager.hpp>
+
+1393134198 c:\programming projects\ocs\test_files\systemmanager_test.hpp
+
+1393135069 c:\programming projects\ocs\test_files\messagehub_test.hpp
+
+1393137239 c:\programming projects\ocs\test_files\samplesystems.hpp
+	"OCS/Systems/System.hpp"
+
+1397749216 c:\programming projects\ocs\test_files\samplecomponents.hpp
+	<sstream>
+	<string>
+	"OCS/Components/Component.hpp"
+	<iostream>
+
+1393135346 c:\programming projects\ocs\test_files\samplemessages.hpp
+	"OCS/Messaging/Message.hpp"
+	"OCS/Messaging/Transceiver.hpp"
+
+1393137239 c:\programming projects\ocs\test_files\\samplesystems.hpp
+	"OCS/Systems/System.hpp"
+
+1393126195 c:\programming projects\ocs\test_files\\samplecomponents.hpp
+	<sstream>
+	<string>
+	"OCS/Components/Component.hpp"
+
+1393135346 c:\programming projects\ocs\test_files\\samplemessages.hpp
+	"OCS/Messaging/Message.hpp"
+	"OCS/Messaging/Transceiver.hpp"
+
+1393208590 source:c:\programming projects\ocs\include\ocs\components\component.cc
+	"OCS/Components/Component.hpp"
+
+1393351406 source:c:\programming projects\ocs\include\ocs\messaging\message.cc
+	<OCS/Messaging/Message.hpp>
+	<OCS/Messaging/Transceiver.hpp>
+	<OCS/Utilities/TimeStamp.hpp>
+
+1393126140 c:\programming projects\ocs\include\ocs\utilities\timestamp.hpp
+	<string>
+
+1393351395 source:c:\programming projects\ocs\include\ocs\messaging\messagehub.cc
+	"OCS/Messaging/MessageHub.hpp"
+
+1393139904 source:c:\programming projects\ocs\include\ocs\messaging\transceiver.cc
+	<OCS/Messaging/Transceiver.hpp>
+	<OCS/Messaging/MessageHub.hpp>
+
+1397749053 source:c:\programming projects\ocs\include\ocs\objects\objectmanager.cc
+	"OCS/Objects/ObjectManager.hpp"
+	<set>
+
+1395379182 source:c:\programming projects\ocs\include\ocs\objects\objectprototypeloader.cc
+	"OCS/Objects/ObjectPrototypeLoader.hpp"
+	"OCS/Objects/ObjectManager.hpp"
+	"OCS/Utilities/FileParser.hpp"
+
+1394933581 c:\programming projects\ocs\include\ocs\utilities\fileparser.hpp
+	<string>
+	<vector>
+	<list>
+	<iostream>
+	<sstream>
+	<fstream>
+	<typeinfo>
+
+1393126079 source:c:\programming projects\ocs\include\ocs\states\state.cc
+	"OCS/States/State.hpp"
+
+1393126069 source:c:\programming projects\ocs\include\ocs\states\statemanager.cc
+	"OCS/States/StateManager.hpp"
+
+1393137156 source:c:\programming projects\ocs\include\ocs\systems\systemmanager.cc
+	"OCS/Systems/SystemManager.hpp"
+	"OCS/Objects/ObjectManager.hpp"
+
+1396740903 source:c:\programming projects\ocs\include\ocs\utilities\fileparser.cc
+	"FileParser.hpp"
+	<stdexcept>
+	<ctime>
+
+1397745956 source:c:\programming projects\ocs\include\ocs\utilities\serializer.cc
+	"Serializer.hpp"
+	<iostream>
+
+1393126156 source:c:\programming projects\ocs\include\ocs\utilities\timer.cc
+	"Timer.hpp"
+
+1393351443 source:c:\programming projects\ocs\include\ocs\utilities\timestamp.cc
+	"TimeStamp.hpp"
+	<ctime>
+
+1397748476 source:c:\programming projects\ocs\include\ocs\objects\object.cc
+	"OCS/Objects/Object.hpp"
+

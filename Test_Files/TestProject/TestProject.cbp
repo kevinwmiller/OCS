@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TestProject" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/TestProject" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add directory="../../include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/TestProject" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-std=c++11" />
+					<Add directory="../../include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add directory="../../include" />
+			<Add directory=".." />
+		</Compiler>
+		<Unit filename="../../include/OCS/Components.hpp" />
+		<Unit filename="../../include/OCS/Components/Component.cc" />
+		<Unit filename="../../include/OCS/Components/Component.hpp" />
+		<Unit filename="../../include/OCS/Components/ComponentArray.hpp" />
+		<Unit filename="../../include/OCS/Messaging.hpp" />
+		<Unit filename="../../include/OCS/Messaging/Message.cc" />
+		<Unit filename="../../include/OCS/Messaging/Message.hpp" />
+		<Unit filename="../../include/OCS/Messaging/MessageHub.cc" />
+		<Unit filename="../../include/OCS/Messaging/MessageHub.hpp" />
+		<Unit filename="../../include/OCS/Messaging/Transceiver.cc" />
+		<Unit filename="../../include/OCS/Messaging/Transceiver.hpp" />
+		<Unit filename="../../include/OCS/Misc/Config.hpp" />
+		<Unit filename="../../include/OCS/Misc/NonCopyable.hpp" />
+		<Unit filename="../../include/OCS/OCS.hpp" />
+		<Unit filename="../../include/OCS/Objects.hpp" />
+		<Unit filename="../../include/OCS/Objects/Object.cc" />
+		<Unit filename="../../include/OCS/Objects/Object.hpp" />
+		<Unit filename="../../include/OCS/Objects/ObjectManager.cc" />
+		<Unit filename="../../include/OCS/Objects/ObjectManager.hpp" />
+		<Unit filename="../../include/OCS/Objects/ObjectPrototypeLoader.cc" />
+		<Unit filename="../../include/OCS/Objects/ObjectPrototypeLoader.hpp" />
+		<Unit filename="../../include/OCS/States.hpp" />
+		<Unit filename="../../include/OCS/States/State.cc" />
+		<Unit filename="../../include/OCS/States/State.hpp" />
+		<Unit filename="../../include/OCS/States/StateManager.cc" />
+		<Unit filename="../../include/OCS/States/StateManager.hpp" />
+		<Unit filename="../../include/OCS/Systems.hpp" />
+		<Unit filename="../../include/OCS/Systems/System.hpp" />
+		<Unit filename="../../include/OCS/Systems/SystemManager.cc" />
+		<Unit filename="../../include/OCS/Systems/SystemManager.hpp" />
+		<Unit filename="../../include/OCS/Utilities/FileParser.cc" />
+		<Unit filename="../../include/OCS/Utilities/FileParser.hpp" />
+		<Unit filename="../../include/OCS/Utilities/PackedArray.hpp" />
+		<Unit filename="../../include/OCS/Utilities/Serializer.cc" />
+		<Unit filename="../../include/OCS/Utilities/Serializer.hpp" />
+		<Unit filename="../../include/OCS/Utilities/TimeStamp.cc" />
+		<Unit filename="../../include/OCS/Utilities/TimeStamp.hpp" />
+		<Unit filename="../../include/OCS/Utilities/Timer.cc" />
+		<Unit filename="../../include/OCS/Utilities/Timer.hpp" />
+		<Unit filename="../MessageHub_Test.cc" />
+		<Unit filename="../MessageHub_Test.hpp" />
+		<Unit filename="../ObjectManager_Test.cc" />
+		<Unit filename="../ObjectManager_Test.hpp" />
+		<Unit filename="../SampleComponents.hpp" />
+		<Unit filename="../SampleMessages.hpp" />
+		<Unit filename="../SampleSystems.cc" />
+		<Unit filename="../SampleSystems.hpp" />
+		<Unit filename="../SystemManager_Test.cc" />
+		<Unit filename="../SystemManager_Test.hpp" />
+		<Unit filename="../main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
