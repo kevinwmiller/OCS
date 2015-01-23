@@ -1,0 +1,19 @@
+C:/Programming Projects/OCS/include/OCS/Utilities/FileParser.hpp:138: warning: argument 'optionName' of command @param is not found in the argument list of FileParser::createAttribute(const std::string &sectionPath, const std::string &attributeName, const T &value)
+C:/Programming Projects/OCS/include/OCS/Utilities/FileParser.hpp:138: warning: The following parameters of FileParser::createAttribute(const std::string &sectionPath, const std::string &attributeName, const T &value) are not documented:
+  parameter 'sectionPath'
+  parameter 'attributeName'
+C:/Programming Projects/OCS/include/OCS/Utilities/FileParser.cc:1956: warning: argument 'optionName' of command @param is not found in the argument list of FileParser::doesAttributeExist(const std::string &attributePath)
+C:/Programming Projects/OCS/include/OCS/Utilities/FileParser.cc:1956: warning: The following parameters of FileParser::doesAttributeExist(const std::string &attributePath) are not documented:
+  parameter 'attributePath'
+C:/Programming Projects/OCS/include/OCS/Utilities/FileParser.hpp:623: warning: argument 'optionName' of command @param is not found in the argument list of FileParser::setAttribute(const std::string &sectionPath, const std::string &attributeName, const T &newValue)
+C:/Programming Projects/OCS/include/OCS/Utilities/FileParser.hpp:623: warning: The following parameters of FileParser::setAttribute(const std::string &sectionPath, const std::string &attributeName, const T &newValue) are not documented:
+  parameter 'sectionPath'
+  parameter 'attributeName'
+C:/Programming Projects/OCS/include/OCS/Utilities/Serializer.hpp:86: warning: argument 'valuesStr' of command @param is not found in the argument list of Serializer::serialize(const std::string &formatStr, const T &first, Args &&...others)
+C:/Programming Projects/OCS/include/OCS/Objects/ObjectPrototypeLoader.cc:108: warning: The following parameters of ocs::ObjectPrototypeLoader::doesPrototypeExist(const ObjectManager &objManager, const std::string &prototypeName) are not documented:
+  parameter 'objManager'
+C:/Programming Projects/OCS/include/OCS/Objects/ObjectPrototypeLoader.cc:31: warning: argument 'Optional' of command @param is not found in the argument list of ocs::ObjectPrototypeLoader::loadObjectPrototype(ObjectManager &objManager, const std::string &filePath, const std::string &prototypeName, const std::string &prototypeParentSection="")
+C:/Programming Projects/OCS/include/OCS/Objects/ObjectPrototypeLoader.cc:31: warning: The following parameters of ocs::ObjectPrototypeLoader::loadObjectPrototype(ObjectManager &objManager, const std::string &filePath, const std::string &prototypeName, const std::string &prototypeParentSection="") are not documented:
+  parameter 'objManager'
+C:/Programming Projects/OCS/include/OCS/Objects/ObjectPrototypeLoader.cc:80: warning: The following parameters of ocs::ObjectPrototypeLoader::loadPrototypeSet(ObjectManager &objManager, const std::string &filePath, const std::string &setName, const std::string &parentSection="") are not documented:
+  parameter 'objManager'

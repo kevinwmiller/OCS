@@ -1,0 +1,6 @@
+[Other]	
+	"Components" : {"Position", "Name"}
+	
+	"Position" : "5 65"
+	"Name" : "Other"
+[/Other]
