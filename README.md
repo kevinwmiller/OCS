@@ -119,48 +119,48 @@ There are four main parts to OCS: components, objects, systems, and messaging. T
 	
 ##TABLE OF CONTENTS:
 	
-*	COMPONENTS
-	*	CREATING A COMPONENT
-	*	SERIALIZING A COMPONENT
-*	OBJECTS
-	*	CREATING OBJECTS
-		*	CREATING A BLANK OBJECT
-		*	CREATING AN OBJECT WITH COMPONENTS
-		*	CREATING A COMPONENT FROM A PROTOTYPE
-	*	ADDING COMPONENTS
-	*	REMOVING COMPONENTS
-	*	DESTROYING AN OBJECT
-	*	QUERYING AN OBJECT'S COMPONENTS
-	*	OBJECT PROTOTYPES
-		*	CREATING A PROTOTYPE IN THE SOURCE CODE
-		*	CREATING A PROTOTYPE IN AN EXTERNAL FILE
-		*	LOADING PROTOTYPES
-		*	PROTOTYPE SETS
-		*	LOADING A PROTOTYPE SET		
-*	SYSTEMS
-	*	CREATING A SYSTEM
-	*	ADDING SYSTEMS
-	*	REMOVING SYSTEMS
-	*	UPDATING SYSTEMS
-	*	WRITING THE UPDATE FUNCTION
-*	MESSAGING
-	*	TRANSCEIVERS
-	*	MESSAGES
-		*	CREATING MESSAGES
-	*	LOGGING MESSAGES
-		*	LOGGING A SINGLE MESSAGE
-		*	LOGGING ALL POSTED MESSAGES
-		*	LOGGING ALL PRIVATE MESSAGES
-	*	SENDING MESSAGES
-		*	SENDING POSTING MESSAGES
-		*	SENDING PRIVATE MESSAGES
-	*	READING MESSAGES
-		*	READING POSTED MESSAGES
-		*	READING PRIVATES MESSAGES
-	*	CLEARING MESSAGES
-		*	CLEARING POSTED MESSAGES
-		*	CLEARING PRIVATE MESSAGES
-*	TIPS
+*	[COMPONENTS](#components)
+	*	[CREATING A COMPONENT](#creating-a-component)
+	*	[SERIALIZING A COMPONENT](#serializing-acomponent)
+*	[OBJECTS](#objects)
+	*	[CREATING OBJECTS](#creating-objects)
+		*	[CREATING A BLANK OBJECT](#creating-a-blank-object)
+		*	[CREATING AN OBJECT WITH COMPONENTS](#creating-an-object-with-components)
+		*	[CREATING A COMPONENT FROM A PROTOTYPE](#creating-a-component-from-a-prototype)
+	*	[ADDING COMPONENTS](#adding-components)
+	*	[REMOVING COMPONENTS](#removing-components)
+	*	[DESTROYING AN OBJECT](#destroying-an-object)
+	*	[QUERYING AN OBJECT'S COMPONENTS](#querying-an-objects-components)
+	*	[OBJECT PROTOTYPES](#object-prototypes)
+		*	[CREATING A PROTOTYPE IN THE SOURCE CODE](#creating-a-prototype-in-the-source-code)
+		*	[CREATING A PROTOTYPE IN AN EXTERNAL FILE](#creating-a-prototype-in-an-external-file)
+		*	[LOADING PROTOTYPES](#loading-prototypes)
+		*	[PROTOTYPE SETS](#prototype-sets)
+		    *   	[LOADING A PROTOTYPE SET](#loading-a-prototype-set)
+*	[SYSTEMS](#systems)
+	*	[CREATING A SYSTEM](#creating-a-system)
+	*	[ADDING SYSTEMS](#adding-systems)
+	*	[REMOVING SYSTEMS](#removing-systems)
+	*	[UPDATING SYSTEMS](#updating-systems)
+	*	[WRITING THE UPDATE FUNCTION](#writing-the-update-function)
+*	[MESSAGING](#messaging)
+	*	[TRANSCEIVERS](#transceivers)
+	*	[MESSAGES](#messages)
+		*	[CREATING MESSAGES](#creating-messages)
+	*	[LOGGING MESSAGES](#logging-messages)
+		*	[LOGGING A SINGLE MESSAGE](#logging-a-single-message)
+		*	[LOGGING ALL POSTED MESSAGES](#logging-all-posted-messages)
+		*	[LOGGING ALL PRIVATE MESSAGES](#logging-all-private-messages)
+	*	[SENDING MESSAGES](#sending-messages)
+		*	[POSTING MESSAGES](#posting-messages)
+		*	[SENDING PRIVATE MESSAGES](#sending-private-messages)
+	*	[READING MESSAGES](#reading-messages)
+		*	[READING POSTED MESSAGES](#reading-posted-messages)
+		*	[READING PRIVATE MESSAGES](#reading-private-messages)
+	*	[CLEARING MESSAGES](#clearing-messages)
+		*	[CLEARING POSTED MESSAGES](#clearing-posted-messages)
+		*	[CLEARING PRIVATE MESSAGES](#clearing-private-messages)
+*	[TIPS](#tips)
 
 ===================================================================================================================
 			
@@ -401,7 +401,7 @@ with a value that contains an array of the prototype names.
 Then somewhere else in the file would be the definitions of the prototypes. These are defined the same way
 as in the previous section.
 
-#####LOADING A PROTOTYPE SET
+######LOADING A PROTOTYPE SET
 
 Like the loadObjectPrototype function, loadPrototypeSet is static within ObjectPrototypeLoader.
 
@@ -605,7 +605,7 @@ Messages will rarely be created in this manner as the MessageHub should handle a
 
 ####SENDING MESSAGES:
 
-#####SENDING POSTING MESSAGES:
+#####POSTING MESSAGES:
 
 Messages are able to be posted publically for all transceivers to view. To post a message, pass in the message type as
 a template paramater, and then pass in the creating transceiver and any paramaters for the message.
