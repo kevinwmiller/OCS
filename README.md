@@ -678,4 +678,5 @@ If you wish to clear your personal mailbox, call clearPrivateMessages and pass i
 -	Call 'clearPostedMessages' for the message hub every frame to prevent messages from piling up.
 -	Try to avoid creating systems that rely on other systems or components that rely on other components. The more decoupled everything is the better.
 -	Email me anymore tips, suggestions, or bugs as you find them.
+
 ===================================================================================================================
