@@ -43,8 +43,8 @@ more features are needed, so keep an eye out for any updates.
 
         cd build
 
-4.    Run cmake using the root as the source directory
-    4.1    To generate default makefile:
+4.    Run cmake using the root as the source directory  
+      4.1    To generate default makefile:
 
         cmake ..
 
@@ -56,8 +56,8 @@ more features are needed, so keep an eye out for any updates.
 
         cmake 
 
-5.    Use the generated make file    
-5.1 Default makefile
+5.    Use the generated make file  
+    5.1 Default makefile
 
         make install
 
