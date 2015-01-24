@@ -33,7 +33,24 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 target_link_libraries(${PROJECT_NAME} OCS)
 
+#Get a copy of the latest OCS librar
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different
+		"${PROJECT_SOURCE_DIR}/../build/libOCS.dll"
+		${PROJECT_SOURCE_DIR}/build/bin)
+#Get test file
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different
+		"${TEST_DIR}/Otherfile.txt"
+		${TEST_DIR}/build/bin)
+
+#Get test file
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different
+		"${TEST_DIR}/prototypes.txt"
+		${TEST_DIR}/build/bin)
+
 install(TARGETS ${PROJECT_NAME}
-		ARCHIVE DESTINATION ${PROJECT_SOURCE_DIR}/build/lib
-		LIBRARY DESTINATION ${PROJECT_SOURCE_DIR}/build/lib
+		ARCHIVE DESTINATION ${PROJECT_SOURCE_DIR}/build/bin
+		LIBRARY DESTINATION ${PROJECT_SOURCE_DIR}/build/bin
 		RUNTIME DESTINATION ${PROJECT_SOURCE_DIR}/build/bin)
