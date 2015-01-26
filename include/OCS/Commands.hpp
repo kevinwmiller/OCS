@@ -20,27 +20,15 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef OCS_SYSTEM_H
-#define OCS_SYSTEM_H
+#ifndef OCS_COMMANDS_HPP
+#define OCS_COMMANDS_HPP
 
-#include "OCS/Misc/NonCopyable.hpp"
-#include "OCS/Messaging/Transceiver.hpp"
-
-namespace ocs
-{
-
-class ObjectManager;
-class MessageHub;
-
-/** \brief Base class for user defined logic systems. All systems will have access to an ObjectManager and a MessageHub.
- *         Systems should operate on a set of components, and can look for posted messages of a desired type from the MessageHub.
- */
-struct System : NonCopyable, public Transceiver
-{
-    virtual ~System() {}
-    virtual void update(ObjectManager&, MessageHub&, double) = 0;
-};
-
-}//ocs
+#include <OCS/Commands/Command.hpp>
+#include <OCS/Commands/ObjectCommand.hpp>
+#include <OCS/Commands/CreateObject.hpp>
+#include <OCS/Commands/DestroyObject.hpp>
+#include <OCS/Commands/AddComponent.hpp>
+#include <OCS/Commands/RemoveComponent.hpp>
+#include <OCS/Commands/RunScript.hpp>
 
 #endif

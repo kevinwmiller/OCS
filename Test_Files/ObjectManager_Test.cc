@@ -27,6 +27,7 @@ freely, subject to the following restrictions:
 #include <string>
 
 #include <OCS/OCS.hpp>
+
 #include "SampleComponents.hpp"
 
 using namespace ocs;

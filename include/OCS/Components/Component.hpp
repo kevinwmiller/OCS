@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _COMPONENT_H
-#define _COMPONENT_H
+#ifndef OCS_COMPONENT_H
+#define OCS_COMPONENT_H
 
 #include "OCS/Misc/Config.hpp"
 #include "OCS/Utilities/Serializer.hpp"

@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _STATE_H
-#define _STATE_H
+#ifndef OCS_STATE_H
+#define OCS_STATE_H
 
 #include "OCS/Objects/ObjectManager.hpp"
 #include "OCS/Messaging/MessageHub.hpp"

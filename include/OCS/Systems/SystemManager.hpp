@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _SYSTEMMANAGER_H
-#define _SYSTEMMANAGER_H
+#ifndef OCS_SYSTEMMANAGER_H
+#define OCS_SYSTEMMANAGER_H
 
 #include <list>
 #include <queue>

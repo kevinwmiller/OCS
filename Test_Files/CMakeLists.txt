@@ -8,6 +8,7 @@ project (OCS_Test)
 Set (INCLUDE_PATH
 				${PROJECT_SOURCE_DIR}
 				${PROJECT_SOURCE_DIR}/include
+				${PROJECT_SOURCE_DIR}/include/Commands
 				${PROJECT_SOURCE_DIR}/include/Components
 				${PROJECT_SOURCE_DIR}/include/Messaging
 				${PROJECT_SOURCE_DIR}/include/Misc
@@ -19,6 +20,7 @@ Set (INCLUDE_PATH
 Set (SRC_DIR ${PROJECT_SOURCE_DIR})
 
 Set (SRC_FILES ${SRC_DIR}/main.cpp
+				${SRC_DIR}/Commands_Test.cc
 				${SRC_DIR}/MessageHub_Test.cc
 				${SRC_DIR}/ObjectManager_Test.cc
 				${SRC_DIR}/SystemManager_Test.cc

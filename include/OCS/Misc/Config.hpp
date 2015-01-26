@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _CONFIG_H
-#define _CONFIG_H
+#ifndef OCS_CONFIG_H
+#define OCS_CONFIG_H
 
 #include <cstdint>
 #include <memory>

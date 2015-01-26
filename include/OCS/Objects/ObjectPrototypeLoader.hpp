@@ -20,13 +20,12 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _OBJECTPROTOTYPELOADER_H
-#define _OBJECTPROTOTYPELOADER_H
+#ifndef OCS_OBJECTPROTOTYPELOADER_H
+#define OCS_OBJECTPROTOTYPELOADER_H
 
 #include <string>
 
 #include "OCS/Objects/ObjectManager.hpp"
-
 
 namespace ocs
 {

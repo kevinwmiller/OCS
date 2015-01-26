@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _MESSAGEHUB_H
-#define _MESSAGEHUB_H
+#ifndef OCS_MESSAGEHUB_H
+#define OCS_MESSAGEHUB_H
 
 #include <iostream>
 #include <memory>

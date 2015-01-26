@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef COMPONENTARRAY_H
-#define COMPONENTARRAY_H
+#ifndef OCS_COMPONENTARRAY_H
+#define OCS_COMPONENTARRAY_H
 
 #include <iostream>
 

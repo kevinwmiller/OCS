@@ -29,5 +29,6 @@ freely, subject to the following restrictions:
 #include <OCS/Messaging.hpp>
 #include <OCS/Components.hpp>
 #include <OCS/Systems.hpp>
+#include <OCS/Commands.hpp>
 
 #endif

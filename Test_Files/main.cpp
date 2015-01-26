@@ -23,22 +23,13 @@ freely, subject to the following restrictions:
 #include "ObjectManager_Test.hpp"
 #include "SystemManager_Test.hpp"
 #include "MessageHub_Test.hpp"
-#include "SampleSystems.hpp"
-#include "SampleComponents.hpp"
-#include "SampleMessages.hpp"
-
-#include <OCS/OCS.hpp>
-
-#include <string>
-#include <stdlib.h>
-#include <iostream>
-#include <fstream>
+#include "Commands_Test.hpp"
 
 int main()
 {
     testObjectManager();
     testSystemManager();
     testMessageHub();
-
+    testCommands();
     return 0;
 }

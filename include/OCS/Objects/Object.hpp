@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _OBJECT_H
-#define _OBJECT_H
+#ifndef OCS_OBJECT_H
+#define OCS_OBJECT_H
 
 #include <unordered_map>
 #include <utility>

@@ -21,6 +21,7 @@ ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 Set (INCLUDE_PATH 
 				${PROJECT_SOURCE_DIR}/include
+				${PROJECT_SOURCE_DIR}/include/Commands
 				${PROJECT_SOURCE_DIR}/include/Components
 				${PROJECT_SOURCE_DIR}/include/Messaging
 				${PROJECT_SOURCE_DIR}/include/Misc
@@ -32,7 +33,8 @@ Set (INCLUDE_PATH
 Set (SRC_DIR ${PROJECT_SOURCE_DIR}/src)
 Set (TEST_DIR ${PROJECT_SOURCE_DIR}/Test_Files)
 
-Set (SRC_FILES ${SRC_DIR}/Components/Component.cc
+Set (SRC_FILES  ${SRC_DIR}/Components/Component.cc
+				${SRC_DIR}/Components/SentinalType.cc
 				${SRC_DIR}/Messaging/Message.cc
 				${SRC_DIR}/Messaging/MessageHub.cc
 				${SRC_DIR}/Messaging/Transceiver.cc

@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _SERIALIZER_H
-#define _SERIALIZER_H
+#ifndef OCS_SERIALIZER_H
+#define OCS_SERIALIZER_H
 
 #include <set>
 #include <sstream>

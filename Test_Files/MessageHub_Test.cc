@@ -26,7 +26,6 @@ freely, subject to the following restrictions:
 
 #include <OCS/OCS.hpp>
 
-#include <cmath>
 #include <iostream>
 #include <cassert>
 
@@ -82,10 +81,12 @@ void TEST_MESSAGE_PM()
 
 }//msgtest
 
-void testMessageHub()
+int testMessageHub()
 {
     std::cout << "\nTesting Messaging\n";
     msgtest::TEST_MESSAGE_POSTING();
     msgtest::TEST_MESSAGE_PM();
     std::cout << "Finished Testing Messaging\n";
+
+    return 0;
 }

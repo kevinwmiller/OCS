@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef OBJECTMANAGER_H
-#define OBJECTMANAGER_H
+#ifndef OCS_OBJECTMANAGER_H
+#define OCS_OBJECTMANAGER_H
 
 #include <map>
 #include <queue>
@@ -32,12 +32,10 @@ freely, subject to the following restrictions:
 #include <OCS/Objects/Object.hpp>
 #include <OCS/Components/ComponentArray.hpp>
 #include <OCS/Misc/Config.hpp>
+#include <OCS/Components/SentinalType.hpp>
 
 namespace ocs
 {
-
-//!Used to end the recursive calls that use variadic templates.
-struct SentinalType : public Component<SentinalType> {};
 
 /**\brief Manages the lifetime of game objects. A blank object can be created
 *         and components may be added manually, or alternatively, the user
@@ -62,11 +60,11 @@ class ObjectManager : NonCopyable
         ObjectManager();
         ~ObjectManager();
 
-        //!Add a component from an exisiting component.
+        //!Add a component from an exisiting component
         template<typename C, typename ... Args>
         ID addComponents(ID, const C&, Args&& ...);
 
-        //!Add the given components to an object prototype under the specified name.
+        //!Add the given components to an object prototype under the specified name
         template<typename C, typename ... Args>
         void addComponentsToPrototype(const std::string&, const C&, Args&& ...);
 
@@ -76,33 +74,39 @@ class ObjectManager : NonCopyable
         //!Allow a component to be referred to by a string
         template<typename C>
         void bindStringToComponent(const std::string&);
+        
+        //!Copy a game object
+        void copyObject(ID, const Object&);
 
-        //!Create a game object with no components.
+        //!Create a game object with no components
         ID createObject();
 
-        //!Create a game object from an object prototype.
+        //!Create a game object from an object prototype
         ID createObject(const std::string&);
 
         //!Create a game object from an object prototype (Overloaded to differentiate from template function)
         ID createObject(const char* str) { return createObject(std::string(str)); }
 
-        //!Create a game object from one or more components.
+        //!Create a game object from one or more components
         template<typename C,typename ... Args>
         ID createObject(const C&, Args&& ...);
+
+        //!Create a game object from an existing object
+        ID createObject(const Object&);
 
         //Deserialize all of an object's components
         void deSerializeObject(ID, std::vector<std::pair<Family, std::string>>&);
 
-        //!Destroy a game object from the object's ID.
+        //!Destroy a game object from the object's ID
         void destroyObject(ID);
 
-        //!Destroy all game objects.
+        //!Destroy all game objects
         void destroyAllObjects();
 
-        //!Check if a prototype of the specified name exists.
+        //!Check if a prototype of the specified name exists
         bool doesPrototypeExist(const std::string&) const;
 
-        //!Get a single component from the object's ID.
+        //!Get a single component from the object's ID
         template<typename C>
         C* const getComponent(ID);
 
@@ -117,42 +121,45 @@ class ObjectManager : NonCopyable
         //!Get a count of all objects
         ID getTotalObjects() const;
 
-        //!Check if an object has the specified prototype.
+        //!Check if an object has the specified prototype
         template<typename C = SentinalType, typename ... Args>
         bool hasComponents(ID);
 
-        //!Check if a prototype has the specified prototype.
+        //!Check if a prototype has the specified prototype
         template<typename C = SentinalType, typename ... Args>
         bool hasComponentsPrototype(const std::string&);
 
-        //!Check if an object id is a prototype's id.
+        //!Check if an object id is a prototype's id
         bool isPrototype(ID);
 
         //!Remove a component from the object's ID
         template<typename C = SentinalType, typename ... Args>
         ID removeComponents(ID);
 
-        //!Remove the given components from an object prototype under the specified name.
+        //!Remove all components from the object's ID
+        ID removeAllComponents(ID);
+
+        //!Remove the given components from an object prototype under the specified name
         template<typename C>
         void removeComponentFromPrototype(const std::string&);
 
         //!Serialize all components of an object
         std::vector<std::string> serializeObject(ID);
 
-        //!Set a component from an existing component.
+        //!Set a component from an existing component
         template<typename C>
         void setComponent(ID, const C&);
 
-        //!Set a component through the component's constructor arguments.
+        //!Set a component through the component's constructor arguments
         template<typename C, typename ... Args>
         void setComponent(ID, Args&& ...);
 
     private:
 
-        //!All game objects reside in here.
+        //!All game objects reside in here
         PackedArray<Object> objects;
 
-        //!Stores an object prototype under its name for easy lookup.
+        //!Stores an object prototype under its name for easy lookup
         std::unordered_map<std::string, Object> objectPrototypes;
 
         //!Stores a prototype base component array with an associated id
@@ -177,10 +184,6 @@ class ObjectManager : NonCopyable
         //!Called on component creation
         template<typename C>
         void registerComponent();
-
-        template<typename T>
-        bool endRecursion(const T&) { return false; }
-        bool endRecursion(const SentinalType&) { return true; }
 
         static ID prototypeIDCounter;
 
@@ -241,6 +244,7 @@ ID ObjectManager::createObject(const C& component, Args&& ... others)
 template<typename C, typename ... Args>
 ID ObjectManager::addComponents(ID objectID, const C& component, Args&& ... others)
 {
+    std::cout << "Adding OM " << objectID << "\n";
     registerComponent<C>();
 
     //A counter for the total components added to the object
@@ -252,7 +256,6 @@ ID ObjectManager::addComponents(ID objectID, const C& component, Args&& ... othe
         if(objects[objectID].componentIndices.find(C::getFamily()) == objects[objectID].componentIndices.end())
         {
             //Add the component to its array
-
             ID componentIndex = getComponentArray<C>().add_item(component);
             getComponentArray<C>()[componentIndex].ownerID = objectID;
 
@@ -320,7 +323,7 @@ template<typename C, typename ... Args>
 ID ObjectManager::removeComponents(ID objectID)
 {
     ID totalRemoved = 0;
-    if(!endRecursion(C()))
+    if(!SentinalType::endRecursion(C()))
     {
         if(objectID < getTotalObjects())
         {
@@ -406,6 +409,7 @@ C* const ObjectManager::getComponent(ID objectID)
 
     if(objects.isValid(objectID))
     {
+    std::cout << "Adding to " << objectID << "\n";
         //If the object has the specified component
         if(objects[objectID].componentIndices.find(C::getFamily()) != objects[objectID].componentIndices.end())
         {
@@ -424,7 +428,7 @@ bool ObjectManager::hasComponentsPrototype(const std::string& prototypeName)
     //Get the prototype
     auto& prototype = objectPrototypes[prototypeName];
 
-    if(!endRecursion(C()))
+    if(!SentinalType::endRecursion(C()))
     {
         if(prototype.componentIndices.find(C::getFamily()) != prototype.componentIndices.end())
             //Return a pointer to the component converted to a boolean
@@ -499,7 +503,7 @@ void ObjectManager::removeComponentFromPrototype(const std::string& prototypeNam
 template<typename C, typename ... Args>
 bool ObjectManager::hasComponents(ID objectID)
 {
-    if(!endRecursion(C()))
+    if(!SentinalType::endRecursion(C()))
     {
         if(getComponent<C>(objectID))
         {

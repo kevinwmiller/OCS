@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _TRANSCEIVER_H
-#define _TRANSCEIVER_H
+#ifndef OCS_TRANSCEIVER_H
+#define OCS_TRANSCEIVER_H
 
 #include <cstdint>
 #include "OCS/Misc/Config.hpp"

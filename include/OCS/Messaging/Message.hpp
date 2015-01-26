@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _MESSAGE_H
-#define _MESSAGE_H
+#ifndef OCS_MESSAGE_H
+#define OCS_MESSAGE_H
 
 #include <cstdint>
 #include <iostream>

@@ -49,7 +49,53 @@ ObjectManager::~ObjectManager()
     availableVersions.push(version);
 }
 
-//Hello
+/** \brief Create an object modeled after an existing object
+ *         
+ *
+ * \param destinationId The id of the object to copy to
+ * \param source The object to copy from
+ */
+void ObjectManager::copyObject(ID destinationId, const Object& source)
+{
+
+    //Only copy to an object that was created using the ObjectManager
+    if (objects.isValid(destinationId))
+    {
+        //Clear the destination's components so they aren't still around after the object gets new components
+        removeAllComponents(destinationId);
+
+        //Copy the component families from the source
+        for(auto& it : source.componentArrays)
+            objects[destinationId].componentArrays[it.first] = compFamilyToCompArray[it.first];
+
+        auto& sourceCompArrays = source.componentArrays;
+        auto& componentIndices = objects[destinationId].componentIndices;
+
+        //Iterate through all of the objects component array pointers
+        for (const auto& it : sourceCompArrays)
+        {
+            Family compFamily = it.first;
+            auto componentArray = objects[destinationId].componentArrays[it.first];
+
+            auto sourceComponentArray = it.second;
+
+            //Get the index of the source's component
+            ID sourceCompIdx = source.componentIndices.at(compFamily);
+
+            //Copy the source's component and store the index that it was assigned
+            ID newComponentIndex = sourceComponentArray->createCopy(sourceCompIdx, componentArray);
+
+            //Make the new object the component's owner
+            componentArray->getBaseComponent(newComponentIndex).ownerID = destinationId;
+
+            //Store the component's index in the map under the newly created object's ID
+            componentIndices[compFamily] = newComponentIndex;
+
+        }
+    }
+   
+}
+
 /** \brief Create a blank object
  *
  * \return The id of the created object
@@ -80,35 +126,7 @@ ID ObjectManager::createObject(const std::string& prototypeName)
         auto& prototype = objectPrototypes[prototypeName];
         ID objectID = createObject();
 
-        //Copy the component families from the prototype
-        for(auto& it : prototype.componentArrays)
-            objects[objectID].componentArrays[it.first] = compFamilyToCompArray[it.first];
-
-        auto& prototypeCompArrays = prototype.componentArrays;
-        auto& componentIndices = objects[objectID].componentIndices;
-
-        //Iterate through all of the objects component array pointers
-        for(const auto& it : prototypeCompArrays)
-        {
-            Family compFamily = it.first;
-            auto componentArray = objects[objectID].componentArrays[it.first];
-
-            auto prototypeComponentArray = it.second;
-
-            //Get the index of the prototype's component
-            ID prototypeCompIdx = prototype.componentIndices[compFamily];
-
-            //Copy the prototype's component and store the index that it was assigned
-            ID newComponentIndex = prototypeComponentArray->createCopy(prototypeCompIdx, componentArray);
-
-            //Make the new object the component's owner
-            componentArray->getBaseComponent(newComponentIndex).ownerID = objectID;
-
-            //Store the component's index in the map under the newly created object's ID
-            componentIndices[compFamily] = newComponentIndex;
-
-        }
-       // std::cout << "Created " << prototypeName << " with ID " << objectID << "\n";
+        copyObject(objectID, prototype);
 
         return objectID;
     }
@@ -127,20 +145,7 @@ void ObjectManager::destroyObject(ID objectID)
 {
     if(objects.isValid(objectID))
     {
-        auto& componentArrays = objects[objectID].componentArrays;
-
-        //Iterate through all of the objects component array pointers
-        for(const auto& it : componentArrays)
-        {
-            Family compFamily = it.first;
-            auto componentArray = it.second;
-
-            //Get the component's index
-            ID compIndex = objects[objectID].componentIndices[compFamily];
-
-            //Remove the component from the appropriate array
-            componentArray->remove(compIndex);
-        }
+        removeAllComponents(objectID);
         //Remove the object from the object array
         objects.remove(objectID);
     }else
@@ -154,13 +159,8 @@ void ObjectManager::destroyObject(ID objectID)
  */
 void ObjectManager::destroyAllObjects()
 {
-    std::set<ID> objectIDs;
-
-    for(const auto& id : objects)
-        objectIDs.insert(id.objectID);
-
-    for(const auto& id : objectIDs)
-        destroyObject(id);
+    while (objects.size() > 0)
+        destroyObject(objects[0].objectID);
 
     objects.clear();
 }
@@ -191,6 +191,36 @@ void ObjectManager::deSerializeObject(ID objectID, std::vector<std::pair<Family,
     {
         objects[objectID].deSerializeComponents(objectArgs);
     }
+}
+
+/** \brief Removes all components from an object
+ *
+ *  \param objectID The id of the object to remove the components from
+ *  \return The number of components removed
+ */
+ID ObjectManager::removeAllComponents(ID objectID)
+{
+    ID componentsRemoved = 0;
+    if(objects.isValid(objectID))
+    {
+        auto& componentArrays = objects[objectID].componentArrays;
+
+        //Iterate through all of the objects component array pointers
+        for(const auto& it : componentArrays)
+        {
+            Family compFamily = it.first;
+            auto componentArray = it.second;
+
+            //Get the component's index
+            ID compIndex = objects[objectID].componentIndices[compFamily];
+
+            //Remove the component from the appropriate array
+            componentArray->remove(compIndex);
+            ++componentsRemoved;
+        }
+    }
+
+    return componentsRemoved;
 }
 
 /** \brief Searches the prototype map for the given prototype name to see if the prototype exists.

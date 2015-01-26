@@ -20,8 +20,8 @@ freely, subject to the following restrictions:
    distribution.
 */
 
-#ifndef _STATEMANAGER_H
-#define _STATEMANAGER_H
+#ifndef OCS_STATEMANAGER_H
+#define OCS_STATEMANAGER_H
 
 #include <memory>
 #include <vector>

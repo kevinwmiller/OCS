@@ -1,5 +1,5 @@
-#ifndef STRING_UTILITIES_H
-#define STRING_UTILITIES_H
+#ifndef OCS_STRING_UTILITIES_H
+#define OCS_STRING_UTILITIES_H
 
 #include <cstdlib>
 #include <string>
