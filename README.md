@@ -1,5 +1,5 @@
 #OCS - ObjectComponentSystem
-##Last Modified: 01/27/2015
+##Last Modified: 01/28/2015
 ##Version 1.1
 
 OCS provides a fast and easy to use interface for creating, 
@@ -90,6 +90,14 @@ OCS is licensed under the zlib license. See LICENSE.txt for full details.
     -	  Added functionality for messages
     -	  Added basic functionality for states
     -	  Added functionality for prototypes
+-	v1.1
+	-	  Added commands to allow events to be created and executed at separate times. Currently there are commands for creating objects(From components, a prototype, or a mix), destroying objects, and adding/removing components.
+		  Please see comments for usage information  
+	-	  Removed the reserve from the PackedArray class. Please note that if you create/remove objects/components while iterating through a component array, then your iterator will likely be invalidated. If you need to perform these actions inside of the loop, please use the new command classes and call execute on them after the loop has terminated.
+	-	  Removed destroyAllObjects from ObjectManager destructor due to a crash that occurred when more than one instance of the class was declared. The crash resulted from a virtual function call that is used to destroy an object's components. Simply call destroyAllObjects before your object manager goes out of scope
+	-	  Started work on command manager which will handle store/executing commands. Will provide ability to map a command to string.
+	-	  Added virtual destructor to BasePackedArray
+	-	  Updated unit tests for commands.
 
 ===================================================================================================================
 
