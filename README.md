@@ -1,6 +1,6 @@
 #OCS - ObjectComponentSystem
-##Last Modified: 01/24/2015
-##Version 1.0
+##Last Modified: 01/27/2015
+##Version 1.1
 
 OCS provides a fast and easy to use interface for creating, 
 testing, and modifying objects, their components, and the systems that allow
