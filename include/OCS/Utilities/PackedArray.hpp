@@ -38,6 +38,7 @@ typedef uint64_t Index;
 class BasePackedArray
 {
     public:
+        virtual ~BasePackedArray() {}
         virtual Index createCopy(Index) = 0;
         virtual Index remove(Index) = 0;
         virtual void clear() = 0;
@@ -53,7 +54,7 @@ template <typename T>
 class PackedArray : public BasePackedArray
 {
     public:
-        PackedArray() {elements.reserve(100000);}
+        PackedArray() {}
 
         PackedArray (std::initializer_list<T> iList)
         {
@@ -70,6 +71,9 @@ class PackedArray : public BasePackedArray
                 reverseLookupList.reserve(numberToReserve);
             }
         }
+
+        ~PackedArray()
+        {}
 
         typename std::vector<T>::iterator begin()
         {

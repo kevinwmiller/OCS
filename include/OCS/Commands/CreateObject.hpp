@@ -55,7 +55,7 @@ public:
 
     void execute() 
     {
-        std::cout << "\tExecuting create " << prototypeName <<"\n";
+        //std::cout << "\tExecuting create " << prototypeName <<"\n";
         ID objectId = -1;
 
         if (!prototypeName.empty())
@@ -63,7 +63,7 @@ public:
         else
             objectId = objManager.createObject();
 
-        std::cout << "Object Id: " << objectId << "\n";
+        //std::cout << "Object Id: " << objectId << "\n";
         add->setObjectId(objectId);
         add->execute();
 

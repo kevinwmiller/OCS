@@ -14,25 +14,22 @@ namespace ocs
 *         
 *
 */
-class DestroyObject : public Command
+class DestroyObject : public ObjectCommand
 {
 
 public:
 
     DestroyObject(ObjectManager& _objManager, ID _objectId) :
-        objManager(_objManager),
-        objectId(_objectId)
+        ObjectCommand(_objManager, _objectId)
     {}
 
     void execute() 
     {
-        std::cout << "\tExecuting DestroyObject\n";
+        //std::cout << "\tExecuting DestroyObject\n";
         objManager.destroyObject(objectId);
     }
 
 private:
-    ObjectManager& objManager;
-    ID objectId;
 
 };
 

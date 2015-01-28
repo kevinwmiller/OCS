@@ -158,6 +158,7 @@ There are four main parts to OCS: components, objects, systems, and messaging. T
 	*	[Clearing Messages](#clearing-messages)
 		*	[Clearing Posted Messages](#clearing-posted-messages)
 		*	[Clearing Private Messages](#clearing-private-messages)
+*	[Commands](#commands)
 *	[Tips](#tips)
 
 ===================================================================================================================
@@ -663,6 +664,10 @@ An automatic solution is in the works.
 #####CLEARING PRIVATES MESSAGES:
 
 If you wish to clear your personal mailbox, call clearPrivateMessages and pass in your Transceiver object.
+
+##COMMANDS
+
+###COMING SOON
 
 ##TIPS:
 

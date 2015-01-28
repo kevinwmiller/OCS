@@ -14,12 +14,13 @@ namespace ocs
 {
 
 /*! \brief Command to Remove a single component to an object
+*   This command is use internally by 'RemoveComponents'(Plural). 
 *
+*   \see RemoveComponents
 *   Usage: 
-*       ocs::RemoveComponent<Position> rem(objManager, 3, Position(5, 4));
+*       ocs::RemoveComponent<Position> rem(objManager, 3);
 *   This will create a RemoveComponent command object called "rem" which will
-*   add a Position component initialized with the values 5 and 4 to object with id 3
-*   which lives in some ObjectManager "objManager"
+*   remove the Position component (If it exists. Otherwise nothing happens) from the object with id 3
 */
 template<typename C>
 class RemoveComponent : public ocs::ObjectCommand
@@ -35,7 +36,6 @@ public:
 
     void execute()
     {
-        std::cout << "Executing Remove " << componentType.getFamily() << std::endl;
         objManager.removeComponents<C>(objectId);
     }
 
@@ -49,6 +49,8 @@ private:
 *
 *   This class stores a vector of unique pointers to "RemoveComponent" commands(The single version)
 *
+*   This command should be preferred over the singular version 'RemoveComponent' because the plural version
+*   provides the same functionality in addition to the ability to add multiple
 *   Usage:
 *       ocs::RemoveComponents<Position, Name> rem(objManager, 0);
 *       ...some time later...
@@ -64,8 +66,7 @@ public:
     RemoveComponents(ObjectManager& _objManager, ID _objectId) :
         ObjectCommand(_objManager, _objectId)
     {
-        remComponentCommands.emplace_back(new RemoveComponent<C>(objManager, objectId));
-        storeComponents<Args...>();
+        storeComponents<C, Args...>();
     }
 
     void execute()
@@ -81,16 +82,12 @@ public:
 private:
     
     //!Create new RemoveComponent command objects until all components have been handled
-    template<typename T = SentinalType, Args...>
+    template<typename T = SentinalType, typename ... Others>
     void storeComponents()
     {
-        std::cout << "Test " << T().getFamily() << "\n";
-        if(!SentinalType::endRecursion(T()))
-        {
-            //Constructor for RemoveComponent will call storeComponents which will create another instance if
-            //there are more components
-            remComponentCommands.emplace_back(new RemoveComponent<T>(objManager, objectId));
-        }
+        remComponentCommands.emplace_back(new RemoveComponent<T>(objManager, objectId));
+        if (sizeof ... (Others) > 0)
+            storeComponents<Others...>();
     }
 
     std::vector<std::unique_ptr<ObjectCommand>> remComponentCommands;

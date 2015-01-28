@@ -14,7 +14,9 @@ namespace ocs
 
 
 /*! \brief Command to add a single component to an object
+*   This command is used internally by the 'AddComponents'(Plural) command
 *
+*   \see AddComponents
 *   Usage: 
 *       ocs::AddComponent<Position> add(objManager, 3, Position(5, 4));
 *       ...some time later...
@@ -24,7 +26,7 @@ namespace ocs
 *   which lives in some ObjectManager "objManager"
 */
 template<typename C>
-class AddComponent : public ocs::ObjectCommand
+class AddComponent : public ObjectCommand
 {
 
 public:
@@ -34,35 +36,33 @@ public:
         component(_component)
     {
     }
-    void setObjectId(ID _objectId) {objectId = _objectId;}
+
     void execute()
     {
-        std::cout << "\tExecuting Add " << component.getFamily() << std::endl;
+        // std::cout << "\tExecuting Add " << component.getFamily() << " on object id " << objectId << std::endl;
         objManager.addComponents(objectId, component);
+        //std::cout << objManager.getTotalObjects();
     }
 
 private:
-
-    AddComponent(ObjectManager& _objManager, ID _objectId) :
-        ObjectCommand(_objManager, _objectId),
-        component()
-    {}
 
     C component;
 };
 
 /*! \brief Command to add multiple components to an object
-*   Due to limitations of template class type deduction, access to this class is granted through a static
-*   method that returns an instance of the class
 *   This class stores a vector of unique pointers to "AddComponent" commands(The single version)
-*
+*   This class should be preferred over the other command 'AddComonent' (Singlular) because the type
+*   is automatically deduced in the plural version.
+*   
+*   If a single component is needed, you can simply pass one in to the constructor
 *   Usage:
-*       ocs::AddComponents add = ocs::AddComponents::add(objManager, 0, Position(5, 4), Motion(), Name("Whatever"));
+*       AddComponents addMultiple(objManager, id2, Position(), Collidable());
+*       AddComponents addSingle(objManager, id2, Position());
 *       ...some time later...
 *       add.execute();
 *
 */
-class AddComponents : public ocs::ObjectCommand
+class AddComponents : public ObjectCommand
 {
 
 public:
@@ -78,32 +78,18 @@ public:
         storeComponents(component, others...);
     }
 
-    //!This is here because of the implementation of CreateObject to allow for creation of blank objects
-    static AddComponents add(ObjectManager& objManager, ID objectId) 
-    {
-        return AddComponents (objManager, objectId);
-    }
-
-
-    template<typename C, typename ... Args>
-    static AddComponents add(ObjectManager& objManager, ID objectId, const C& component, Args&& ... others)
-    {
-        AddComponents add(objManager, objectId);
-        add.storeComponents(component, others...);
-        return add;
-    }
-
     ID getNumComponents() const { return addComponentCommands.size(); }
 
-    void setObjectId(ID _objectId) {objectId = _objectId;}
     void execute()
     {
-        std::cout << "AddComponents " << objectId << "\n";
+        //std::cout << "AddComponents " << objectId << "\n";
+        //int i = 0;
         for (auto& addCmd : addComponentCommands)
         {
              //Ensure that the 'single' commands have the same objectId (If it was changed after construction)
-             addCmd->setObjectId(objectId);
-             addCmd->execute();
+            addCmd->setObjectId(objectId);
+            addCmd->execute();
+            //std::cout << "... AddComponents " << i++ << "\n";
         }
     }
 

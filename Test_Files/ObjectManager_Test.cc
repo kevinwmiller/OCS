@@ -36,6 +36,7 @@ namespace objtest
 {
 
 ObjectManager objManager;
+ObjectManager objManager2;
 
 bool operator==(const Position& lhs, const Position& rhs)
 {
@@ -83,6 +84,7 @@ void TEST_OBJECT_CREATION()
 {
     std::cout << "Testing creating objects\n";
     ID id = objManager.createObject();
+
     assert(id == 0);
 
     id = objManager.createObject(Position(65, 30), Name("Test"), Motion());
@@ -143,12 +145,20 @@ void TEST_COMPONENT_ASSIGNING()
 
     std::cout << "Testing assigning components\n";
     ID id = objManager.createObject();
+    ID id2 = objManager2.createObject(Position(560, -4541), Collidable(), Name("Testing2"));
+
     objManager.addComponents(id, Position(56, -45), Motion(), Name("Testing"));
+
+    objManager2.addComponents(id2, Position(560, -4541), Collidable(), Name("Testing2"));
 
     bool test = objManager.hasComponents<Position, Motion, Name>(id);
     assert( test );
-   // assert(objManager.hasComponents<Motion>(id));
-    //assert(objManager.hasComponents<Name>(id));
+
+    bool test2 = objManager2.hasComponents<Position, Collidable, Name>(id2);
+    assert(test2);
+
+    assert(objManager.hasComponents<Motion>(id));
+    assert(!objManager.hasComponents<Collidable>(id));
 
     assert(*(objManager.getComponent<Position>(id)) == Position(56, -45));
 
@@ -156,11 +166,14 @@ void TEST_COMPONENT_ASSIGNING()
 
     assert(objManager.getComponent<Name>(id)->name == "Testing");
 
+    assert(objManager2.getComponent<Name>(id2)->name == "Testing2");
+
     //Test adding a component the object already has
     objManager.addComponents(id, Position());
     assert(objManager.getComponentArray<Position>().size() == 1);
 
     objManager.destroyAllObjects();
+    objManager2.destroyAllObjects();
     std::cout << "Finished testing assigning components\n";
 
 }

@@ -45,7 +45,7 @@ ObjectManager::ObjectManager()
 
 ObjectManager::~ObjectManager()
 {
-    destroyAllObjects();
+    //destroyAllObjects();
     availableVersions.push(version);
 }
 

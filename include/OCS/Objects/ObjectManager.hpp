@@ -33,7 +33,6 @@ freely, subject to the following restrictions:
 #include <OCS/Components/ComponentArray.hpp>
 #include <OCS/Misc/Config.hpp>
 #include <OCS/Components/SentinalType.hpp>
-
 namespace ocs
 {
 
@@ -114,7 +113,7 @@ class ObjectManager : NonCopyable
         template<typename C>
         ComponentArray<C>& getComponentArray() const;
 
-        //!Get a count of the specidifed component
+        //!Get a count of the specified component
         template<typename C>
         ID getTotalComponents() const;
 
@@ -244,7 +243,6 @@ ID ObjectManager::createObject(const C& component, Args&& ... others)
 template<typename C, typename ... Args>
 ID ObjectManager::addComponents(ID objectID, const C& component, Args&& ... others)
 {
-    std::cout << "Adding OM " << objectID << "\n";
     registerComponent<C>();
 
     //A counter for the total components added to the object
@@ -409,7 +407,6 @@ C* const ObjectManager::getComponent(ID objectID)
 
     if(objects.isValid(objectID))
     {
-    std::cout << "Adding to " << objectID << "\n";
         //If the object has the specified component
         if(objects[objectID].componentIndices.find(C::getFamily()) != objects[objectID].componentIndices.end())
         {
