@@ -84,13 +84,13 @@ OCS is licensed under the zlib license. See LICENSE.txt for full details.
 
 ##CHANGE LOG:
 
--	v1.0
+-	v1.0.0
     -	  Added functionality for components
     -	  Added functionality for systems
     -	  Added functionality for messages
     -	  Added basic functionality for states
     -	  Added functionality for prototypes
--	v1.1
+-	v1.1.0
 	-	  Added commands to allow events to be created and executed at separate times. Currently there are commands for creating objects(From components, a prototype, or a mix), destroying objects, and adding/removing components.
 		  Please see comments for usage information  
 	-	  Removed the reserve from the PackedArray class. Please note that if you create/remove objects/components while iterating through a component array, then your iterator will likely be invalidated. If you need to perform these actions inside of the loop, please use the new command classes and call execute on them after the loop has terminated.
@@ -99,11 +99,13 @@ OCS is licensed under the zlib license. See LICENSE.txt for full details.
 	-	  Added virtual destructor to BasePackedArray
 	-	  Updated unit tests for commands.
 
+-	v1.2.0
+	-	  Added function to query the ObjectManager for a list of object ids with the specified components
+	
 ===================================================================================================================
 
 ##UPCOMING CHANGES:
 
--	Add queues for creating and destroying objects/components (Fix for PackedArray reserving a lot of space up front)
 -	Add ability to use different format for prototype files
 -	Add ability for Serializer to be able to serialize to binary format
 -	Add ability for Serializer to be able to serialize maps, arrays, and other containers

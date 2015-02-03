@@ -25,27 +25,119 @@ freely, subject to the following restrictions:
 
 #include <memory>
 #include <map>
-#include <queue>
 
 #include "OCS/Commands/Command.hpp"
+#include <OCS/Misc/Config.hpp>
 
 namespace ocs
 {
 
-using CmdPtr = std::shared_ptr<Command>;
+struct CommandInfo
+{
+    CommandInfo(ID _id, int _maxExecutes, const std::string& _alias) :
+      id(_id),
+      maxExecutes(_maxExecutes),
+      alias(_alias)
+    {}
+    ID id;
+    int maxExecutes;
+    std::string alias;
+
+    void execute()
+    {
+        if (command)
+        {
+            command->execute();
+            --maxExecutes;
+        }
+        else
+            maxExecutes = 0;
+    }
+
+    std::shared_ptr<Command> command;
+};
 
 class CommandManager
 {
     public:
+        CommandManager();
 
-        void addCommand(CmdPtr, bool = false);
-        void addCommand(CmdPtr, const std::string&, bool = false);
+        template<typename CommandType, typename ... Args>
+        ID add(Args&& ...);
+        template<typename CommandType, typename ... Args>
+        ID add(int, Args&& ...);
+        template<typename CommandType, typename ... Args>
+        ID add(const std::string&, Args&& ...);
+        template<typename CommandType, typename ... Args>
+        ID add(const std::string&, int, Args&& ...);
+
+        bool exists(const std::string&) const;
+        bool exists(ID) const;
+
+        bool remove(const std::string&);
+        bool remove(ID);
+
+        bool execute(const std::string&);
+        void executeAllAnonCmds();
+
+        inline ID totalNamedCommands() const;
+        inline ID totalAnonymousCommands() const;
+        inline ID totalCommands() const;
 
     private:
 
-        std::map<std::string, CmdPtr> namedCommands;
-        std::queue<CmdPtr> commands;
+        ID nextId;
+        std::map<std::string, std::shared_ptr<CommandInfo>> namedCommands;
+        std::map<ID, std::shared_ptr<CommandInfo>> commands;
 };
+
+template<typename CommandType, typename ... Args>
+ID CommandManager::add(Args&& ... args)
+{
+    return add<CommandType>(1, args...);
+}
+
+template<typename CommandType, typename ... Args>
+ID CommandManager::add(int maxExecutes, Args&& ... args)
+{
+    return add<CommandType>("", maxExecutes, args...);
+}
+
+template<typename CommandType, typename ... Args>
+ID CommandManager::add(const std::string& alias, Args&& ... args)
+{
+    return add<CommandType>(alias, 1, args...);
+}
+
+template<typename CommandType, typename ... Args>
+ID CommandManager::add(const std::string& alias, int maxExecutes, Args&& ... args)
+{
+    ID newId = nextId++;
+    auto cmdInfo = std::make_shared<CommandInfo>(newId, maxExecutes, alias);
+    cmdInfo->command = std::make_shared<CommandType>(std::forward<Args>(args)...);
+
+    if (cmdInfo->alias == "")
+      commands[cmdInfo->id] = cmdInfo;
+    else
+      namedCommands[cmdInfo->alias] = cmdInfo;
+
+    return newId;
+}
+
+inline ID CommandManager::totalNamedCommands() const
+{
+    return namedCommands.size();
+}
+
+inline ID CommandManager::totalAnonymousCommands() const
+{
+    return commands.size();
+}
+
+inline ID CommandManager::totalCommands() const
+{
+    return totalNamedCommands() + totalCommands();
+}
 
 }//ocs
 

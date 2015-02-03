@@ -87,7 +87,7 @@ class ObjectManager : NonCopyable
         ID createObject(const char* str) { return createObject(std::string(str)); }
 
         //!Create a game object from one or more components
-        template<typename C,typename ... Args>
+        template<typename C, typename ... Args>
         ID createObject(const C&, Args&& ...);
 
         //!Create a game object from an existing object
@@ -112,6 +112,10 @@ class ObjectManager : NonCopyable
         //!Retrives the given component's array. If it does not exists, one is created and returned.
         template<typename C>
         ComponentArray<C>& getComponentArray() const;
+
+        //!Returns a list of object ids that have the specified components
+        template<typename ... Args>
+        std::vector<ID> getObjects();
 
         //!Get a count of the specified component
         template<typename C>
@@ -202,6 +206,22 @@ ComponentArray<C>& ObjectManager::getComponentArray() const
     static std::unordered_map<ID, ComponentArray<C>> components;
 
     return components[version];
+}
+
+/** \brief Query the object manager for a list of objects that have the specified components
+ *
+ * \return A vector of object ids with the specified components
+ */
+template<typename ... Args>
+std::vector<ID> ObjectManager::getObjects()
+{
+    std::vector<ID> ids;
+    for (auto& obj : objects)
+    {
+        if (hasComponents<Args...>(obj.objectID))
+            ids.push_back(obj.objectID);
+    }
+    return ids;
 }
 
 /** \brief Return a reference to the arrays for prototype components.

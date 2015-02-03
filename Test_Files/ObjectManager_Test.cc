@@ -86,13 +86,19 @@ void TEST_OBJECT_CREATION()
     ID id = objManager.createObject();
 
     assert(id == 0);
-
     id = objManager.createObject(Position(65, 30), Name("Test"), Motion());
     assert(id == 1);
+    objManager.createObject(Name(), Collidable());
+    objManager.createObject(Name());
+    objManager.createObject(Name());
     assert(objManager.getComponent<Name>(id)->name == "Test");
 
-    id = objManager.createObject(Position(), Position(), Position(), Motion());
+    id = objManager.createObject(Position(), Position(), Position(), Motion(), Collidable());
     assert(objManager.getTotalComponents<Position>() == 2);
+
+    auto objects = objManager.getObjects<Collidable, Name>();
+    
+    assert((objects.size() == 1 && objects[0] == 1));
 
     objManager.destroyAllObjects();
 

@@ -34,6 +34,7 @@ Set (SRC_DIR ${PROJECT_SOURCE_DIR}/src)
 Set (TEST_DIR ${PROJECT_SOURCE_DIR}/Test_Files)
 
 Set (SRC_FILES  ${SRC_DIR}/Components/Component.cc
+				${SRC_DIR}/Commands/CommandManager.cc
 				${SRC_DIR}/Components/SentinalType.cc
 				${SRC_DIR}/Messaging/Message.cc
 				${SRC_DIR}/Messaging/MessageHub.cc
