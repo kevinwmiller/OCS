@@ -100,25 +100,25 @@ void TEST_DESTROY_OBJECT_COMMAND()
     ID id1 = objManager.createObject(Position(2, 3), Name("Test1"));
     ID id2 = objManager.createObject(Motion(), Name("Test2"));
     ID id3 = objManager.createObject(Collidable(), Name("Test3"));
-    assert(objManager.getTotalObjects == 3);
+    assert(objManager.getTotalObjects() == 3);
     assert(objManager.getTotalComponents<Name>() == 3);
     assert(objManager.getComponent<Name>(id2) == "Test2");
 
     DestroyObject destr(objManager, id2);
 
-    assert(objManager.getTotalObjects == 3);
+    assert(objManager.getTotalObjects() == 3);
 
     destr.execute();
-    assert(objManager.getTotalObjects == 2);
+    assert(objManager.getTotalObjects() == 2);
     assert(objManager.getTotalComponents<Name>() == 2);
 
     destr.execute(); //Still has same object id which shouldn't exist anymore
-    assert(objManager.getTotalObjects == 2);
+    assert(objManager.getTotalObjects() == 2);
     assert(objManager.getTotalComponents<Name>() == 2);
 
     destr.setObjectId(id1);
     destr.execute();
-    assert(objManager.getTotalObjects == 1);
+    assert(objManager.getTotalObjects() == 1);
     assert(objManager.getTotalComponents<Name>() == 1);
 
     objManager.destroyAllObjects();
@@ -135,7 +135,7 @@ void TEST_ADD_COMPONENTS_COMMAND()
     ID id2 = objManager.createObject(Motion(), Name("Test2"));
     ID id3 = objManager.createObject(Collidable(), Name("Test3"));
 
-    assert(objManager.getTotalObjects == 3);
+    assert(objManager.getTotalObjects() == 3);
     assert(objManager.getTotalComponents<Name>() == 3);
     assert(objManager.getComponent<Name>(id2) == "Test2");
 
@@ -155,7 +155,7 @@ void TEST_ADD_COMPONENTS_COMMAND()
 
     //Create a blank object and execute the component pack command on it
     ID id4 = objManager.createObject();
-    assert(objManager.getTotalObjects == 4);
+    assert(objManager.(getTotalObjects()) == 4);
 
     assert(objManager.getTotalComponents<Position>() == 2);
     assert(objManager.getTotalComponents<Collidable>() == 2);
