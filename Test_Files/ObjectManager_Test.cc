@@ -97,8 +97,8 @@ void TEST_OBJECT_CREATION()
     assert(objManager.getTotalComponents<Position>() == 2);
 
     auto objects = objManager.getObjects<Collidable, Name>();
-    
-    assert((objects.size() == 1 && objects[0] == 1));
+
+    assert((objects.size() == 1 && objects[0] == 2));
 
     objManager.destroyAllObjects();
 
