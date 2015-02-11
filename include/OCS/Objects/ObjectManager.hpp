@@ -428,12 +428,10 @@ C* const ObjectManager::getComponent(ID objectID)
     if(objects.isValid(objectID))
     {
         //If the object has the specified component
-        if(objects[objectID].componentIndices.find(C::getFamily()) != objects[objectID].componentIndices.end())
-        {
-            ID componentIndex = objects[objectID].componentIndices[C::getFamily()];
-
-            compPtr = &getComponentArray<C>()[componentIndex];
-        }
+        auto& compIndices = objects[objectID].componentIndices;
+        auto found = compIndices.find(C::getFamily());
+        if(found != compIndices.end())
+            compPtr = &getComponentArray<C>()[found->second];
     }
     return compPtr;
 }
