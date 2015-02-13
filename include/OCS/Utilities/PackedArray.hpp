@@ -29,6 +29,7 @@ freely, subject to the following restrictions:
 #include <stdint.h>
 #include <initializer_list>
 #include <iostream>
+#include <limits>
 
 typedef uint64_t Index;
 
@@ -44,6 +45,8 @@ class BasePackedArray
         virtual void clear() = 0;
         virtual Index size() const = 0;
         virtual bool isValid(Index) const = 0;
+
+        static const Index INVALID_INDEX = std::numeric_limits<Index>::max();
 };
 
 /** \brief A wrapper around a vector trades space efficiency for a constant time remove function. All other
@@ -144,22 +147,19 @@ class PackedArray : public BasePackedArray
         {
             if(indexToCopy < elements.size())
                 return add_item(elements[indexToCopy]);
-            return -1;
+            return INVALID_INDEX;
         }
 
         bool isValid(Index idx) const
         {
-            if(idx >= elementIndeces.size() || elementIndeces[idx] == -1)
-                return false;
-
-            return true;
+            return (idx < elementIndeces.size() && elementIndeces[idx] != INVALID_INDEX);
         }
 
         Index remove(Index idx)
         {
-            Index swappedIndex = -1;
+            Index swappedIndex = INVALID_INDEX;
 
-            if(idx < elementIndeces.size())
+            if(isValid(idx))
             {
                 Index indexToRemove = elementIndeces[idx];
                 swappedIndex = reverseLookupList[size() - 1];
@@ -170,7 +170,7 @@ class PackedArray : public BasePackedArray
                 elements[indexToRemove] = elements[size() - 1];
                 elements.pop_back();
 
-               // elementIndeces[indexToRemove] = -1;
+                // elementIndeces[idx] = INVALID_INDEX;
 
                 availableIndeces.push(idx);
             }

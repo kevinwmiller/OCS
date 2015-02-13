@@ -102,7 +102,7 @@ void TEST_DESTROY_OBJECT_COMMAND()
     ID id3 = objManager.createObject(Collidable(), Name("Test3"));
     assert(objManager.getTotalObjects() == 3);
     assert(objManager.getTotalComponents<Name>() == 3);
-    assert(objManager.getComponent<Name>(id2) == "Test2");
+    assert(objManager.getComponent<Name>(id2)->name == "Test2");
 
     DestroyObject destr(objManager, id2);
 
@@ -137,7 +137,7 @@ void TEST_ADD_COMPONENTS_COMMAND()
 
     assert(objManager.getTotalObjects() == 3);
     assert(objManager.getTotalComponents<Name>() == 3);
-    assert(objManager.getComponent<Name>(id2) == "Test2");
+    assert(objManager.getComponent<Name>(id2)->name == "Test2");
 
     AddComponents addMultiple(objManager, id2, Position(), Collidable());
 
@@ -155,7 +155,7 @@ void TEST_ADD_COMPONENTS_COMMAND()
 
     //Create a blank object and execute the component pack command on it
     ID id4 = objManager.createObject();
-    assert(objManager.(getTotalObjects()) == 4);
+    assert(objManager.getTotalObjects() == 4);
 
     assert(objManager.getTotalComponents<Position>() == 2);
     assert(objManager.getTotalComponents<Collidable>() == 2);
@@ -183,19 +183,19 @@ void TEST_REMOVE_COMPONENTS_COMMAND()
 {
     std::cout << "Testing Remove Components Command\n";
 
-    objManager.createObject(Position(), Motion(), Name());
+    auto id = objManager.createObject(Position(), Motion(), Name());
     assert(objManager.getTotalObjects() == 1);
-    assert((objManager.hasComponents<Position, Motion, Name>()));
+    assert((objManager.hasComponents<Position, Motion, Name>(id)));
 
     RemoveComponents<Position> rem(objManager, 0);
-    assert((objManager.hasComponents<Position, Motion, Name>()));
+    assert((objManager.hasComponents<Position, Motion, Name>(id)));
 
     rem.execute();
-    assert((!objManager.hasComponents<Position>()));
+    assert((!objManager.hasComponents<Position>(id)));
     rem.execute(); //Remove twice. Shouldn't do anything
 
     RemoveComponents<Position, Motion, Name> rem2(objManager, 0);
-    assert((!objManager.hasComponents<Position, Motion, Name>()));
+    assert((!objManager.hasComponents<Position, Motion, Name>(id)));
     objManager.destroyAllObjects();
     std::cout << "Finished Testing Remove Components Command\n";
 }

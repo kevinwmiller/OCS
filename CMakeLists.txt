@@ -66,7 +66,7 @@ IF (OperatingSystem MATCHES "Windows")
 ELSEIF (NOT OperatingSystem MATCHES "Windows")
 	IF(NOT EXISTS ${PROJECT_SOURCE_DIR}/build/TestOCS.sh)
 		Message("Creating Linux/Mac test files")
-		file(WRITE build/testOCS.sh "#!/bin/bash\n../Test_Files/build/bin/OCS_Test.exe")
+		file(WRITE build/testOCS.sh "#!/bin/bash\nLD_LIBRARY_PATH=\".\":\"$LD_LIBRARY_PATH\" \"../Test_Files/build/bin/OCS_Test\"\n")
 	ENDIF(NOT EXISTS ${PROJECT_SOURCE_DIR}/build/TestOCS.sh)
 ENDIF (OperatingSystem MATCHES "Windows")
 
