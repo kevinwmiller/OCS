@@ -157,6 +157,9 @@ class ObjectManager : NonCopyable
         template<typename C, typename ... Args>
         void setComponent(ID, Args&& ...);
 
+        //!Update a component from a string to deserialize from
+        bool updateComponentFromString(ID, const std::string&, const std::string&);
+
     private:
 
         //!All game objects reside in here

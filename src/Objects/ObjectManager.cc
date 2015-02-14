@@ -235,6 +235,68 @@ bool ObjectManager::doesPrototypeExist(const std::string& prototypeName) const
     return objectPrototypes.find(prototypeName) != objectPrototypes.end();
 }
 
+/** \brief Updates a component from a string to deserialize using the component's bound string name
+ *
+ * \param objectID The ID of the object's component to update.
+ * \param compName The bound string name of the component type to update.
+ * \param compStr The serialized component data to deserialize.
+ *
+ * \return True if the update was successful. False if it fails.
+ *
+ */
+bool ObjectManager::updateComponentFromString(ID objectID, const std::string& compName, const std::string& compStr)
+{
+    bool status = false;
+
+    // Check if the object ID is valid
+    if(objects.isValid(objectID))
+    {
+        // Get the component family from the string
+        auto found = stringToCompFamily.find(compName);
+        if(found != stringToCompFamily.end())
+        {
+            auto compFamily = found->second;
+
+            // Get the object
+            auto& obj = objects[objectID];
+
+            // Check if the component already exists
+            auto foundCompArray = obj.componentArrays.find(compFamily);
+            if(foundCompArray != obj.componentArrays.end())
+            {
+                // Update the component if it does exist
+                auto compIdx = obj.componentIndices[compFamily];
+                auto component = &foundCompArray->second->getBaseComponent(compIdx);
+                component->deSerialize(compStr);
+                status = true;
+            }
+            else
+            {
+                // Add a new component if it doesn't exist
+                // Get the component array from the component family
+                foundCompArray = compFamilyToCompArray.find(compFamily);
+                if(foundCompArray != compFamilyToCompArray.end())
+                {
+                    // Add the component (and deserialize the string)
+                    auto compArray = foundCompArray->second;
+                    auto compIdx = compArray->add_item(compStr);
+
+                    // Update the component arrays and indices
+                    obj.componentArrays[compFamily] = compArray;
+                    obj.componentIndices[compFamily] = compIdx;
+                    status = true;
+                }
+            }
+        }
+        else
+            std::cerr << "Error: Component name not bound: " << compName << std::endl;
+    }
+    else
+        std::cerr << "Error: Invalid object ID: " << objectID << std::endl;
+
+    return status;
+}
+
 void ObjectManager::addComponentToPrototypeFromString(const std::string& prototypeName, const std::string& compName, const std::string& compValues)
 {
     if(stringToCompFamily.find(compName) != stringToCompFamily.end())
