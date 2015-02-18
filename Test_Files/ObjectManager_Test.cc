@@ -202,6 +202,19 @@ void TEST_COMPONENT_MODIFYING()
 
     assert(comp.x == 65 && comp.y == 0);
 
+    // Test 1 (existing component)
+    objManager.updateComponentFromString(id, "Name", "First test");
+    auto nameComp = objManager.getComponent<Name>(id);
+    assert(nameComp->name == "First test");
+
+    objManager.destroyAllObjects();
+
+    // Test 2 (not existing component)
+    ID id2 = objManager.createObject();
+    objManager.updateComponentFromString(id2, "Name", "Second test");
+    auto nameComp2 = objManager.getComponent<Name>(id2);
+    assert(nameComp2 != nullptr);
+    assert(nameComp2->name == "Second test");
 
     objManager.destroyAllObjects();
 
