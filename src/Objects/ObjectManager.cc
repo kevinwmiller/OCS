@@ -277,9 +277,10 @@ bool ObjectManager::updateComponentFromString(ID objectID, const std::string& co
                 foundCompArray = compFamilyToCompArray.find(compFamily);
                 if(foundCompArray != compFamilyToCompArray.end())
                 {
-                    // Add the component (and deserialize the string)
+                    // Add the component (which will deserialize the string), and set the owner ID
                     auto compArray = foundCompArray->second;
                     auto compIdx = compArray->add_item(compStr);
+                    compArray->getBaseComponent(compIdx).ownerID = objectID;
 
                     // Update the component arrays and indices
                     obj.componentArrays[compFamily] = compArray;
