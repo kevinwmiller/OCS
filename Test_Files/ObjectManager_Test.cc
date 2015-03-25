@@ -210,11 +210,27 @@ void TEST_COMPONENT_MODIFYING()
     objManager.destroyAllObjects();
 
     // Test 2 (not existing component)
+    id = objManager.createObject();
     ID id2 = objManager.createObject();
-    objManager.updateComponentFromString(id2, "Name", "Second test");
+    objManager.updateComponentFromString(id, "Position", "0 0");
+    objManager.updateComponentFromString(id, "Position", "50 20");
+    objManager.updateComponentFromString(id2, "Name", "test");
+    objManager.updateComponentFromString(id2, "Position", "1 2");
+
+    auto posComp = objManager.getComponent<Position>(id);
+    assert(posComp != nullptr);
+    assert(posComp->getOwnerID() == id);
+    assert(posComp->x == 50 && posComp->y == 20);
+
     auto nameComp2 = objManager.getComponent<Name>(id2);
     assert(nameComp2 != nullptr);
-    assert(nameComp2->name == "Second test");
+    assert(nameComp2->getOwnerID() == id2);
+    assert(nameComp2->name == "test");
+
+    auto posComp2 = objManager.getComponent<Position>(id2);
+    assert(posComp2 != nullptr);
+    assert(posComp2->getOwnerID() == id2);
+    assert(posComp2->x == 1 && posComp2->y == 2);
 
     objManager.destroyAllObjects();
 
