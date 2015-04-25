@@ -83,6 +83,7 @@ IF(NOT EXISTS ${PROJECT_SOURCE_DIR}/build/Otherfile.txt)
 ENDIF(NOT EXISTS ${PROJECT_SOURCE_DIR}/build/Otherfile.txt)
 
 add_library(${PROJECT_NAME} SHARED ${SRC_FILES})
+add_library(${PROJECT_NAME}_s STATIC ${SRC_FILES})
 
 add_subdirectory(${TEST_DIR})
 
