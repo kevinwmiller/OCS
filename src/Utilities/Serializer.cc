@@ -25,6 +25,11 @@ freely, subject to the following restrictions:
 
 namespace readentirestring
 {
+std::stringstream& operator<<(std::stringstream& out, std::string& str)
+{
+    out.str(str);
+    return out;
+}
 /** \brief Store everything in a stringstream instead of the string up to the first instance of whitespace
  *
  * \param in The stringstream with the string to extract

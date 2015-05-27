@@ -28,6 +28,11 @@ freely, subject to the following restrictions:
 #include <string>
 #include "OCS/Utilities/StringUtilities.hpp"
 
+namespace readentirestring 
+{
+extern std::stringstream& operator>>(std::stringstream& in, std::string& str);
+extern std::stringstream& operator<<(std::stringstream& out, std::string& str);
+}
 /**\brief Serializer -
 *           Converts between a string and a value using a specified format string.
 *           Users specifiy a format to indicate how a string should be converted to
@@ -151,7 +156,6 @@ bool Serializer::deSerialize(std::string formatStr, std::string valuesStr, T& fi
     //Look for the next conversion character while iterating through both strings.
     if(!moveToNextConversionChar(formatStr, valuesStr))
         return false;
-
     std::string value("");
 
     //If the value is a string
@@ -169,20 +173,15 @@ bool Serializer::deSerialize(std::string formatStr, std::string valuesStr, T& fi
     //Otherwise get the value and use the character after the conversion character as the end of the value
     else
         value = getNextValue(valuesStr, formatStr[1]);
-
     //Remove the conversion character from the format string
     formatStr = formatStr.substr(1);
-
     //If the value could not be read, exit the function
     if(value == "")
         return false;
-
     convertStrToValue(value, first);
-
     //If there are more values to be read, call the function again
     if(sizeof ... (others) > 0)
         return true && deSerialize(formatStr, valuesStr, others...);
-
     return true;
 }
 
@@ -190,6 +189,7 @@ bool Serializer::deSerialize(std::string formatStr, std::string valuesStr, T& fi
 template<typename T>
 void Serializer::convertStrToValue(const std::string& strValue, T& value)
 {
+    using namespace readentirestring;
     std::stringstream ss;
     ss << strValue;
     ss >> value;

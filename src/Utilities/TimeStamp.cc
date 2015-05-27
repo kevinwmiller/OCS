@@ -25,15 +25,11 @@ freely, subject to the following restrictions:
 
 std::string TimeStamp::getTimeStamp(const std::string& format)
 {
-    std::string timeStamp;
-
     time_t currentTime = time(0);
     struct tm tStruct = *localtime(&currentTime);
     char buffer[256];
     strftime(buffer, sizeof(buffer), format.c_str(), &tStruct);
 
-    timeStamp = buffer;
-
-    return timeStamp;
+    return buffer;
 }
 

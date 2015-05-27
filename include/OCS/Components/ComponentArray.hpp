@@ -39,7 +39,7 @@ struct BaseComponentArray
     virtual void clear() = 0;
     virtual Index size() const = 0;
 
-    virtual Index add_item(const std::string&) = 0;
+    virtual Index addItem(const std::string&) = 0;
 
 };
 
@@ -59,8 +59,8 @@ struct ComponentArray : public BaseComponentArray
         typename std::vector<C>::const_iterator end() const { return arry.cend(); }
 
         template<typename ... Args>
-        Index emplace_item(Args&& ... args) { return arry.emplace_item(args...); }
-        Index add_item(const C& item) { return arry.add_item(item); }
+        Index emplaceItem(Args&& ... args) { return arry.emplaceItem(args...); }
+        Index addItem(const C& item) { return arry.addItem(item); }
         Index createCopy(Index idx) { return arry.createCopy(idx); }
 
         Index createCopy(Index idx, BaseComponentArray* otherArry)
@@ -72,7 +72,7 @@ struct ComponentArray : public BaseComponentArray
             {
                 C newItem = arry[idx];
 
-                return otherCompArry->add_item(newItem);
+                return otherCompArry->addItem(newItem);
             }
             return -1;
 
@@ -82,12 +82,14 @@ struct ComponentArray : public BaseComponentArray
         void clear() { arry.clear(); }
         Index size() const { return arry.size(); }
 
-        Index add_item(const std::string& compValues)
+        Index addItem(const std::string& compValues)
         {
+std::cout << "In addItem\n";
             C newItem;
             newItem.deSerialize(compValues);
-
-            return arry.add_item(newItem);
+std::cout << "Derserialized\n";
+            return arry.addItem(newItem);
+std::cout << "Actually added\n";
         }
 
     private:

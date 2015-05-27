@@ -26,12 +26,13 @@ freely, subject to the following restrictions:
 #include <vector>
 #include <stack>
 #include <utility>
-#include <stdint.h>
 #include <initializer_list>
 #include <iostream>
 #include <limits>
 
-typedef uint64_t Index;
+#include <fstream>
+
+using Index = uint64_t;
 
 /** \brief Polymorphic class for PackedArrays
  *
@@ -45,7 +46,6 @@ class BasePackedArray
         virtual void clear() = 0;
         virtual Index size() const = 0;
         virtual bool isValid(Index) const = 0;
-
         static const Index INVALID_INDEX = std::numeric_limits<Index>::max();
 };
 
@@ -57,12 +57,12 @@ template <typename T>
 class PackedArray : public BasePackedArray
 {
     public:
-        PackedArray() {}
+        PackedArray() {std::ofstream out("out.log");out.close();}
 
         PackedArray (std::initializer_list<T> iList)
         {
             for(auto it = iList.begin(); it != iList.end(); ++it)
-                add_item(*it);
+                addItem(*it);
         }
 
         PackedArray(std::size_t numberToReserve)
@@ -70,7 +70,7 @@ class PackedArray : public BasePackedArray
             if(numberToReserve > 0)
             {
                 elements.reserve(numberToReserve);
-                elementIndeces.reserve(numberToReserve);
+                elementIds.reserve(numberToReserve);
                 reverseLookupList.reserve(numberToReserve);
             }
         }
@@ -100,12 +100,12 @@ class PackedArray : public BasePackedArray
 
         T& operator[](Index idx)
         {
-            return elements[ elementIndeces[idx] ];
+            return elements[ elementIds[idx] ];
         }
 
         const T& operator[](Index idx) const
         {
-            return elements[ elementIndeces[idx] ];
+            return elements[ elementIds[idx] ];
         }
 
         Index size() const
@@ -113,87 +113,120 @@ class PackedArray : public BasePackedArray
             return elements.size();
         }
 
-        Index add_item(const T& item)
+        //Get the Id of an element at a given position in the actual list
+        Index getId(Index idx)
+        {
+            if (idx < size()) {
+                std::cout << "Returning " << reverseLookupList[idx] << "\n";
+                std::cout << "Actual index " << elementIds[reverseLookupList[idx]] << "\n";
+                return reverseLookupList[idx];
+            }
+            return INVALID_INDEX;
+        }
+
+        Index addItem(const T& item)
         {
             Index newIdx;
             elements.push_back(item);
 
-            if(availableIndeces.size() > 0)
+            if(availableIds.size() > 0)
             {
                // std::cout << "Free indexes\n";
-                newIdx = availableIndeces.top();
-                elementIndeces[newIdx] = size() - 1;
-                reverseLookupList[size() - 1] = newIdx;
-                availableIndeces.pop();
+                newIdx = availableIds.top();
+                elementIds[newIdx] = size() - 1;
+                //reverseLookupList[size() - 1] = newIdx;
+                reverseLookupList.push_back(newIdx);
+                availableIds.pop();
             }
             else
             {
                // std::cout << "No free indexes\n";
                 newIdx = elements.size() - 1;
-                elementIndeces.push_back(newIdx);
+                elementIds.push_back(newIdx);
                 reverseLookupList.push_back(newIdx);
             }
             return newIdx;
         }
 
         template<typename ... Args>
-        Index emplace_item(Args&& ... args)
+        Index emplaceItem(Args&& ... args)
         {
             T newItem(std::forward<Args>(args) ... );
-            return add_item(newItem);
+            return addItem(newItem);
         }
 
         Index createCopy(Index indexToCopy)
         {
-            if(indexToCopy < elements.size())
-                return add_item(elements[indexToCopy]);
+            if(isValid(indexToCopy))
+                return addItem(elements[indexToCopy]);
             return INVALID_INDEX;
         }
 
         bool isValid(Index idx) const
         {
-            return (idx < elementIndeces.size() && elementIndeces[idx] != INVALID_INDEX);
+            return (idx < elementIds.size() && elementIds[idx] != INVALID_INDEX);
         }
 
         Index remove(Index idx)
         {
-            Index swappedIndex = INVALID_INDEX;
+            Index swappedId = INVALID_INDEX;
 
+            std::ofstream out("out.log", std::ios::app);
+            std::cout << "Removing " << idx << "\n";
             if(isValid(idx))
             {
-                Index indexToRemove = elementIndeces[idx];
-                swappedIndex = reverseLookupList[size() - 1];
+                std::cout << "Valid " << idx <<"\nBefore\n";
 
-                elementIndeces[swappedIndex] = indexToRemove;
-                reverseLookupList[indexToRemove] = swappedIndex;
+                //printVector(out, elements , "Elements");
+                printVector(std::cout, elementIds, "ElementIds");
+                printVector(std::cout, reverseLookupList, "Reverse");
+                Index indexToRemove = elementIds[idx];
+                swappedId = reverseLookupList[size() - 1];
 
-                elements[indexToRemove] = elements[size() - 1];
+                elementIds[swappedId] = indexToRemove;
+                reverseLookupList[indexToRemove] = swappedId;
+
+                std::swap(elements[indexToRemove], elements[size() - 1]);
+                //elements[indexToRemove] = elements[size() - 1];
                 elements.pop_back();
+                reverseLookupList.pop_back();
+                elementIds[idx] = INVALID_INDEX;
 
-                // elementIndeces[idx] = INVALID_INDEX;
-
-                availableIndeces.push(idx);
+                std::cout << "After\n";
+                //printVector(out, elements , "Elements");
+                printVector(std::cout, elementIds, "ElementIds");
+                printVector(std::cout, reverseLookupList, "Reverse");
+                availableIds.push(idx);
             }
+            out.close();
+            return swappedId;
+        }
 
-            return swappedIndex;
+        template<typename F>
+        void printVector(std::ostream& out, std::vector<F>& v, const std::string& label)
+        {
+            out << label << "\n";
+            for (auto& i : v)
+                out << i << " ";
+            out << "\n";
         }
 
         void clear()
         {
             elements.clear();
             reverseLookupList.clear();
-            elementIndeces.clear();
+            elementIds.clear();
 
-            while(availableIndeces.size() > 0)
-                availableIndeces.pop();
+            while(availableIds.size() > 0)
+                availableIds.pop();
         }
 
     private:
 
         std::vector<T> elements;
-        std::vector<Index> elementIndeces;
+        std::vector<Index> elementIds;
         std::vector<Index> reverseLookupList;
-        std::stack<Index> availableIndeces;
+        std::stack<Index> availableIds;
 
 };
 

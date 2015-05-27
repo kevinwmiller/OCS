@@ -25,6 +25,7 @@ freely, subject to the following restrictions:
 
 #include "OCS/Misc/Config.hpp"
 #include "OCS/Utilities/Serializer.hpp"
+#include "OCS/Misc/TemplateMacros.hpp"
 
 namespace ocs
 {
@@ -46,6 +47,7 @@ struct BaseComponent
 
     virtual std::string serialize() { return (""); }
     virtual void deSerialize(const std::string&) {}
+    virtual std::string getName() { return ""; }
 
     protected:
 
@@ -56,6 +58,8 @@ struct BaseComponent
         ID ownerID;
         static Family familyCounter;
 };
+
+CREATE_HAS_MEMBER_FUNCTION(name, hasName);
 
 /*! \brief All created components should inherit from this in the following way:
  *
@@ -83,6 +87,30 @@ struct Component : public BaseComponent
         static Family family = BaseComponent::familyCounter++;
         return family;
     }
+
+    std::string getName()
+    {
+        return componentName();
+    }
+
+    static std::string componentName()
+    {
+        return ComponentName<Derived, hasName<Derived>::value>::name();
+    }
+
+private:
+
+    template <typename T, bool>
+    struct ComponentName
+    {
+        static std::string name() {return T::name; }
+    };
+
+    template <typename T>
+    struct ComponentName<T, false>
+    {
+        static std::string name() {return ""; }
+    };
 };
 
 }//ocs

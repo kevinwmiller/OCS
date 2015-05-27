@@ -103,10 +103,10 @@ void ObjectManager::copyObject(ID destinationId, const Object& source)
  */
 ID ObjectManager::createObject()
 {
-    ID indx = objects.emplace_item();
-    objects[indx].objectID = indx;
-
-    return indx;
+    ID index = objects.emplaceItem();
+    objects[index].objectID = index;
+    std::cout << "Created object with id " << objects[index].objectID << " \n";
+    return index;
 }
 
 /** \brief Create an object modeled after the prototype of the given name.
@@ -148,8 +148,10 @@ void ObjectManager::destroyObject(ID objectID)
         removeAllComponents(objectID);
         //Remove the object from the object array
         objects.remove(objectID);
-    }else
-        std::cerr << "Error: Invalid object id\n";
+        std::cout << "Removed " << objectID << "\n";
+    }
+    // else
+    //     std::cerr << "Error: Invalid object id\n";
 }
 
 /** \brief Destroys all objects by iterating through the objects list and calling destroyObject.
@@ -159,8 +161,11 @@ void ObjectManager::destroyObject(ID objectID)
  */
 void ObjectManager::destroyAllObjects()
 {
-    while (objects.size() > 0)
-        destroyObject(objects[0].objectID);
+    while (objects.size() > 0) {
+        //std::cout << "Size: " << objects.size() << "\n" << "Object Id: " << objects[0].objectID << "\n";
+
+        destroyObject(objects.getId(0));
+    }
 
     objects.clear();
 }
@@ -233,39 +238,6 @@ ID ObjectManager::removeAllComponents(ID objectID)
 bool ObjectManager::doesPrototypeExist(const std::string& prototypeName) const
 {
     return objectPrototypes.find(prototypeName) != objectPrototypes.end();
-}
-
-void ObjectManager::addComponentToPrototypeFromString(const std::string& prototypeName, const std::string& compName, const std::string& compValues)
-{
-    if(stringToCompFamily.find(compName) != stringToCompFamily.end())
-    {
-        auto componentFamily = stringToCompFamily[compName];
-
-        //std::cout << "Adding component family: " << componentFamily << std::endl;
-
-        //Get the prototype
-        auto& prototype = objectPrototypes[prototypeName];
-
-        if(prototype.objectID == ID(-1))
-            prototype.objectID = prototypeIDCounter++;
-
-        //If the prototype does not already have the given component
-        if(prototype.componentArrays.find(componentFamily) == prototype.componentArrays.end())
-        {
-            //Add the first component in the list
-            auto compArray = compFamilyToProtoCompArray[componentFamily];
-
-            auto compIdx = compArray->add_item(compValues);
-
-            prototype.componentArrays[componentFamily] = compArray;
-            prototype.componentIndices[componentFamily] = compIdx;
-
-        }
-
-          //std::cout << "Finished Adding component family: " << componentFamily << std::endl;
-    }
-    else
-        std::cerr << "Error: " << compName << " not bound to a component\n";
 }
 
 }//ocs

@@ -67,7 +67,7 @@ bool ObjectPrototypeLoader::loadObjectPrototype(ObjectManager& objManager, const
         for(const auto& compName : componentTypes)
         {
             std::string componentValues = parser.getAttributeAsString(sectionPath, compName);
-            objManager.addComponentToPrototypeFromString(prototypeName, compName, componentValues);
+            objManager.assignComponentsToPrototype(prototypeName, compName, componentValues);
         }
 
        // std::cout << "Finished loading prototype " << prototypeName << "!\n\n";

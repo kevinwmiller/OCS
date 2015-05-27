@@ -33,6 +33,8 @@ struct Position : public ocs::Component<Position>
 {
     Position(float _x = 0.0f, float _y = 0.0f) : x(_x), y(_y) {}
 
+    static std::string name() { return "Position" };
+
     std::string serialize() { return serializer.serialize("Position % %", x, y); }
     void deSerialize(const std::string& str) { serializer.deSerialize("% %", str, x, y); }
 

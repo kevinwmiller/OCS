@@ -45,16 +45,18 @@ bool operator==(const Position& lhs, const Position& rhs)
 
 void TEST_OBJECT_PROTOTYPE()
 {
-    std::cout << "Testing object prototypes\n";
+    std::cout << "Testing Object Prototypes\n";
     std::string file("prototypes.txt");
 
+    std::cout << "\tBinding Components\n";
     objManager.bindStringToComponent<Position>("Position");
     objManager.bindStringToComponent<Name>("Name");
     objManager.bindStringToComponent<Motion>("Motion");
     objManager.bindStringToComponent<Collidable>("Collidable");
 
+    std::cout << "\tLoading Prototype Sets\n";
     int totalPrototypes = ObjectPrototypeLoader::loadPrototypeSet(objManager, file, "Prototypes","[Prototypes]");
-
+    std::cout << "\tDone Loading Prototype Sets\n";
     assert(totalPrototypes == 4);
 
     assert(objManager.doesPrototypeExist("Test1"));
@@ -124,14 +126,20 @@ void TEST_OBJECT_COMPONENT_SERIALIZATION()
 void TEST_OBJECT_DESTRUCTION()
 {
     std::cout << "Testing destroying objects\n";
-    objManager.createObject(Name("Test1"));
-    objManager.createObject(Name("Test2"));
-    objManager.createObject(Name("Test3"));
-    objManager.createObject(Name("Test4"));
-    objManager.createObject(Name("Test5"));
+    uint64_t idx;
+    idx = objManager.createObject(Name("Test1"));
+    std::cout << "Created Object. New Index:" << idx << "\n";
+    idx = objManager.createObject(Name("Test2"));
+    std::cout << "Created Object. New Index:" << idx << "\n";
+    idx = objManager.createObject(Name("Test3"));
+    std::cout << "Created Object. New Index:" << idx << "\n";
+    idx = objManager.createObject(Name("Test4"));
+    std::cout << "Created Object. New Index:" << idx << "\n";
+    idx = objManager.createObject(Name("Test5"));
+    std::cout << "Created Object. New Index:" << idx << "\n";
 
     objManager.destroyObject(2);
-
+    std::cout << "Destroyed Objects 2\n";
     assert(objManager.getTotalObjects() == 4);
 
     assert(objManager.getComponent<Name>(4)->name == "Test5");
@@ -234,6 +242,77 @@ void TEST_COMPONENT_REMOVING()
     std::cout << "Finished testing removing components\n";
 }
 
+void TEST_PACKEDARRAY()
+{
+    std::cout << "Testing Packed Array\n";
+
+    PackedArray<Index> arry = {2, 4, 6, 8, 10};
+    
+    std::cout << arry << "\n";
+
+    // std::cout << "At arry 1 " << arry[1] << "\n";
+    // std::cout << "At arry 4 " << arry[4] << "\n";
+    arry.remove(1);
+
+    // std::cout << "After removing 1 1 valid? " << arry.isValid(1) << "\n";
+    // std::cout << "After removing 1 4 valid? " << arry.isValid(4) << "\n";
+    // std::cout << "At arry 4 " << arry[4] << "\n";
+
+    std::cout << arry << "\n";
+
+
+    arry.remove(2);
+
+    // std::cout << "After removing 2 2 valid? " << arry.isValid(2) << "\n";
+    // std::cout << "After removing 2 3 valid? " << arry.isValid(3) << "\n";
+    // std::cout << "At arry 3 " << arry[3] << "\n";
+
+    std::cout << arry << "\n";
+
+    //uint64_t idx = arry.addItem(15);
+
+    // std::cout << "New index " << idx << "\n";
+
+    // std::cout << "After adding 15\n";
+    // std::cout << "After adding 2 valid? " << arry.isValid(2) << "\n";
+    std::cout << arry << "\n";
+
+    //idx = arry.addItem(73);
+
+    //std::cout << "New index " << idx << "\n";
+
+    //std::cout << "After adding 73\n";
+    //std::cout << "After adding 1 valid? " << arry.isValid(1) << "\n";
+    std::cout << arry << "\n";
+
+    arry.remove(4);
+    std::cout << arry << "\n";
+    // std::cout << "After removing 4 4 valid? " << arry.isValid(4) << "\n";
+    // std::cout << "After removing 4 1 valid? " << arry.isValid(1) << "\n";
+    // std::cout << "At arry 1 " << arry[1] << "\n";
+
+    uint64_t newIdx = arry.addItem(15);
+    arry.addItem(72);
+    arry.addItem(176);
+    std::cout << "Added " << newIdx << "\n";
+    std::cout << arry << "\n";
+
+    arry.remove(newIdx);
+    std::cout << arry << "\n";
+
+
+    std::cout << "Removing everything\n";
+
+    while (arry.size() > 0) {
+        std::cout << arry << "\n";
+        arry.remove(arry.getId(0));
+    }
+
+    //std::cout << (int)(Index(-1)) << "\n";
+
+    std::cout << "Done Testing Packed Array\n";
+}
+
 }//objtest
 
 int testObjectManager()
@@ -246,6 +325,7 @@ int testObjectManager()
     objtest::TEST_COMPONENT_MODIFYING();
     objtest::TEST_COMPONENT_REMOVING();
     objtest::TEST_OBJECT_DESTRUCTION();
+    objtest::TEST_PACKEDARRAY();
     std::cout << "Finished testing ObjectManager\n";
 
     return 0;

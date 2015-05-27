@@ -143,7 +143,7 @@ void TEST_ADD_COMPONENTS_COMMAND()
 
     assert(objManager.getTotalComponents<Position>() == 1);
     assert(objManager.getTotalComponents<Collidable>() == 1);
-    assert(!objManager.getComponent<Motion>(id2));
+    assert(objManager.getComponent<Motion>(id2));
     assert(!objManager.getComponent<Collidable>(id2));
 
     addMultiple.execute();
@@ -168,7 +168,7 @@ void TEST_ADD_COMPONENTS_COMMAND()
 
     assert(objManager.getTotalComponents<Position>() == 3);
     assert(objManager.getTotalComponents<Collidable>() == 3);
-    assert(objManager.getComponent<Motion>(id4));
+    assert(objManager.getComponent<Position>(id4));
     assert(objManager.getComponent<Collidable>(id4));
 
     //Try to add to object that doesn't exist
