@@ -2,9 +2,9 @@
 ##Last Modified: 01/28/2015
 ##Version 1.1
 
-OCS provides a fast and easy to use interface for creating, 
+OCS provides a fast and easy to use interface for creating,
 testing, and modifying objects, their components, and the systems that allow
-everything to interact.  
+everything to interact.
 
 ===================================================================================================================
 
@@ -43,7 +43,7 @@ more features are needed, so keep an eye out for any updates.
 
         cd build
 
-4.    Run cmake using the root as the source directory  
+4.    Run cmake using the root as the source directory
       4.1    To generate default makefile:
 
         cmake ..
@@ -54,9 +54,9 @@ more features are needed, so keep an eye out for any updates.
 
     4.3    To see a list of other generators:
 
-        cmake 
+        cmake
 
-5.    Use the generated make file  
+5.    Use the generated make file
     5.1 Default makefile
 
         make install
@@ -69,13 +69,13 @@ more features are needed, so keep an eye out for any updates.
 ===================================================================================================================
 
 ##SUPPORT:
-	
+
 If any bugs are found or if you have any suggestions for new features or changes, you can reach me at KevM1227@gmail.com.
 
 For more information, see the project's home page at https://github.com/Lastresort92/OCS
-	
+
 ===================================================================================================================
-			
+
 ##LICENSING:
 
 OCS is licensed under the zlib license. See LICENSE.txt for full details.
@@ -92,7 +92,7 @@ OCS is licensed under the zlib license. See LICENSE.txt for full details.
     -	  Added functionality for prototypes
 -	v1.1.0
 	-	  Added commands to allow events to be created and executed at separate times. Currently there are commands for creating objects(From components, a prototype, or a mix), destroying objects, and adding/removing components.
-		  Please see comments for usage information  
+		  Please see comments for usage information
 	-	  Removed the reserve from the PackedArray class. Please note that if you create/remove objects/components while iterating through a component array, then your iterator will likely be invalidated. If you need to perform these actions inside of the loop, please use the new command classes and call execute on them after the loop has terminated.
 	-	  Removed destroyAllObjects from ObjectManager destructor due to a crash that occurred when more than one instance of the class was declared. The crash resulted from a virtual function call that is used to destroy an object's components. Simply call destroyAllObjects before your object manager goes out of scope
 	-	  Started work on command manager which will handle store/executing commands. Will provide ability to map a command to string.
@@ -101,7 +101,7 @@ OCS is licensed under the zlib license. See LICENSE.txt for full details.
 
 -	v1.2.0
 	-	  Added function to query the ObjectManager for a list of object ids with the specified components
-	
+
 ===================================================================================================================
 
 ##UPCOMING CHANGES:
@@ -122,11 +122,11 @@ Program will crash if wrong format is used when loading prototypes.
 ##INSTRUCTIONS:
 
 There are four main parts to OCS: components, objects, systems, and messaging. The following sections will review all of these and show examples on how to use them.
-	
-===================================================================================================================	
-	
+
+===================================================================================================================
+
 ##TABLE OF CONTENTS:
-	
+
 *	[Components](#components)
 	*	[Creating a Component](#creating-a-component)
 	*	[Serializing a Component](#serializing-acomponent)
@@ -172,40 +172,40 @@ There are four main parts to OCS: components, objects, systems, and messaging. T
 *	[Tips](#tips)
 
 ===================================================================================================================
-			
+
 ##COMPONENTS:
-		
+
 The component is the basis of OCS. They define what objects are and how they interact with
 the rest of the world. A component in OCS is a POD type, and represents a single aspect
 about an object. All components are stored in arrays to limit the amount of cache misses that
 occur in a program. Components and Messages make use of the Curiously Recurring Template Pattern(CRTP)
 to keep track of their ids.
 
-**NOTE: No logic other than serializing or deSerializing should be in the components and all components 
+**NOTE: No logic other than serializing or deSerializing should be in the components and all components
 MUST implement a default constructor and SHOULD implement a parameratized constructor.**
-	
-		
+
+
 ###CREATING A COMPONENT:
 
 A Position component might have 2 float values: an x, and a y. To create this component, you might
 make it like this.
-	
+
 	struct Position : public ocs::Component<Position>
 	{
 		Position(float _x = 0.0f, float _y = 0.0f) : x(_x), y(_y) {}
-		
+
 		float x, y;
 	};
-	
+
 This component can then be added to an object using the ObjectManager class.
-	
+
 ###SERIALIZING A COMPONENT*:
 
-All components have access to a Serializer object. This object operates in a similar way to printf and scanf in 
+All components have access to a Serializer object. This object operates in a similar way to printf and scanf in
 how it takes a format string and a list of variables, and returns a string in the given format.
 
 To allow a component to be serialized or deserialized (perhaps to be loaded from a file), simply overload the serialize
-and deSerialize functions in your component. Then in the definition, call the serialize or deSerialize function of the 
+and deSerialize functions in your component. Then in the definition, call the serialize or deSerialize function of the
 Serializer object, and give it a format string and a list of values to serialize.
 
 
@@ -213,19 +213,19 @@ Serializer object, and give it a format string and a list of values to serialize
 	struct Position : ocs::Component<Position>
 	{
 		Position(float _x = 0.0f, float _y = 0.0f) : x(_x), y(_y) {}
-		
+
 		std::string serialize() { return serializer.serialize("% %", x, y); }
 		void deSerialize(const std::string& values) { serializer.deSerialize("% %", values, x, y; }
-		
+
 		float x, y;
 	};
-		
+
 The component can then be converted to and from a string by calling the serialize or deSerialize functions.
 
 *More serializing options are coming soon. Converting to and from byte arrays, and loading arrays into the string are next additions.
 
 ===================================================================================================================
-	
+
 ##OBJECTS:
 
 An object in OCS is represented by an ID and is the element that ties a group of components together. The
@@ -235,7 +235,7 @@ array.
 ###CREATING OBJECTS:
 
 *NOTE: All examples below assume an instance of ObjectManager called objManager exists. If your manager inherits from State, one is given to you.*
-	  
+
 Objects can be created in three different ways: as an empty object with no components, an object with one or more components passed
 to the createObject function, or copied from an object prototype.
 
@@ -243,8 +243,8 @@ to the createObject function, or copied from an object prototype.
 
 	auto id = objManager.createObject();
 
-Creating an empty object should be rarely used, but if you do then it is recommended that you store the id of the 
-object in order to add components on set up. 
+Creating an empty object should be rarely used, but if you do then it is recommended that you store the id of the
+object in order to add components on set up.
 
 ####CREATING AN OBJECT WITH COMPONENTS:
 
@@ -265,20 +265,20 @@ creation.
 
 ####ADDING COMPONENTS:
 
-If a component needs to be added to an object after creation you can do so my calling the addComponents function.
+If a component needs to be added to an object after creation you can do so my calling the assign function.
 
-  
-	objManager.addComponents( Position(65, 45) );
+
+	objManager.assign( Position(65, 45) );
 
 Multiple components can be added at once. However, keep in mind that an object may only have one instance of each type
 of component for technical reasons.
 
 ####REMOVING COMPONENTS:
 
-To remove one or more components from an object, call the removeComponents function.
+To remove one or more components from an object, call the remove function.
 
 
-	objManager.removeComponents<Position, Velocity>(45);
+	objManager.remove<Position, Velocity>(45);
 
 ####DESTROYING AN OBJECT:
 
@@ -302,10 +302,10 @@ give it an alias to refer by later. Prototypes can be made directly in the sourc
 
 ####CREATING A PROTOTYPE IN THE SOURCE CODE
 
-To create an object prototype, call the addComponentsToPrototype function in ObjectManager and specify the
+To create an object prototype, call the assignToPrototype function in ObjectManager and specify the
 name of the prototype to add the components to. If the prototype does not already exist, one will be created.
 
-	objManager.addComponentsToPrototype("Player", Position(65, 45), Velocity(200, .5), Renderable("Txtre File.png");
+	objManager.assignToPrototype("Player", Position(65, 45), Velocity(200, .5), Renderable("Txtre File.png");
 
 This will create a prototype under the name "Player" with Position, Velocity, and Renderable components.
 
@@ -334,7 +334,7 @@ Every section must have a section header and an end tag. These markers are enclo
 A prototype called "Player" would have a section that looks like this.
 
 	[Player]
-	
+
 	[/Player]
 
 The component names and values would go in between these markers.
@@ -346,9 +346,9 @@ in double quotes, and an array is a comma separated list of attributes enclosed 
 A colon separates an attribute name from its values.
 
 	[Player]
-		
+
 		"Components" : { "Position", "Velocity", "Renderable" }
-		
+
 	[/Player]
 
 Each component name should then have an attribute with the same name as the one that is in the list.
@@ -358,13 +358,13 @@ Assuming Position and Velocity take the format "% %", and Renderable takes the f
 String values should be enclosed in single quotes.
 
 	[Player]
-		
+
 		"Components" : { "Position", "Velocity", "Renderable" }
-		
+
 		"Position" : "65 45"
 		"Velocity" : "200 .5"
 		"Renderable" : "'Txtre File.png'"
-		
+
 	[/Player]
 
 After this prototype is loaded, it can be used as if it was hard coded. There is no performance difference after the
@@ -403,10 +403,10 @@ A prototype set is a list of prototypes that can simplify the loading of prototy
 To load a prototype set, create a section in the same manner as above, and create an attribute
 with a value that contains an array of the prototype names.
 
-	[Set]					
-		"Prototype Set" : { "Player", "Ball", "Brick" }					
+	[Set]
+		"Prototype Set" : { "Player", "Ball", "Brick" }
 	[/Set]
-	
+
 Then somewhere else in the file would be the definitions of the prototypes. These are defined the same way
 as in the previous section.
 
@@ -419,12 +419,12 @@ the name of the prototype set attribute, and the section that this attribute res
 
 	//Assuming the above example is in prototypes.txt and all prototypes are defined
 	ObjectPrototypeLoader::loadPrototypeSet(objManager, "prototypes.txt", "Prototype Set", "[Set]");
-	
+
 Notice the square brackets around the name of the section.
 
 Calling this function would be the same as calling loadObjectPrototype for all 3 prototype names.
 
-		
+
 
 ===================================================================================================================
 
@@ -450,7 +450,7 @@ two floats called "speed" and "angle".
 			{
 				//Use the velocity component's owner id to get the object's position component
 				auto pos = objManager.getComponent<Position>( vel.getOwnerID() );
-				
+
 				//Check if the object actually had a Position component.
 				if(pos)
 				{
@@ -484,7 +484,7 @@ system as the template paramater.
 Removing Systems is as easy as passing in the system type to the removeSystem function.
 
 	sysManager.removeSystem<MovementSystem>();
-	
+
 ###UPDATING SYSTEMS:
 
 All systems are, in essence, a single update function. This function should operate a single component array and be as
@@ -494,17 +494,17 @@ previous frame.
 Systems can be updated in two ways: update all systems in a single function call, or individually.
 
 If updateAllSystems is called, then the systems will be updated in the order that they were added in.
-	
+
 	sysManager.updateAllSystems(dt);
-	
+
 You can also call updateSystem and pass in the System type as a template paramater to manually update a system.
 
 	sysManager.updateSystem<MovementSystem>(dt);
-	
+
 ####WRITING THE UPDATE FUNCTION:
 
 An update function for a movement system might look like this:
-	
+
 	//Assuming components call Velocity(an angle and speed) and Position(an x and a y) have been created
 	void MovementSystem::update(ObjectManager& objManager, MessageHub& msgHub, double dt)
 	{
@@ -512,8 +512,8 @@ An update function for a movement system might look like this:
 		{
 			//Attempt to get the velocity's owner's position component
 			auto pos = objManager.getComponent<Position>(vel.getOwnerID);
-			
-			//Ensure that the object has a position component. 
+
+			//Ensure that the object has a position component.
 			if(pos)
 			{
 				pos->x += cos(vel.angle) * vel.speed * dt;
@@ -522,7 +522,7 @@ An update function for a movement system might look like this:
 		}
 	}
 
-===================================================================================================================	
+===================================================================================================================
 
 ##MESSAGING:
 
@@ -557,16 +557,16 @@ All messages must take a const Transceiver reference an pass the transceiver to 
 
 	struct ObjectDestroyed : public Message<ObjectDestroyed
 	{
-		ObjectDestroyed(const Transceiver& transceiver, ocs::ID _destroyedObjectID) : 
+		ObjectDestroyed(const Transceiver& transceiver, ocs::ID _destroyedObjectID) :
 			Message(transceiver), destroyedObjectID(_destroyedObjectID) {}
-		
+
 		ocs::ID destroyedObjectID;
 	};
-	
+
 The message can then be posted to be viewed publically or it can be sent in a private message.
 
 ####LOGGING MESSAGES:
-	
+
 Messages can be logged to any ostream object such as the console window or an open file.
 
 All messages have default logging which contains the Message Family, and the sender id. To gain access to more
@@ -574,25 +574,25 @@ specialized logging overload the "log" function in your message object and defin
 
 	struct ObjectDestroyed : public Message<ObjectDestroyed
 	{
-		ObjectDestroyed(const Transceiver& transceiver, ocs::ID _destroyedObjectID) : 
+		ObjectDestroyed(const Transceiver& transceiver, ocs::ID _destroyedObjectID) :
 			Message(transceiver), destroyedObjectID(_destroyedObjectID) {}
-		
+
 		void log(std::ostream& out)
 		{
 			out << "Message Type: ObjectDestroyed\n";
-			out << "Message Family: " << getFamily() << std::endl;
+			out << "Message Family: " << componentFamily() << std::endl;
 			out << "Sender: " << getSender() << std::endl;
 			out << "Destroyed Object ID: " << destroyedObjectID << std::endl;
 		}
-		
+
 		ocs::ID destroyedObjectID;
 	};
-	
+
 Ideally, the logged message should include the Message Type(The name of the message object), the message family(The family id
 that was assigned to the message), the transceiver id of the sender, and all appropriate information about the message, all with labels.
 
 #####LOGGING A SINGLE MESSAGE:
-	
+
 To log a single message, call the log function on an instantiated message object and call log and pass in an ostream object.
 
 	ObjectDestroyed objDestroyed(*this, 5);
@@ -605,11 +605,11 @@ Messages will rarely be created in this manner as the MessageHub should handle a
 	To log all messages that are currently posted in the MessageHub, call logPostedMessages and pass in an ostream object.
 
 		msgHub.logPostedMessages(std::cout);
-	
+
 #####LOGGING ALL PRIVATE MESSAGES:
 
 	To log all of a transceiver's private messages, call logPrivateMessages and pass in the transceiver object and an ostream object.
-	
+
 		msgHub.logPrivateMessages(*this, std::cout);
 
 ####SENDING MESSAGES:
@@ -621,13 +621,13 @@ a template paramater, and then pass in the creating transceiver and any paramate
 
  Assuming a message called ObjectDestroyed has been created, the poster inherits from Transceiver, and a MessageHub called
 msgHub is available.
-	
+
 	//Post that object with id '5' has been destroyed
 	msgHub.postMessage<ObjectDestroyed>(*this, 5);
 
 The message hub will then create a new ObjectDestroyed object with the given paramaters, and other Transceivers can view it
 by using the readPostedMessages function.
-	
+
 #####SENDING PRIVATE MESSAGES
 
 All transceivers are given access to a "mailbox" that other transceivers can send messages to. Sending private messages
@@ -649,12 +649,12 @@ To get a list of all messages of a certain type, pass in the message type as a t
 
 	//Get a list of all TextMessage messages and store them in textMsgs.
 	auto textMsgs = msgHub.readPostedMessages<TextMessage>();
-	
+
 Returns a vector of all posted messages of the given type. It is recommended to create a variable using auto as the return type
 may change in future versions (i.e. vector -> list etc.).
 
 Reading posted messages has no effect on the actual message board.
-	
+
 #####READING PRIVATE MESSAGES:
 
 Reading private messages is nearly the same as reading posted messages. The only difference is you give the function your
@@ -682,7 +682,7 @@ If you wish to clear your personal mailbox, call clearPrivateMessages and pass i
 ##TIPS:
 
 -	Post any user input to the MessageHub and allow the systems to determine what to do with it.
--	Use the new ranged based for loops to step through the component arrays. 
+-	Use the new ranged based for loops to step through the component arrays.
 	-	for(auto& renderComp : objManager.getComponentArray<Renderable>())
 -	Use the configure function in the State class to create any object prototypes.
 -	Prefer to load prototypes from a file to allow for faster modifying of prototypes.

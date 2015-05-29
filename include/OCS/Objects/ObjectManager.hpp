@@ -39,7 +39,7 @@ freely, subject to the following restrictions:
 namespace ocs
 {
 
-CREATE_HAS_MEMBER_FUNCTION(getFamily, hasComponentFamily);
+CREATE_HAS_MEMBER_FUNCTION(family, hasComponentFamily);
 
 /**\brief Manages the lifetime of game objects. A blank object can be created
 *         and components may be added manually, or alternatively, the user
@@ -66,25 +66,25 @@ class ObjectManager : NonCopyable
 
         //!Add any components that the object doesn't have or set the value of a component to the given value if the object does have an instance of it
         template<typename C, typename ... Args>
-        ID assignComponents(ID, const C&, Args&& ...);
+        ID assign(ID, const C&, Args&& ...);
 
         /**Assign a component based on component name and deSerialization string
         Add any components that the object doesn't have or set the value of a component to the given value if the object does have an instance of it*/
         template<typename ... Args>
-        ID assignComponents(ID, const std::string&, const std::string&, Args&& ...);
-        
+        ID assign(ID, const std::string&, const std::string&, Args&& ...);
+
         //!Add the given components to an object prototype under the specified name
         template<typename C, typename ... Args, typename = typename std::enable_if<hasComponentFamily<C>::value>::type>
-        void assignComponentsToPrototype(const std::string&, const C&, Args&& ...);
+        void assignToPrototype(const std::string&, const C&, Args&& ...);
 
         //!Add components to a prototype using strings. Used mainly for prototype file loading.
         template<typename ... Args>
-        void assignComponentsToPrototype(const std::string&, const std::string&, const std::string&, Args&& ...);
+        void assignToPrototype(const std::string&, const std::string&, const std::string&, Args&& ...);
 
         //!Allow a component to be referred to by a string
         template<typename C>
         void bindStringToComponent(const std::string&);
-        
+
         //!Copy a game object
         void copyObject(ID, const Object&);
 
@@ -146,20 +146,24 @@ class ObjectManager : NonCopyable
         // //!Check if an object id is a prototype's id
         // bool isPrototype(ID);
 
-        //!Called on component creation
+        //!Must be called before using components
+        template<typename C, typename ... Args>
+        void registerComponents();
+
+        //!Must be called before using components
         template<typename C>
         void registerComponent();
 
         //!Remove a component from the object's ID
         template<typename C = SentinalType, typename ... Args>
-        ID removeComponents(ID);
+        ID remove(ID);
 
         //!Remove all components from the object's ID
-        ID removeAllComponents(ID);
+        ID removeAll(ID);
 
         //!Remove the given components from an object prototype under the specified name
         template<typename C>
-        void removeComponentFromPrototype(const std::string&);
+        void removeFromPrototype(const std::string&);
 
         //!Serialize all components of an object
         std::vector<std::string> serializeObject(ID);
@@ -186,25 +190,26 @@ class ObjectManager : NonCopyable
         ComponentArray<C>& getPrototypeComponentArray() const;
 
         //!Overload function with an empty template paramater list to allow recursion
-        ID addComponents(ID) { return 0;}
+        ID assign(ID) { return 0;}
+        ID assignFromString(Object&, std::unordered_map<ID, BaseComponentArray*>&) { }
 
         //!Add a component from an exisiting component
         template<typename C, typename ... Args>
         ID addComponents(ID, const C&, Args&& ...);
 
         template<typename ... Args>
-        ID assignComponentsFromString(Object&, std::unordered_map<ID, BaseComponentArray*>&, const std::string&, const std::string&, Args&& ...);
+        ID assignFromString(Object&, std::unordered_map<ID, BaseComponentArray*>&, const std::string&, const std::string&, Args&& ...);
 
         //!Overload function with an empty template paramater list to allow recursion
-        void assignComponentsToPrototype(const std::string&) { }
+        void assignToPrototype(const std::string&) { }
 
         //!Set a component from an existing component
         template<typename C>
-        void setComponent(ID, const C&);
+        bool setComponent(ID, const C&);
 
         //!Set a component through the component's constructor arguments
         template<typename C, typename ... Args>
-        void setComponent(ID, Args&& ...);
+        bool setComponent(ID, Args&& ...);
 
         static ID prototypeIDCounter;
 
@@ -213,6 +218,10 @@ class ObjectManager : NonCopyable
         static ID versionCounter;
         static std::queue<ID> availableVersions;
 };
+
+template <>
+template <typename C, typename ... Args>
+void ObjectManager::registerComponents<void>() { }
 
 /** \brief Return a reference to an array of the specified component.
  *
@@ -265,7 +274,7 @@ template<typename C, typename ... Args>
 ID ObjectManager::createObject(const C& component, Args&& ... others)
 {
     ID id = createObject();
-    addComponents(id, component, others...);
+    assign(id, component, others...);
 
     return id;
 }
@@ -281,32 +290,32 @@ ID ObjectManager::createObject(const C& component, Args&& ... others)
 template<typename C, typename ... Args>
 ID ObjectManager::addComponents(ID objectID, const C& component, Args&& ... others)
 {
-    registerComponent<C>();
+    registerComponents<C>();
 
     //A counter for the total components added to the object
     ID added = 0;
 
-    if(objects.isValid(objectID))
+    if (objects.isValid(objectID))
     {
         //Only add the component if the object does not have an instance of it already.
-        if(objects[objectID].componentIndices.find(C::getFamily()) == objects[objectID].componentIndices.end())
+        if (objects[objectID].componentIndices.find(C::componentFamily()) == objects[objectID].componentIndices.end())
         {
             //Add the component to its array
             ID componentIndex = getComponentArray<C>().addItem(component);
             getComponentArray<C>()[componentIndex].ownerID = objectID;
 
             //Store a pointer to the components PackedArray for destroying of the object
-            objects[objectID].componentArrays[C::getFamily()] = &getComponentArray<C>();
+            objects[objectID].componentArrays[C::componentFamily()] = &getComponentArray<C>();
 
             //Store the component's index in the object
-            objects[objectID].componentIndices[C::getFamily()] = componentIndex;
+            objects[objectID].componentIndices[C::componentFamily()] = componentIndex;
 
             added = 1;
         }
     }
 
     //If there are more objects to add then add them.
-    if(sizeof ... (others) > 0)
+    if (sizeof ... (others) > 0)
         return added + addComponents(objectID, others...);
     return added;
 }
@@ -318,13 +327,13 @@ ID ObjectManager::addComponents(ID objectID, const C& component, Args&& ... othe
  *
  */
 template<typename C>
-void ObjectManager::setComponent(ID objectID, const C& value)
+bool ObjectManager::setComponent(ID objectID, const C& value)
 {
-    if(objects.isValid(objectID))
+    if (objects.isValid(objectID))
     {
         auto compPtr = getComponent<C>(objectID);
         // If the object has the specified component
-        if(compPtr)
+        if (compPtr)
         {
             //Set the objects component to the new value
             *compPtr = value;
@@ -342,19 +351,19 @@ void ObjectManager::setComponent(ID objectID, const C& value)
  *
  */
 template<typename C, typename ... Args>
-ID ObjectManager::assignComponents(ID objectID, const C& first, Args&& ... others)
+ID ObjectManager::assign(ID objectID, const C& first, Args&& ... others)
 {
     ID numAdded = 0;
-    if(objects.isValid(objectID))
+    if (objects.isValid(objectID))
     {
         if (!hasComponents<C>(objectID))
-            numAdded = addComponents(objectID, first);
+            numAdded = assign(objectID, first);
         else
             setComponent(objectID, first);
 
         //If there are more objects to add then add them.
-        if(sizeof ... (others) > 0)
-            return numAdded + assignComponents(objectID, others...);
+        if (sizeof...(others) > 0)
+            return numAdded + assign(objectID, others...);
     }
     return numAdded;
 }
@@ -362,10 +371,10 @@ ID ObjectManager::assignComponents(ID objectID, const C& first, Args&& ... other
 /**Assign a component based on component name and deSerialization string
 Add any components that the object doesn't have or set the value of a component to the given value if the object does have an instance of it*/
 template<typename ... Args>
-ID ObjectManager::assignComponents(ID objectID, const std::string& componentName, const std::string& compValues, Args&& ... others)
+ID ObjectManager::assign(ID objectID, const std::string& componentName, const std::string& compValues, Args&& ... others)
 {
-    if(objects.isValid(objectID))
-        return assignComponentsFromString(objects[objectID], compFamilyToCompArray, componentName, compValues, others...);
+    if (objects.isValid(objectID))
+        return assignFromString(objects[objectID], compFamilyToCompArray, componentName, compValues, others...);
     return 0;
 }
 
@@ -376,29 +385,29 @@ ID ObjectManager::assignComponents(ID objectID, const std::string& componentName
  *
  */
 template<typename C, typename ... Args>
-ID ObjectManager::removeComponents(ID objectID)
+ID ObjectManager::remove(ID objectID)
 {
     ID totalRemoved = 0;
-    if(!SentinalType::endRecursion(C()))
+    if (!SentinalType::endRecursion(C()))
     {
-        if(objects.isValid(objectID))
+        if (objects.isValid(objectID))
         {
             //Only remove the component if the object has an instance of it.
-            if(objects[objectID].componentIndices.find(C::getFamily()) != objects[objectID].componentIndices.end())
+            if (objects[objectID].componentIndices.find(C::componentFamily()) != objects[objectID].componentIndices.end())
             {
-                ID componentIndex = objects[objectID].componentIndices[C::getFamily()];
+                ID componentIndex = objects[objectID].componentIndices[C::componentFamily()];
 
                 //Remove the component from its array
                 getComponentArray<C>().remove(componentIndex);
 
                 //Remove the pointer to the component maps from the object
-                objects[objectID].componentArrays.erase(C::getFamily());
-                objects[objectID].componentIndices.erase(C::getFamily());
+                objects[objectID].componentArrays.erase(C::componentFamily());
+                objects[objectID].componentIndices.erase(C::componentFamily());
 
                 totalRemoved = 1;
             }
 
-            return totalRemoved + removeComponents<Args...>(objectID);
+            return totalRemoved + remove<Args...>(objectID);
         }
     }
 
@@ -413,22 +422,31 @@ template<typename C>
 void ObjectManager::bindStringToComponent(const std::string& compName)
 {
     //Only bind the string if it is not already in use.
-    if(stringToCompFamily.find(compName) == stringToCompFamily.end())
-        stringToCompFamily[compName] = C::getFamily();
+    if (stringToCompFamily.find(compName) == stringToCompFamily.end())
+        stringToCompFamily[compName] = C::componentFamily();
+}
+
+//!Must be called before using components
+template<typename C, typename ... Args>
+void ObjectManager::registerComponents()
+{
+    registerComponent<C>();
+    if (sizeof...(Args) > 0)
+        registerComponents<Args...>();
 }
 
 //!Called on component creation
 template<typename C>
 void ObjectManager::registerComponent()
 {
-    if(compFamilyToCompArray.find(C::getFamily()) == compFamilyToCompArray.end())
+    if (compFamilyToCompArray.find(C::componentFamily()) == compFamilyToCompArray.end())
     {
-        compFamilyToProtoCompArray[C::getFamily()] = &getPrototypeComponentArray<C>();
-        compFamilyToCompArray[C::getFamily()] = &getComponentArray<C>();
+        compFamilyToProtoCompArray[C::componentFamily()] = &getPrototypeComponentArray<C>();
+        compFamilyToCompArray[C::componentFamily()] = &getComponentArray<C>();
 
         //Bind component to it's name if set
-        if (C::getName() != "")
-            bindStringToComponent<C>(C::getName());
+        if (C::componentName() != "")
+            bindStringToComponent<C>(C::componentName());
     }
 }
 
@@ -468,7 +486,7 @@ C* const ObjectManager::getComponent(ID objectID)
     {
         //If the object has the specified component
         auto& compIndices = objects[objectID].componentIndices;
-        auto found = compIndices.find(C::getFamily());
+        auto found = compIndices.find(C::componentFamily());
         if(found != compIndices.end())
             compPtr = &getComponentArray<C>()[found->second];
     }
@@ -484,7 +502,7 @@ bool ObjectManager::hasComponentsPrototype(const std::string& prototypeName)
 
     if(!SentinalType::endRecursion(C()))
     {
-        if(prototype.componentIndices.find(C::getFamily()) != prototype.componentIndices.end())
+        if(prototype.componentIndices.find(C::componentFamily()) != prototype.componentIndices.end())
             //Return a pointer to the component converted to a boolean
             return true && hasComponentsPrototype<Args...>(prototypeName);
 
@@ -504,7 +522,7 @@ bool ObjectManager::hasComponentsPrototype(const std::string& prototypeName)
  *
  */
 template<typename C, typename ... Args, typename>
-void ObjectManager::assignComponentsToPrototype(const std::string& prototypeName, const C& first, Args&& ... others)
+void ObjectManager::assignToPrototype(const std::string& prototypeName, const C& first, Args&& ... others)
 {
     registerComponent<C>();
 
@@ -515,34 +533,34 @@ void ObjectManager::assignComponentsToPrototype(const std::string& prototypeName
         prototype.objectID = prototypeIDCounter++;
 
     //If the prototype does not already have the given component
-    if(prototype.componentArrays.find(C::getFamily()) == prototype.componentArrays.end())
+    if(prototype.componentArrays.find(C::componentFamily()) == prototype.componentArrays.end())
     {
         //Add the first component in the list
         auto compIdx = getPrototypeComponentArray<C>().addItem(first);
 
-        prototype.componentArrays[C::getFamily()] = &getPrototypeComponentArray<C>();
-        prototype.componentIndices[C::getFamily()] = compIdx;
+        prototype.componentArrays[C::componentFamily()] = &getPrototypeComponentArray<C>();
+        prototype.componentIndices[C::componentFamily()] = compIdx;
 
         //If there are more components to add, keep adding them
         if(sizeof...(others) > 0)
-            assignComponentsToPrototype(prototypeName, others...);
+            assignToPrototype(prototypeName, others...);
     }
 
 }
 
 template<typename ... Args>
-void ObjectManager::assignComponentsToPrototype(const std::string& prototypeName, const std::string& compName, const std::string& compValues, Args&& ... others)
+void ObjectManager::assignToPrototype(const std::string& prototypeName, const std::string& compName, const std::string& compValues, Args&& ... others)
 {
     //Get the prototype
     auto& prototype = objectPrototypes[prototypeName];
     if(prototype.objectID == ID(-1))
         prototype.objectID = prototypeIDCounter++;
 
-    assignComponentsFromString(prototype, compFamilyToProtoCompArray, compName, compValues, others...);
+    assignFromString(prototype, compFamilyToProtoCompArray, compName, compValues, others...);
 }
 
 template<typename ... Args>
-ID ObjectManager::assignComponentsFromString(Object& obj, std::unordered_map<ID, BaseComponentArray*>& compFamilyArray, const std::string& compName, const std::string& compValues, Args&& ... others)
+ID ObjectManager::assignFromString(Object& obj, std::unordered_map<ID, BaseComponentArray*>& compFamilyArray, const std::string& compName, const std::string& compValues, Args&& ... others)
 {
     ID numAdded = 0;
     if(stringToCompFamily.find(compName) != stringToCompFamily.end())
@@ -575,7 +593,7 @@ ID ObjectManager::assignComponentsFromString(Object& obj, std::unordered_map<ID,
 
     //If there are more components to add, keep adding them
     if(sizeof...(others) > 0)
-        return numAdded + assignComponentsFromString(obj, compFamilyArray, others...);
+        return numAdded + assignFromString(obj, compFamilyArray, others...);
     return numAdded;
 }
 
@@ -584,7 +602,7 @@ ID ObjectManager::assignComponentsFromString(Object& obj, std::unordered_map<ID,
  * \param prototypeName The name of the prototype to remove the component from.
  */
 template<typename C>
-void ObjectManager::removeComponentFromPrototype(const std::string& prototypeName)
+void ObjectManager::removeFromPrototype(const std::string& prototypeName)
 {
     //If the prototype has the specified component
     if(objectPrototypes.find(prototypeName) != objectPrototypes.end())
@@ -593,12 +611,12 @@ void ObjectManager::removeComponentFromPrototype(const std::string& prototypeNam
         auto& compIndices = objectPrototypes[prototypeName].componentIndices;
 
         //If the prototype has the component to remove
-        if(compArray.find(C::getFamily()) != compArray.end())
+        if(compArray.find(C::componentFamily()) != compArray.end())
         {
-            compArray[C::getFamily()]->remove(compIndices[C::getFamily()]);
+            compArray[C::componentFamily()]->remove(compIndices[C::componentFamily()]);
 
-            compArray.erase(C::getFamily());
-            compIndices.erase(C::getFamily());
+            compArray.erase(C::componentFamily());
+            compIndices.erase(C::componentFamily());
         }
     }
 }

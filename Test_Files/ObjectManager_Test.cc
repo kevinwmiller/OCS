@@ -161,9 +161,9 @@ void TEST_COMPONENT_ASSIGNING()
     ID id = objManager.createObject();
     ID id2 = objManager2.createObject(Position(560, -4541), Collidable(), Name("Testing2"));
 
-    objManager.addComponents(id, Position(56, -45), Motion(), Name("Testing"));
+    objManager.assign(id, Position(56, -45), Motion(), Name("Testing"));
 
-    objManager2.addComponents(id2, Position(560, -4541), Collidable(), Name("Testing2"));
+    objManager2.assign(id2, Position(560, -4541), Collidable(), Name("Testing2"));
 
     bool test = objManager.hasComponents<Position, Motion, Name>(id);
     assert( test );
@@ -183,7 +183,7 @@ void TEST_COMPONENT_ASSIGNING()
     assert(objManager2.getComponent<Name>(id2)->name == "Testing2");
 
     //Test adding a component the object already has
-    objManager.addComponents(id, Position());
+    objManager.assign(id, Position());
     assert(objManager.getComponentArray<Position>().size() == 1);
 
     objManager.destroyAllObjects();
@@ -196,7 +196,7 @@ void TEST_COMPONENT_MODIFYING()
 {
     std::cout << "Testing modifying components\n";
     ID id = objManager.createObject();
-    objManager.addComponents(id, Position(56, -45), Motion(), Name("Testing"));
+    objManager.assign(id, Position(56, -45), Motion(), Name("Testing"));
 
     assert(*(objManager.getComponent<Position>(id)) == Position(56, -45));
 
@@ -221,20 +221,20 @@ void TEST_COMPONENT_REMOVING()
 {
     std::cout << "Testing removing components\n";
     ID id = objManager.createObject();
-    objManager.addComponents(id, Position(56, -45), Motion(), Name("Testing"));
+    objManager.assign(id, Position(56, -45), Motion(), Name("Testing"));
 
     assert(objManager.hasComponents<Position>(id));
     assert(objManager.getComponentArray<Position>().size() == 1);
 
-    objManager.removeComponents<Position, Motion>(id);
-    objManager.removeComponents<Position>(id);
+    objManager.remove<Position, Motion>(id);
+    objManager.remove<Position>(id);
 
     assert(objManager.getComponentArray<Position>().size() == 0);
 
     bool hasComps = objManager.hasComponents<Position, Motion>(id);
     assert(!hasComps);
 
-    objManager.addComponents(id, Position());
+    objManager.assign(id, Position());
     assert(objManager.hasComponents<Position>(id));
     assert(objManager.getComponentArray<Position>().size() == 1);
 
@@ -247,7 +247,7 @@ void TEST_PACKEDARRAY()
     std::cout << "Testing Packed Array\n";
 
     PackedArray<Index> arry = {2, 4, 6, 8, 10};
-    
+
     std::cout << arry << "\n";
 
     // std::cout << "At arry 1 " << arry[1] << "\n";

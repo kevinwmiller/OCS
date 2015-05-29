@@ -47,8 +47,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onfocus="searchBox.OnSearchFieldFocus(true)"
+               onblur="searchBox.OnSearchFieldFocus(false)"
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -74,7 +74,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
+<iframe src="javascript:void(0)" frameborder="0"
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -94,7 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>A user defined message can be created by inheriting from "Message" and passing in the type as the template paramater. e.g. struct <a class="el" href="struct_text_message.html">TextMessage</a> : public ocs::Message&lt;TextMessage&gt; { <a class="el" href="struct_text_message.html">TextMessage(const Transceiver&amp; _transceiver, const std::string&amp; _msg)</a> : Message(_transceiver), msg(_msg) {.  
+<p>A user defined message can be created by inheriting from "Message" and passing in the type as the template paramater. e.g. struct <a class="el" href="struct_text_message.html">TextMessage</a> : public ocs::Message&lt;TextMessage&gt; { <a class="el" href="struct_text_message.html">TextMessage(const Transceiver&amp; _transceiver, const std::string&amp; _msg)</a> : Message(_transceiver), msg(_msg) {.
  <a href="structocs_1_1_message.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_message_8hpp_source.html">Message.hpp</a>&gt;</code></p>
@@ -123,7 +123,7 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getTimeStamp</
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a19653cb6b12a6a7808e411d67026d3e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19653cb6b12a6a7808e411d67026d3e1"></a>
-static Family&#160;</td><td class="memItemRight" valign="bottom"><b>getFamily</b> ()</td></tr>
+static Family&#160;</td><td class="memItemRight" valign="bottom"><b>family</b> ()</td></tr>
 <tr class="separator:a19653cb6b12a6a7808e411d67026d3e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>

@@ -31,7 +31,7 @@ struct TextMessage : public ocs::Message<TextMessage>
     void log(std::ostream& out)
     {
         out << "Message Type: TextMessage\n";
-        out << "Message Family: " << getFamily() << std::endl;
+        out << "Message Family: " << componentFamily() << std::endl;
         out << "Sender: " << getSender() << std::endl;
         out << "Message: " << msg << std::endl;
     }
@@ -48,7 +48,7 @@ struct Explosion : public ocs::Message<Explosion>
     void log(std::ostream& out)
     {
         out << "Message Type: Explosion\n";
-        out << "Message Family: " << getFamily() << std::endl;
+        out << "Message Family: " << componentFamily() << std::endl;
         out << "Sender: " << getSender() << std::endl;
         out << "Radius: " << radius << std::endl;
         out << "Damage: " << damage << std::endl;

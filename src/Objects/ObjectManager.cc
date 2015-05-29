@@ -45,12 +45,14 @@ ObjectManager::ObjectManager()
 
 ObjectManager::~ObjectManager()
 {
+    //This function ends up calling virtual functions which should not be called in destructors or constructors.
+    //Do not uncomment
     //destroyAllObjects();
     availableVersions.push(version);
 }
 
 /** \brief Create an object modeled after an existing object
- *         
+ *
  *
  * \param destinationId The id of the object to copy to
  * \param source The object to copy from
@@ -62,7 +64,7 @@ void ObjectManager::copyObject(ID destinationId, const Object& source)
     if (objects.isValid(destinationId))
     {
         //Clear the destination's components so they aren't still around after the object gets new components
-        removeAllComponents(destinationId);
+        removeAll(destinationId);
 
         //Copy the component families from the source
         for(auto& it : source.componentArrays)
@@ -93,7 +95,7 @@ void ObjectManager::copyObject(ID destinationId, const Object& source)
 
         }
     }
-   
+
 }
 
 /** \brief Create a blank object
@@ -145,7 +147,7 @@ void ObjectManager::destroyObject(ID objectID)
 {
     if(objects.isValid(objectID))
     {
-        removeAllComponents(objectID);
+        removeAll(objectID);
         //Remove the object from the object array
         objects.remove(objectID);
         std::cout << "Removed " << objectID << "\n";
@@ -203,7 +205,7 @@ void ObjectManager::deSerializeObject(ID objectID, std::vector<std::pair<Family,
  *  \param objectID The id of the object to remove the components from
  *  \return The number of components removed
  */
-ID ObjectManager::removeAllComponents(ID objectID)
+ID ObjectManager::removeAll(ID objectID)
 {
     ID componentsRemoved = 0;
     if(objects.isValid(objectID))

@@ -47,8 +47,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onfocus="searchBox.OnSearchFieldFocus(true)"
+               onblur="searchBox.OnSearchFieldFocus(false)"
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
+<iframe src="javascript:void(0)" frameborder="0"
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -134,12 +134,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        ~<a class="code" href="classocs_1_1_object_manager.html">ObjectManager</a>();</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> ... Args&gt;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        ID <a class="code" href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">addComponents</a>(ID, <span class="keyword">const</span> C&amp;, Args&amp;&amp; ...);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        ID <a class="code" href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">assign</a>(ID, <span class="keyword">const</span> C&amp;, Args&amp;&amp; ...);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> ... Args&gt;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classocs_1_1_object_manager.html#a23a17c6257c4ac490bba474c9ca7c30a">addComponentsToPrototype</a>(<span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> C&amp;, Args&amp;&amp; ...);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classocs_1_1_object_manager.html#a23a17c6257c4ac490bba474c9ca7c30a">assignToPrototype</a>(<span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> C&amp;, Args&amp;&amp; ...);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classocs_1_1_object_manager.html#a511c3df356e7eca14c4f2faa7b5181c2">addComponentToPrototypeFromString</a>(<span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> std::string&amp;);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classocs_1_1_object_manager.html#a511c3df356e7eca14c4f2faa7b5181c2">assignToPrototypeFromString</a>(<span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> std::string&amp;, <span class="keyword">const</span> std::string&amp;);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C&gt;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classocs_1_1_object_manager.html#a0eab647ca923703064050c4063f04b5e">bindStringToComponent</a>(<span class="keyword">const</span> std::string&amp;);</div>
@@ -182,7 +182,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classocs_1_1_object_manager.html#a4d36b0124931206e107f2e1e2df2b32b">isPrototype</a>(ID);</div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C = <a class="code" href="structocs_1_1_sentinal_type.html">SentinalType</a>, <span class="keyword">typename</span> ... Args&gt;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        ID <a class="code" href="classocs_1_1_object_manager.html#aa226587ce17992580973397d935fd18f">removeComponents</a>(ID);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        ID <a class="code" href="classocs_1_1_object_manager.html#aa226587ce17992580973397d935fd18f">remove</a>(ID);</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C&gt;</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classocs_1_1_object_manager.html#a3f5846a277daa849c17382981a435499">removeComponentFromPrototype</a>(<span class="keyword">const</span> std::string&amp;);</div>
@@ -210,9 +210,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C&gt;</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <a class="code" href="struct_component_array.html">ComponentArray&lt;C&gt;</a>&amp; getPrototypeComponentArray() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        ID <a class="code" href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">addComponents</a>(ID) { <span class="keywordflow">return</span> 0;}</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        ID <a class="code" href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">assign</a>(ID) { <span class="keywordflow">return</span> 0;}</div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classocs_1_1_object_manager.html#a23a17c6257c4ac490bba474c9ca7c30a">addComponentsToPrototype</a>(<span class="keyword">const</span> std::string&amp;) { }</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classocs_1_1_object_manager.html#a23a17c6257c4ac490bba474c9ca7c30a">assignToPrototype</a>(<span class="keyword">const</span> std::string&amp;) { }</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> C&gt;</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordtype">void</span> registerComponent();</div>
@@ -249,13 +249,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00225"></a><span class="lineno"><a class="line" href="classocs_1_1_object_manager.html#aaaf76caeb43b397762a0f03eb3cb4d49">  225</a></span>&#160;ID <a class="code" href="classocs_1_1_object_manager.html#aa2ec109f66dc26dcff620acd626aa0e2">ObjectManager::createObject</a>(<span class="keyword">const</span> C&amp; component, Args&amp;&amp; ... others)</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;{</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    ID <span class="keywordtype">id</span> = <a class="code" href="classocs_1_1_object_manager.html#aa2ec109f66dc26dcff620acd626aa0e2">createObject</a>();</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <a class="code" href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">addComponents</a>(<span class="keywordtype">id</span>, component, others...);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <a class="code" href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">assign</a>(<span class="keywordtype">id</span>, component, others...);</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">return</span> id;</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;}</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> ... Args&gt;</div>
-<div class="line"><a name="l00242"></a><span class="lineno"><a class="line" href="classocs_1_1_object_manager.html#a36569ecf179be8d7d383f88c928a323e">  242</a></span>&#160;ID <a class="code" href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">ObjectManager::addComponents</a>(ID objectID, <span class="keyword">const</span> C&amp; component, Args&amp;&amp; ... others)</div>
+<div class="line"><a name="l00242"></a><span class="lineno"><a class="line" href="classocs_1_1_object_manager.html#a36569ecf179be8d7d383f88c928a323e">  242</a></span>&#160;ID <a class="code" href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">ObjectManager::assign</a>(ID objectID, <span class="keyword">const</span> C&amp; component, Args&amp;&amp; ... others)</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;{</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    registerComponent&lt;C&gt;();</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
@@ -265,7 +265,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="keywordflow">if</span>(objectID &lt; <a class="code" href="classocs_1_1_object_manager.html#a426660bdfffbde2f3db1cdac5dee2924">getTotalObjects</a>())</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    {</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        <span class="comment">//Only add the component if the object does not have an instance of it already.</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="keywordflow">if</span>(objects[objectID].componentIndices.find(C::getFamily()) == objects[objectID].componentIndices.end())</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        <span class="keywordflow">if</span>(objects[objectID].componentIndices.find(C::componentFamily()) == objects[objectID].componentIndices.end())</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        {</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            <span class="comment">//Add the component to its array</span></div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;</div>
@@ -273,10 +273,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            getComponentArray&lt;C&gt;()[componentIndex].ownerID = objectID;</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;            <span class="comment">//Store a pointer to the components PackedArray for destroying of the object</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            objects[objectID].componentArrays[C::getFamily()] = &amp;getComponentArray&lt;C&gt;();</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            objects[objectID].componentArrays[C::componentFamily()] = &amp;getComponentArray&lt;C&gt;();</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;            <span class="comment">//Store the component&#39;s index in the object</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            objects[objectID].componentIndices[C::getFamily()] = componentIndex;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;            objects[objectID].componentIndices[C::componentFamily()] = componentIndex;</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            added = 1;</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        }</div>
@@ -284,7 +284,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="comment">//If there are more objects to add then add them.</span></div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordflow">if</span>(<span class="keyword">sizeof</span> ... (others) &gt; 0)</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordflow">return</span> added + <a class="code" href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">addComponents</a>(objectID, others...);</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordflow">return</span> added + <a class="code" href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">assign</a>(objectID, others...);</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <span class="keywordflow">return</span> added;</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;}</div>
@@ -315,7 +315,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;}</div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;</div>
 <div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> ... Args&gt;</div>
-<div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="classocs_1_1_object_manager.html#aa226587ce17992580973397d935fd18f">  320</a></span>&#160;ID <a class="code" href="classocs_1_1_object_manager.html#aa226587ce17992580973397d935fd18f">ObjectManager::removeComponents</a>(ID objectID)</div>
+<div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="classocs_1_1_object_manager.html#aa226587ce17992580973397d935fd18f">  320</a></span>&#160;ID <a class="code" href="classocs_1_1_object_manager.html#aa226587ce17992580973397d935fd18f">ObjectManager::remove</a>(ID objectID)</div>
 <div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;{</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    ID totalRemoved = 0;</div>
 <div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordflow">if</span>(!endRecursion(C()))</div>
@@ -323,21 +323,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;        <span class="keywordflow">if</span>(objectID &lt; <a class="code" href="classocs_1_1_object_manager.html#a426660bdfffbde2f3db1cdac5dee2924">getTotalObjects</a>())</div>
 <div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        {</div>
 <div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            <span class="comment">//Only remove the component if the object has an instance of it.</span></div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            <span class="keywordflow">if</span>(objects[objectID].componentIndices.find(C::getFamily()) != objects[objectID].componentIndices.end())</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            <span class="keywordflow">if</span>(objects[objectID].componentIndices.find(C::componentFamily()) != objects[objectID].componentIndices.end())</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            {</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                ID componentIndex = objects[objectID].componentIndices[C::getFamily()];</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                ID componentIndex = objects[objectID].componentIndices[C::componentFamily()];</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                <span class="comment">//Remove the component from its array</span></div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                getComponentArray&lt;C&gt;().<span class="keyword">remove</span>(componentIndex);</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                <span class="comment">//Remove the pointer to the component maps from the object</span></div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                objects[objectID].componentArrays.erase(C::getFamily());</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                objects[objectID].componentIndices.erase(C::getFamily());</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                objects[objectID].componentArrays.erase(C::componentFamily());</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                objects[objectID].componentIndices.erase(C::componentFamily());</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;</div>
 <div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                totalRemoved = 1;</div>
 <div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            }</div>
 <div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            <span class="keywordflow">return</span> totalRemoved + <a class="code" href="classocs_1_1_object_manager.html#aa226587ce17992580973397d935fd18f">removeComponents</a>&lt;Args...&gt;(objectID);</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            <span class="keywordflow">return</span> totalRemoved + <a class="code" href="classocs_1_1_object_manager.html#aa226587ce17992580973397d935fd18f">remove</a>&lt;Args...&gt;(objectID);</div>
 <div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;        }</div>
 <div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    }</div>
 <div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
@@ -350,7 +350,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <span class="comment">//Only bind the string if it is not already in use.</span></div>
 <div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    <span class="keywordflow">if</span>(stringToCompFamily.find(compName) == stringToCompFamily.end())</div>
 <div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    {</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        stringToCompFamily[compName] = C::getFamily();</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;        stringToCompFamily[compName] = C::componentFamily();</div>
 <div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        registerComponent&lt;C&gt;();</div>
 <div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    }</div>
 <div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;}</div>
@@ -358,10 +358,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> C&gt;</div>
 <div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;<span class="keywordtype">void</span> ObjectManager::registerComponent()</div>
 <div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;{</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordflow">if</span>(compFamilyToCompArray.find(C::getFamily()) == compFamilyToCompArray.end())</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    <span class="keywordflow">if</span>(compFamilyToCompArray.find(C::componentFamily()) == compFamilyToCompArray.end())</div>
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    {</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        compFamilyToProtoCompArray[C::getFamily()] = &amp;getPrototypeComponentArray&lt;C&gt;();</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        compFamilyToCompArray[C::getFamily()] = &amp;getComponentArray&lt;C&gt;();</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        compFamilyToProtoCompArray[C::componentFamily()] = &amp;getPrototypeComponentArray&lt;C&gt;();</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;        compFamilyToCompArray[C::componentFamily()] = &amp;getComponentArray&lt;C&gt;();</div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    }</div>
 <div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;}</div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;</div>
@@ -379,9 +379,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <span class="keywordflow">if</span>(objects.isValid(objectID))</div>
 <div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    {</div>
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        <span class="comment">//If the object has the specified component</span></div>
-<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        <span class="keywordflow">if</span>(objects[objectID].componentIndices.find(C::getFamily()) != objects[objectID].componentIndices.end())</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        <span class="keywordflow">if</span>(objects[objectID].componentIndices.find(C::componentFamily()) != objects[objectID].componentIndices.end())</div>
 <div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;        {</div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            ID componentIndex = objects[objectID].componentIndices[C::getFamily()];</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            ID componentIndex = objects[objectID].componentIndices[C::componentFamily()];</div>
 <div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;</div>
 <div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;            compPtr = &amp;getComponentArray&lt;C&gt;()[componentIndex];</div>
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;        }</div>
@@ -397,7 +397,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;</div>
 <div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    <span class="keywordflow">if</span>(!endRecursion(C()))</div>
 <div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    {</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        <span class="keywordflow">if</span>(prototype.componentIndices.find(C::getFamily()) != prototype.componentIndices.end())</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        <span class="keywordflow">if</span>(prototype.componentIndices.find(C::componentFamily()) != prototype.componentIndices.end())</div>
 <div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;            <span class="comment">//Return a pointer to the component converted to a boolean</span></div>
 <div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span> &amp;&amp; hasComponentsPrototype&lt;Args...&gt;(prototypeName);</div>
 <div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;</div>
@@ -408,7 +408,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;}</div>
 <div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;</div>
 <div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> ... Args&gt;</div>
-<div class="line"><a name="l00449"></a><span class="lineno"><a class="line" href="classocs_1_1_object_manager.html#a51eb5edb6df7ea598e87708b88ed3dd6">  449</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classocs_1_1_object_manager.html#a23a17c6257c4ac490bba474c9ca7c30a">ObjectManager::addComponentsToPrototype</a>(<span class="keyword">const</span> std::string&amp; prototypeName, <span class="keyword">const</span> C&amp; first, Args&amp;&amp; ... others)</div>
+<div class="line"><a name="l00449"></a><span class="lineno"><a class="line" href="classocs_1_1_object_manager.html#a51eb5edb6df7ea598e87708b88ed3dd6">  449</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classocs_1_1_object_manager.html#a23a17c6257c4ac490bba474c9ca7c30a">ObjectManager::assignToPrototype</a>(<span class="keyword">const</span> std::string&amp; prototypeName, <span class="keyword">const</span> C&amp; first, Args&amp;&amp; ... others)</div>
 <div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;{</div>
 <div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    registerComponent&lt;C&gt;();</div>
 <div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;</div>
@@ -419,17 +419,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;        prototype.objectID = prototypeIDCounter++;</div>
 <div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;</div>
 <div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;    <span class="comment">//If the prototype does not already have the given component</span></div>
-<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    <span class="keywordflow">if</span>(prototype.componentArrays.find(C::getFamily()) == prototype.componentArrays.end())</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;    <span class="keywordflow">if</span>(prototype.componentArrays.find(C::componentFamily()) == prototype.componentArrays.end())</div>
 <div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    {</div>
 <div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;        <span class="comment">//Add the first component in the list</span></div>
 <div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;        <span class="keyword">auto</span> compIdx = getPrototypeComponentArray&lt;C&gt;().add_item(first);</div>
 <div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;        prototype.componentArrays[C::getFamily()] = &amp;getPrototypeComponentArray&lt;C&gt;();</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        prototype.componentIndices[C::getFamily()] = compIdx;</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;        prototype.componentArrays[C::componentFamily()] = &amp;getPrototypeComponentArray&lt;C&gt;();</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        prototype.componentIndices[C::componentFamily()] = compIdx;</div>
 <div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;</div>
 <div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        <span class="comment">//If there are more components to add, keep adding them</span></div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;        <span class="keywordflow">if</span>(<span class="keyword">sizeof</span>...(others) &gt; 0)</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;            <a class="code" href="classocs_1_1_object_manager.html#a23a17c6257c4ac490bba474c9ca7c30a">addComponentsToPrototype</a>(prototypeName, others...);</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;            <a class="code" href="classocs_1_1_object_manager.html#a23a17c6257c4ac490bba474c9ca7c30a">assignToPrototype</a>(prototypeName, others...);</div>
 <div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;    }</div>
 <div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;</div>
 <div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;}</div>
@@ -444,12 +444,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;        <span class="keyword">auto</span>&amp; compIndices = objectPrototypes[prototypeName].componentIndices;</div>
 <div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;</div>
 <div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;        <span class="comment">//If the prototype has the component to remove</span></div>
-<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;        <span class="keywordflow">if</span>(compArray.find(C::getFamily()) != compArray.end())</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;        <span class="keywordflow">if</span>(compArray.find(C::componentFamily()) != compArray.end())</div>
 <div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;        {</div>
-<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;            compArray[C::getFamily()]-&gt;remove(compIndices[C::getFamily()]);</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;            compArray[C::componentFamily()]-&gt;remove(compIndices[C::componentFamily()]);</div>
 <div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;</div>
-<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;            compArray.erase(C::getFamily());</div>
-<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;            compIndices.erase(C::getFamily());</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;            compArray.erase(C::componentFamily());</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;            compIndices.erase(C::componentFamily());</div>
 <div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;        }</div>
 <div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;    }</div>
 <div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;}</div>
@@ -475,7 +475,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;</div>
 <div class="ttc" id="classocs_1_1_object_manager_html_a61dfb19822abeb42949375b90b666a60"><div class="ttname"><a href="classocs_1_1_object_manager.html#a61dfb19822abeb42949375b90b666a60">ocs::ObjectManager::setComponent</a></div><div class="ttdeci">void setComponent(ID, const C &amp;)</div><div class="ttdoc">Set a component from an existing component. </div><div class="ttdef"><b>Definition:</b> ObjectManager.hpp:283</div></div>
-<div class="ttc" id="classocs_1_1_object_manager_html_a23a17c6257c4ac490bba474c9ca7c30a"><div class="ttname"><a href="classocs_1_1_object_manager.html#a23a17c6257c4ac490bba474c9ca7c30a">ocs::ObjectManager::addComponentsToPrototype</a></div><div class="ttdeci">void addComponentsToPrototype(const std::string &amp;, const C &amp;, Args &amp;&amp;...)</div><div class="ttdoc">Add the given components to an object prototype under the specified name. </div></div>
+<div class="ttc" id="classocs_1_1_object_manager_html_a23a17c6257c4ac490bba474c9ca7c30a"><div class="ttname"><a href="classocs_1_1_object_manager.html#a23a17c6257c4ac490bba474c9ca7c30a">ocs::ObjectManager::assignToPrototype</a></div><div class="ttdeci">void assignToPrototype(const std::string &amp;, const C &amp;, Args &amp;&amp;...)</div><div class="ttdoc">Add the given components to an object prototype under the specified name. </div></div>
 <div class="ttc" id="classocs_1_1_object_manager_html_adaff0c77d0fca75660d848d986a545c1"><div class="ttname"><a href="classocs_1_1_object_manager.html#adaff0c77d0fca75660d848d986a545c1">ocs::ObjectManager::destroyObject</a></div><div class="ttdeci">void destroyObject(ID)</div><div class="ttdoc">Destroy a game object from the object&#39;s ID. </div><div class="ttdef"><b>Definition:</b> ObjectManager.cc:126</div></div>
 <div class="ttc" id="struct_component_array_html"><div class="ttname"><a href="struct_component_array.html">ComponentArray</a></div><div class="ttdef"><b>Definition:</b> ComponentArray.hpp:47</div></div>
 <div class="ttc" id="classocs_1_1_object_manager_html_a563a841ee6c2c3baa0c0f5442d24ddce"><div class="ttname"><a href="classocs_1_1_object_manager.html#a563a841ee6c2c3baa0c0f5442d24ddce">ocs::ObjectManager::doesPrototypeExist</a></div><div class="ttdeci">bool doesPrototypeExist(const std::string &amp;) const </div><div class="ttdoc">Check if a prototype of the specified name exists. </div><div class="ttdef"><b>Definition:</b> ObjectManager.cc:203</div></div>
@@ -490,16 +490,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="ttc" id="classocs_1_1_object_manager_html_a9852616971e16911de910c9e3b87a486"><div class="ttname"><a href="classocs_1_1_object_manager.html#a9852616971e16911de910c9e3b87a486">ocs::ObjectManager::serializeObject</a></div><div class="ttdeci">std::vector&lt; std::string &gt; serializeObject(ID)</div><div class="ttdoc">Serialize all components of an object. </div><div class="ttdef"><b>Definition:</b> ObjectManager.cc:178</div></div>
 <div class="ttc" id="classocs_1_1_object_manager_html_a80c87ef8b4fbee0922736bd644c9a25a"><div class="ttname"><a href="classocs_1_1_object_manager.html#a80c87ef8b4fbee0922736bd644c9a25a">ocs::ObjectManager::hasComponentsPrototype</a></div><div class="ttdeci">bool hasComponentsPrototype(const std::string &amp;)</div><div class="ttdoc">Check if a prototype has the specified prototype. </div><div class="ttdef"><b>Definition:</b> ObjectManager.hpp:422</div></div>
 <div class="ttc" id="structocs_1_1_component_html"><div class="ttname"><a href="structocs_1_1_component.html">ocs::Component</a></div><div class="ttdoc">All created components should inherit from this in the following way: </div><div class="ttdef"><b>Definition:</b> Component.hpp:71</div></div>
-<div class="ttc" id="classocs_1_1_object_manager_html_aa226587ce17992580973397d935fd18f"><div class="ttname"><a href="classocs_1_1_object_manager.html#aa226587ce17992580973397d935fd18f">ocs::ObjectManager::removeComponents</a></div><div class="ttdeci">ID removeComponents(ID)</div><div class="ttdoc">Remove a component from the object&#39;s ID. </div><div class="ttdef"><b>Definition:</b> ObjectManager.hpp:320</div></div>
+<div class="ttc" id="classocs_1_1_object_manager_html_aa226587ce17992580973397d935fd18f"><div class="ttname"><a href="classocs_1_1_object_manager.html#aa226587ce17992580973397d935fd18f">ocs::ObjectManager::remove</a></div><div class="ttdeci">ID remove(ID)</div><div class="ttdoc">Remove a component from the object&#39;s ID. </div><div class="ttdef"><b>Definition:</b> ObjectManager.hpp:320</div></div>
 <div class="ttc" id="classocs_1_1_object_manager_html_af257b22896f581bee0f93fea5c45322e"><div class="ttname"><a href="classocs_1_1_object_manager.html#af257b22896f581bee0f93fea5c45322e">ocs::ObjectManager::getComponent</a></div><div class="ttdeci">C *const getComponent(ID)</div><div class="ttdoc">Get a single component from the object&#39;s ID. </div><div class="ttdef"><b>Definition:</b> ObjectManager.hpp:403</div></div>
-<div class="ttc" id="classocs_1_1_object_manager_html_a04f930ee3bb6ca39ee93d3a66d3556a9"><div class="ttname"><a href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">ocs::ObjectManager::addComponents</a></div><div class="ttdeci">ID addComponents(ID, const C &amp;, Args &amp;&amp;...)</div><div class="ttdoc">Add a component from an exisiting component. </div></div>
+<div class="ttc" id="classocs_1_1_object_manager_html_a04f930ee3bb6ca39ee93d3a66d3556a9"><div class="ttname"><a href="classocs_1_1_object_manager.html#a04f930ee3bb6ca39ee93d3a66d3556a9">ocs::ObjectManager::assign</a></div><div class="ttdeci">ID assign(ID, const C &amp;, Args &amp;&amp;...)</div><div class="ttdoc">Add a component from an exisiting component. </div></div>
 <div class="ttc" id="classocs_1_1_object_manager_html_af0767b5192c37b0e0273ef8fa154edba"><div class="ttname"><a href="classocs_1_1_object_manager.html#af0767b5192c37b0e0273ef8fa154edba">ocs::ObjectManager::createObject</a></div><div class="ttdeci">ID createObject(const char *str)</div><div class="ttdoc">Create a game object from an object prototype (Overloaded to differentiate from template function) ...</div><div class="ttdef"><b>Definition:</b> ObjectManager.hpp:87</div></div>
 <div class="ttc" id="classocs_1_1_object_manager_html_a4d36b0124931206e107f2e1e2df2b32b"><div class="ttname"><a href="classocs_1_1_object_manager.html#a4d36b0124931206e107f2e1e2df2b32b">ocs::ObjectManager::isPrototype</a></div><div class="ttdeci">bool isPrototype(ID)</div><div class="ttdoc">Check if an object id is a prototype&#39;s id. </div></div>
 <div class="ttc" id="structocs_1_1_sentinal_type_html"><div class="ttname"><a href="structocs_1_1_sentinal_type.html">ocs::SentinalType</a></div><div class="ttdoc">Used to end the recursive calls that use variadic templates. </div><div class="ttdef"><b>Definition:</b> ObjectManager.hpp:40</div></div>
 <div class="ttc" id="class_packed_array_html"><div class="ttname"><a href="class_packed_array.html">PackedArray</a></div><div class="ttdoc">A wrapper around a vector trades space efficiency for a constant time remove function. All other indexes are unaffected through the use of lookup tables. </div><div class="ttdef"><b>Definition:</b> PackedArray.hpp:53</div></div>
 <div class="ttc" id="classocs_1_1_object_manager_html_a928fae3239953c9cd9870e1765c940c8"><div class="ttname"><a href="classocs_1_1_object_manager.html#a928fae3239953c9cd9870e1765c940c8">ocs::ObjectManager::destroyAllObjects</a></div><div class="ttdeci">void destroyAllObjects()</div><div class="ttdoc">Destroy all game objects. </div><div class="ttdef"><b>Definition:</b> ObjectManager.cc:155</div></div>
 <div class="ttc" id="classocs_1_1_object_manager_html_a0eab647ca923703064050c4063f04b5e"><div class="ttname"><a href="classocs_1_1_object_manager.html#a0eab647ca923703064050c4063f04b5e">ocs::ObjectManager::bindStringToComponent</a></div><div class="ttdeci">void bindStringToComponent(const std::string &amp;)</div><div class="ttdoc">Allow a component to be referred to by a string. </div><div class="ttdef"><b>Definition:</b> ObjectManager.hpp:354</div></div>
-<div class="ttc" id="classocs_1_1_object_manager_html_a511c3df356e7eca14c4f2faa7b5181c2"><div class="ttname"><a href="classocs_1_1_object_manager.html#a511c3df356e7eca14c4f2faa7b5181c2">ocs::ObjectManager::addComponentToPrototypeFromString</a></div><div class="ttdeci">void addComponentToPrototypeFromString(const std::string &amp;, const std::string &amp;, const std::string &amp;)</div><div class="ttdoc">Add components to a prototype using strings. Used mainly for prototype file loading. </div><div class="ttdef"><b>Definition:</b> ObjectManager.cc:208</div></div>
+<div class="ttc" id="classocs_1_1_object_manager_html_a511c3df356e7eca14c4f2faa7b5181c2"><div class="ttname"><a href="classocs_1_1_object_manager.html#a511c3df356e7eca14c4f2faa7b5181c2">ocs::ObjectManager::assignToPrototypeFromString</a></div><div class="ttdeci">void assignToPrototypeFromString(const std::string &amp;, const std::string &amp;, const std::string &amp;)</div><div class="ttdoc">Add components to a prototype using strings. Used mainly for prototype file loading. </div><div class="ttdef"><b>Definition:</b> ObjectManager.cc:208</div></div>
 <div class="ttc" id="classocs_1_1_object_manager_html_a426660bdfffbde2f3db1cdac5dee2924"><div class="ttname"><a href="classocs_1_1_object_manager.html#a426660bdfffbde2f3db1cdac5dee2924">ocs::ObjectManager::getTotalObjects</a></div><div class="ttdeci">ID getTotalObjects() const </div><div class="ttdoc">Get a count of all objects. </div><div class="ttdef"><b>Definition:</b> ObjectManager.cc:172</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -47,7 +47,7 @@ struct BaseComponent
 
     virtual std::string serialize() { return (""); }
     virtual void deSerialize(const std::string&) {}
-    virtual std::string getName() { return ""; }
+    virtual const std::string& getName() = 0;
 
     protected:
 
@@ -82,35 +82,37 @@ struct Component : public BaseComponent
     *
     *   \return The family id of the component.
     */
-    static Family getFamily()
+    static Family componentFamily()
     {
-        static Family family = BaseComponent::familyCounter++;
-        return family;
+        static Family _family = BaseComponent::familyCounter++;
+        return _family;
     }
 
-    std::string getName()
+    const std::string& getName()
     {
         return componentName();
     }
 
-    static std::string componentName()
+    static const std::string& componentName()
     {
-        return ComponentName<Derived, hasName<Derived>::value>::name();
+        return _componentName; //ComponentName<Derived, hasName<Derived>::value>::name();
     }
 
-private:
+protected:
 
-    template <typename T, bool>
-    struct ComponentName
-    {
-        static std::string name() {return T::name; }
-    };
+    // template <typename T, bool>
+    // struct ComponentName
+    // {
+    //     static const std::string& name() {return _name; }
+    // };
 
-    template <typename T>
-    struct ComponentName<T, false>
-    {
-        static std::string name() {return ""; }
-    };
+    // template <typename T>
+    // struct ComponentName<T, false>
+    // {
+    //     static const std::string& name() {return emptyName; }
+    // };
+
+    static std::string _componentName;
 };
 
 }//ocs

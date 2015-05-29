@@ -119,7 +119,7 @@ void MessageHub::postMessage(const Transceiver& transceiver, Args&& ... args)
 {
     messagePtr<BaseMessage> msg(new T(transceiver, std::forward<Args>(args)...));
 
-    messageBoard[T::getFamily()].push_back(msg);
+    messageBoard[T::componentFamily()].push_back(msg);
 }
 
 template<typename T>
@@ -127,7 +127,7 @@ std::vector<messagePtr<T>> MessageHub::readPostedMessages()
 {
     std::vector<messagePtr<T>> msgSlot;
 
-    for(auto& baseMsg : messageBoard[T::getFamily()])
+    for(auto& baseMsg : messageBoard[T::componentFamily()])
     {
         auto msg = std::static_pointer_cast<T>(baseMsg);
         msgSlot.push_back(msg);
@@ -141,7 +141,7 @@ void MessageHub::sendPrivateMessage(ID receiverID, const Transceiver& transceive
 {
     messagePtr<BaseMessage> msg( new T(transceiver, std::forward<Args>(args)...) );
 
-    privateMessages[receiverID][T::getFamily()].push_back(msg);
+    privateMessages[receiverID][T::componentFamily()].push_back(msg);
 }
 
 template<typename T>
@@ -149,7 +149,7 @@ std::vector<messagePtr<T>> MessageHub::readPrivateMessages(const Transceiver& tr
 {
     std::vector<messagePtr<T>> messages;
 
-    auto& privateMsgSlot = privateMessages[transceiver.getID()][T::getFamily()];
+    auto& privateMsgSlot = privateMessages[transceiver.getID()][T::componentFamily()];
     for(auto& msg : privateMsgSlot)
     {
         messagePtr<T> message = std::static_pointer_cast<T>(msg);

@@ -27,8 +27,8 @@ freely, subject to the following restrictions:
 #include <OCS/Commands/ObjectCommand.hpp>
 #include <OCS/Commands/CreateObject.hpp>
 #include <OCS/Commands/DestroyObject.hpp>
-#include <OCS/Commands/AddComponent.hpp>
-#include <OCS/Commands/RemoveComponent.hpp>
+#include <OCS/Commands/AssignCommand.hpp>
+#include <OCS/Commands/RemoveCommand.hpp>
 #include <OCS/Commands/RunScript.hpp>
 
 #endif

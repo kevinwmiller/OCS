@@ -47,14 +47,11 @@ void TEST_CREATE_OBJECT_COMMAND()
     std::cout << "Testing Create Object Command\n";
 
     std::string file("prototypes.txt");
-    objManager.bindStringToComponent<Position>("Position");
-    objManager.bindStringToComponent<Name>("Name");
-    objManager.bindStringToComponent<Motion>("Motion");
-    objManager.bindStringToComponent<Collidable>("Collidable");
+    objManager.registerComponents<Position, Name, Motion, Collidable>();
     int totalPrototypes = ObjectPrototypeLoader::loadPrototypeSet(objManager, file, "Prototypes","[Prototypes]");
     assert(totalPrototypes == 4);
     assert(objManager.doesPrototypeExist("Test1"));
-    
+
     CreateObject createCmd(objManager, Position(3, 4), Name("Test1"));
 
     assert(objManager.getTotalObjects() == 0);
@@ -139,7 +136,7 @@ void TEST_ADD_COMPONENTS_COMMAND()
     assert(objManager.getTotalComponents<Name>() == 3);
     assert(objManager.getComponent<Name>(id2)->name == "Test2");
 
-    AddComponents addMultiple(objManager, id2, Position(), Collidable());
+    Assign addMultiple(objManager, id2, Position(), Collidable());
 
     assert(objManager.getTotalComponents<Position>() == 1);
     assert(objManager.getTotalComponents<Collidable>() == 1);
@@ -172,8 +169,8 @@ void TEST_ADD_COMPONENTS_COMMAND()
     assert(objManager.getComponent<Collidable>(id4));
 
     //Try to add to object that doesn't exist
-    AddComponent<Position> add(objManager, 500, Position());
-    add.execute();
+    Assign assign(objManager, 500, Position());
+    assign.execute();
 
     objManager.destroyAllObjects();
     std::cout << "Finished Testing Add Components Command\n";
@@ -187,14 +184,14 @@ void TEST_REMOVE_COMPONENTS_COMMAND()
     assert(objManager.getTotalObjects() == 1);
     assert((objManager.hasComponents<Position, Motion, Name>(id)));
 
-    RemoveComponents<Position> rem(objManager, 0);
+    Remove<Position> rem(objManager, 0);
     assert((objManager.hasComponents<Position, Motion, Name>(id)));
 
     rem.execute();
     assert((!objManager.hasComponents<Position>(id)));
     rem.execute(); //Remove twice. Shouldn't do anything
 
-    RemoveComponents<Position, Motion, Name> rem2(objManager, 0);
+    Remove<Position, Motion, Name> rem2(objManager, 0);
     assert((!objManager.hasComponents<Position, Motion, Name>(id)));
     objManager.destroyAllObjects();
     std::cout << "Finished Testing Remove Components Command\n";

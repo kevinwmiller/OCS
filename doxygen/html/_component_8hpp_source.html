@@ -47,8 +47,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onfocus="searchBox.OnSearchFieldFocus(true)"
+               onblur="searchBox.OnSearchFieldFocus(false)"
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -71,7 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
+<iframe src="javascript:void(0)" frameborder="0"
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -144,7 +144,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="structocs_1_1_component.html">Component</a>() {}</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="structocs_1_1_component.html#a7f1be99ba50d34a25219f11a5eea5ec6">   81</a></span>&#160;    <span class="keyword">static</span> Family <a class="code" href="structocs_1_1_component.html#a7f1be99ba50d34a25219f11a5eea5ec6">getFamily</a>()</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="structocs_1_1_component.html#a7f1be99ba50d34a25219f11a5eea5ec6">   81</a></span>&#160;    <span class="keyword">static</span> Family <a class="code" href="structocs_1_1_component.html#a7f1be99ba50d34a25219f11a5eea5ec6">family</a>()</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keyword">static</span> Family family = BaseComponent::familyCounter++;</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> family;</div>
@@ -156,7 +156,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="structocs_1_1_base_component_html"><div class="ttname"><a href="structocs_1_1_base_component.html">ocs::BaseComponent</a></div><div class="ttdoc">Components should not inherit from this struct Please see Component<Derived> </div><div class="ttdef"><b>Definition:</b> Component.hpp:41</div></div>
 <div class="ttc" id="classocs_1_1_object_manager_html"><div class="ttname"><a href="classocs_1_1_object_manager.html">ocs::ObjectManager</a></div><div class="ttdoc">Manages the lifetime of game objects. A blank object can be created and components may be added manua...</div><div class="ttdef"><b>Definition:</b> ObjectManager.hpp:57</div></div>
-<div class="ttc" id="structocs_1_1_component_html_a7f1be99ba50d34a25219f11a5eea5ec6"><div class="ttname"><a href="structocs_1_1_component.html#a7f1be99ba50d34a25219f11a5eea5ec6">ocs::Component::getFamily</a></div><div class="ttdeci">static Family getFamily()</div><div class="ttdoc">Assigns a family id if the component does not already have one. Returns the family id for the given c...</div><div class="ttdef"><b>Definition:</b> Component.hpp:81</div></div>
+<div class="ttc" id="structocs_1_1_component_html_a7f1be99ba50d34a25219f11a5eea5ec6"><div class="ttname"><a href="structocs_1_1_component.html#a7f1be99ba50d34a25219f11a5eea5ec6">ocs::Component::family</a></div><div class="ttdeci">static Family componentFamily()</div><div class="ttdoc">Assigns a family id if the component does not already have one. Returns the family id for the given c...</div><div class="ttdef"><b>Definition:</b> Component.hpp:81</div></div>
 <div class="ttc" id="structocs_1_1_component_html"><div class="ttname"><a href="structocs_1_1_component.html">ocs::Component</a></div><div class="ttdoc">All created components should inherit from this in the following way: </div><div class="ttdef"><b>Definition:</b> Component.hpp:71</div></div>
 <div class="ttc" id="class_serializer_html"><div class="ttname"><a href="class_serializer.html">Serializer</a></div><div class="ttdoc">Serializer - Converts between a string and a value using a specified format string. Users specifiy a format to indicate how a string should be converted to a list of values. Inspired by printf and scanf. </div><div class="ttdef"><b>Definition:</b> Serializer.hpp:53</div></div>
 </div><!-- fragment --></div><!-- contents -->

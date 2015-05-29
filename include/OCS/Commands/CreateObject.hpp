@@ -7,7 +7,7 @@
 #include <vector>
 
 #include <OCS/Commands/Command.hpp>
-#include <OCS/Commands/AddComponent.hpp>
+#include <OCS/Commands/AssignCommand.hpp>
 
 #include <OCS/Objects/Object.hpp>
 #include <OCS/Objects/ObjectManager.hpp>
@@ -16,7 +16,7 @@ namespace ocs
 {
 
 /*! \brief Command to create an object
-*   
+*
 *   Objects can be created by passing any number of components to the contructor.
 *   A blank object will be created if no components are given
 *   Objects may also be created by giving the name of the prototype.
@@ -34,18 +34,18 @@ public:
     CreateObject(ObjectManager& _objManager, const S& _prototypeName, Args&& ... Components) :
         objManager(_objManager),
         prototypeName(_prototypeName),
-        add(new AddComponents(objManager, -1, Components...))
+        add(new Assign(objManager, -1, Components...))
     {
-  //      add = new 
+  //      add = new
     }
 
     template<typename ... Args>
     CreateObject(ObjectManager& _objManager, Args&& ... Components) :
         objManager(_objManager),
-        //add(AddComponents::add(objManager, -1, Components...))
-        add(new AddComponents(objManager, -1, Components...))
+        //add(assign::add(objManager, -1, Components...))
+        add(new Assign(objManager, -1, Components...))
     {
-        //add = new AddComponents(objManager, -1, Components...);
+        //add = new Assign(objManager, -1, Components...);
     }
 
     ~CreateObject()
@@ -53,7 +53,7 @@ public:
         //std::cout << "\tDestroying CreateObject\n";
     }
 
-    void execute() 
+    void execute()
     {
         //std::cout << "\tExecuting create " << prototypeName <<"\n";
         ID objectId = -1;
@@ -67,14 +67,14 @@ public:
         add->setObjectId(objectId);
         add->execute();
 
-        
+
     }
 
 private:
-    
+
     ObjectManager& objManager;
     std::string prototypeName;
-    std::unique_ptr<AddComponents> add;
+    std::unique_ptr<Assign> add;
 };
 
 }

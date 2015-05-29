@@ -47,8 +47,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
                onmouseout="return searchBox.OnSearchSelectHide()"
                alt=""/>
           <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onfocus="searchBox.OnSearchFieldFocus(true)"
+               onblur="searchBox.OnSearchFieldFocus(false)"
                onkeyup="searchBox.OnSearchFieldChange(event)"/>
           </span><span class="right">
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
@@ -74,7 +74,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
-<iframe src="javascript:void(0)" frameborder="0" 
+<iframe src="javascript:void(0)" frameborder="0"
         name="MSearchResults" id="MSearchResults">
 </iframe>
 </div>
@@ -93,7 +93,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>All created components should inherit from this in the following way:  
+<p>All created components should inherit from this in the following way:
  <a href="structocs_1_1_component.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_component_8hpp_source.html">Component.hpp</a>&gt;</code></p>
@@ -102,7 +102,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a7f1be99ba50d34a25219f11a5eea5ec6"><td class="memItemLeft" align="right" valign="top">static Family&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structocs_1_1_component.html#a7f1be99ba50d34a25219f11a5eea5ec6">getFamily</a> ()</td></tr>
+<tr class="memitem:a7f1be99ba50d34a25219f11a5eea5ec6"><td class="memItemLeft" align="right" valign="top">static Family&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structocs_1_1_component.html#a7f1be99ba50d34a25219f11a5eea5ec6">family</a> ()</td></tr>
 <tr class="memdesc:a7f1be99ba50d34a25219f11a5eea5ec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a family id if the component does not already have one. Returns the family id for the given component.  <a href="#a7f1be99ba50d34a25219f11a5eea5ec6">More...</a><br /></td></tr>
 <tr class="separator:a7f1be99ba50d34a25219f11a5eea5ec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -149,7 +149,7 @@ template&lt;typename Derived&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static Family <a class="el" href="structocs_1_1_component.html">ocs::Component</a>&lt; Derived &gt;::getFamily </td>
+          <td class="memname">static Family <a class="el" href="structocs_1_1_component.html">ocs::Component</a>&lt; Derived &gt;::family </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

@@ -87,11 +87,11 @@ struct Message : public BaseMessage
 
     virtual void log(std::ostream& out)
     {
-        out << "Message Family: " << getFamily() << std::endl;
+        out << "Message Family: " << componentFamily() << std::endl;
         out << "Sender: " << getSender() << std::endl;
     }
 
-    static Family getFamily()
+    static Family componentFamily()
     {
         static Family family = BaseMessage::familyCounter++;
         return family;

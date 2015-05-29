@@ -13,37 +13,6 @@
 namespace ocs
 {
 
-/*! \brief Command to Remove a single component to an object
-*   This command is use internally by 'RemoveComponents'(Plural). 
-*
-*   \see RemoveComponents
-*   Usage: 
-*       ocs::RemoveComponent<Position> rem(objManager, 3);
-*   This will create a RemoveComponent command object called "rem" which will
-*   remove the Position component (If it exists. Otherwise nothing happens) from the object with id 3
-*/
-template<typename C>
-class RemoveComponent : public ocs::ObjectCommand
-{
-
-public:
-
-    RemoveComponent(ObjectManager& _objManager, ID _objectId) :
-        ObjectCommand(_objManager, _objectId),
-        componentType()
-    {
-    }
-
-    void execute()
-    {
-        objManager.removeComponents<C>(objectId);
-    }
-
-private:
-
-    //!Stored to keep track of the component type
-    C componentType;
-};
 
 /*! \brief Command to remove multiple components to an object
 *
@@ -52,18 +21,18 @@ private:
 *   This command should be preferred over the singular version 'RemoveComponent' because the plural version
 *   provides the same functionality in addition to the ability to add multiple
 *   Usage:
-*       ocs::RemoveComponents<Position, Name> rem(objManager, 0);
+*       ocs::remove<Position, Name> rem(objManager, 0);
 *       ...some time later...
-*       rem.execute();       
+*       rem.execute();
 *
 */
 template<typename C, typename ... Args>
-class RemoveComponents : public ocs::ObjectCommand
+class Remove : public ocs::ObjectCommand
 {
 
 public:
 
-    RemoveComponents(ObjectManager& _objManager, ID _objectId) :
+    Remove(ObjectManager& _objManager, ID _objectId) :
         ObjectCommand(_objManager, _objectId)
     {
         storeComponents<C, Args...>();
@@ -80,7 +49,39 @@ public:
     }
 
 private:
-    
+
+    /*! \brief Command to Remove a single component to an object
+    *   This command is use internally by 'removeCommand'(Plural).
+    *
+    *   \see remove
+    *   Usage:
+    *       ocs::RemoveComponent<Position> rem(objManager, 3);
+    *   This will create a RemoveComponent command object called "rem" which will
+    *   remove the Position component (If it exists. Otherwise nothing happens) from the object with id 3
+    */
+    template<typename Component>
+    class RemoveComponent : public ocs::ObjectCommand
+    {
+
+    public:
+
+        RemoveComponent(ObjectManager& _objManager, ID _objectId) :
+            ObjectCommand(_objManager, _objectId),
+            componentType()
+        {
+        }
+
+        void execute()
+        {
+            objManager.remove<Component>(objectId);
+        }
+
+    private:
+
+        //!Stored to keep track of the component type
+        Component componentType;
+    };
+
     //!Create new RemoveComponent command objects until all components have been handled
     template<typename T = SentinalType, typename ... Others>
     void storeComponents()
@@ -91,7 +92,7 @@ private:
     }
 
     std::vector<std::unique_ptr<ObjectCommand>> remComponentCommands;
-    
+
 };
 
 }
