@@ -26,6 +26,6 @@ namespace ocs
 {
 
 Family BaseComponent::familyCounter = 0;
-std::string _componentName = "";
+std::string BaseComponent::emptyName = "";
 
 }//ocs

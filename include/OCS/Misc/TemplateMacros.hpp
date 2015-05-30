@@ -8,7 +8,7 @@
         typedef char no[2]; \
 \
         template <typename C> \
-        static yes& test(typename C::func*); \
+        static yes& test( decltype(&C::func)); \
 \
         template <typename C> \
         static no& test(...); \

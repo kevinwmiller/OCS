@@ -143,9 +143,6 @@ class ObjectManager : NonCopyable
         template<typename C = SentinalType, typename ... Args>
         bool hasComponentsPrototype(const std::string&);
 
-        // //!Check if an object id is a prototype's id
-        // bool isPrototype(ID);
-
         //!Must be called before using components
         template<typename C, typename ... Args>
         void registerComponents();
@@ -180,18 +177,20 @@ class ObjectManager : NonCopyable
         std::unordered_map<ID, BaseComponentArray*> compFamilyToProtoCompArray;
 
         //!Stores a base component array with an associated id
-        static std::unordered_map<ID, BaseComponentArray*> compFamilyToCompArray;
+        std::unordered_map<ID, BaseComponentArray*> compFamilyToCompArray;
 
         //!Stores a component id with an associated string
-        static std::unordered_map<std::string, ID> stringToCompFamily;
+        std::unordered_map<std::string, ID> stringToCompFamily;
 
         //!Stores components for object prototypes
         template<typename C>
         ComponentArray<C>& getPrototypeComponentArray() const;
 
         //!Overload function with an empty template paramater list to allow recursion
-        ID assign(ID) { return 0;}
+        ID assign(ID) { return 0; }
         ID assignFromString(Object&, std::unordered_map<ID, BaseComponentArray*>&) { }
+
+        ID addComponents(ID) { return 0; }
 
         //!Add a component from an exisiting component
         template<typename C, typename ... Args>
@@ -202,6 +201,9 @@ class ObjectManager : NonCopyable
 
         //!Overload function with an empty template paramater list to allow recursion
         void assignToPrototype(const std::string&) { }
+
+        template <typename C = void, typename ... Args, typename = typename std::enable_if<!std::is_base_of<BaseComponent, C>::value>::type >
+        void registerComponents() {}
 
         //!Set a component from an existing component
         template<typename C>
@@ -218,10 +220,6 @@ class ObjectManager : NonCopyable
         static ID versionCounter;
         static std::queue<ID> availableVersions;
 };
-
-template <>
-template <typename C, typename ... Args>
-void ObjectManager::registerComponents<void>() { }
 
 /** \brief Return a reference to an array of the specified component.
  *
@@ -353,11 +351,12 @@ bool ObjectManager::setComponent(ID objectID, const C& value)
 template<typename C, typename ... Args>
 ID ObjectManager::assign(ID objectID, const C& first, Args&& ... others)
 {
+    std::cout << "Assigning object\n";
     ID numAdded = 0;
     if (objects.isValid(objectID))
     {
         if (!hasComponents<C>(objectID))
-            numAdded = assign(objectID, first);
+            numAdded = addComponents(objectID, first);
         else
             setComponent(objectID, first);
 
@@ -373,6 +372,7 @@ Add any components that the object doesn't have or set the value of a component 
 template<typename ... Args>
 ID ObjectManager::assign(ID objectID, const std::string& componentName, const std::string& compValues, Args&& ... others)
 {
+    std::cout << "Assigning from string\n";
     if (objects.isValid(objectID))
         return assignFromString(objects[objectID], compFamilyToCompArray, componentName, compValues, others...);
     return 0;
@@ -430,6 +430,7 @@ void ObjectManager::bindStringToComponent(const std::string& compName)
 template<typename C, typename ... Args>
 void ObjectManager::registerComponents()
 {
+std::cout << "Registering components\n";
     registerComponent<C>();
     if (sizeof...(Args) > 0)
         registerComponents<Args...>();
@@ -445,8 +446,9 @@ void ObjectManager::registerComponent()
         compFamilyToCompArray[C::componentFamily()] = &getComponentArray<C>();
 
         //Bind component to it's name if set
-        if (C::componentName() != "")
+        if (C::componentName() != "") {
             bindStringToComponent<C>(C::componentName());
+            }
     }
 }
 

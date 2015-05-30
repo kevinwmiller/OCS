@@ -49,10 +49,11 @@ void TEST_OBJECT_PROTOTYPE()
     std::string file("prototypes.txt");
 
     std::cout << "\tBinding Components\n";
-    objManager.bindStringToComponent<Position>("Position");
-    objManager.bindStringToComponent<Name>("Name");
-    objManager.bindStringToComponent<Motion>("Motion");
-    objManager.bindStringToComponent<Collidable>("Collidable");
+    objManager.registerComponents<Position, Name, Motion, Collidable>();
+    // objManager.bindStringToComponent<Position>("Position");
+    // objManager.bindStringToComponent<Name>("Name");
+    // objManager.bindStringToComponent<Motion>("Motion");
+    // objManager.bindStringToComponent<Collidable>("Collidable");
 
     std::cout << "\tLoading Prototype Sets\n";
     int totalPrototypes = ObjectPrototypeLoader::loadPrototypeSet(objManager, file, "Prototypes","[Prototypes]");
@@ -93,13 +94,19 @@ void TEST_OBJECT_CREATION()
     objManager.createObject(Name(), Collidable());
     objManager.createObject(Name());
     objManager.createObject(Name());
+
+    std::cout << "Checking for test\n";
     assert(objManager.getComponent<Name>(id)->name == "Test");
+    std::cout << "Has name Test\n";
 
     id = objManager.createObject(Position(), Position(), Position(), Motion(), Collidable());
-    assert(objManager.getTotalComponents<Position>() == 2);
 
+    std::cout << "Testing total components\n";
+    assert(objManager.getTotalComponents<Position>() == 2);
+    std::cout << "Done Testing total components\n";
     auto objects = objManager.getObjects<Collidable, Name>();
 
+    std::cout << "Assert size\n";
     assert((objects.size() == 1 && objects[0] == 2));
 
     objManager.destroyAllObjects();

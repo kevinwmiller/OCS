@@ -23,15 +23,18 @@ freely, subject to the following restrictions:
 #ifndef _COMPONENTS_H
 #define _COMPONENTS_H
 
-#include <sstream>
+#include <iostream>
 #include <string>
+#include <sstream>
 
 #include "OCS/Components/Component.hpp"
-#include <iostream>
 
 struct Position : public ocs::Component<Position>
 {
-    Position(float _x = 0.0f, float _y = 0.0f) : x(_x), y(_y) { _componentName = "Position"; }
+    static const std::string& _name_() { static std::string name = "Position"; return name; };
+   // static const std::string _name_ = "Position";
+
+    Position(float _x = 0.0f, float _y = 0.0f) : x(_x), y(_y) { }
 
     std::string serialize() { return serializer.serialize("Position % %", x, y); }
     void deSerialize(const std::string& str) { serializer.deSerialize("% %", str, x, y); }
@@ -42,6 +45,7 @@ struct Position : public ocs::Component<Position>
 
 struct Motion : public ocs::Component<Motion>
 {
+    static const std::string& _name_() { static std::string name = "Motion"; return name; };
     Motion (float _speed = 0, float _angle = 0) : speed(_speed), angle(_angle) {}
 
     std::string serialize() { return serializer.serialize("Motion % %", speed, angle);}
@@ -52,6 +56,7 @@ struct Motion : public ocs::Component<Motion>
 
 struct Name : public ocs::Component<Name>
 {
+    static const std::string& _name_() { static std::string name = "Name"; return name; };
     Name(const std::string& _name = "") : name(_name) {}
 
     std::string serialize() { return "Name " + name; }
@@ -62,6 +67,7 @@ struct Name : public ocs::Component<Name>
 
 struct Collidable : public ocs::Component<Collidable>
 {
+    static const std::string& _name_() { static std::string name = "Collidable"; return name; };
     Collidable(float _top = 0.0f, float _left = 0.0f, float _width = 0.0f, float _height = 0.0f) :
         top(_top), left(_left), width(_width), height(_height) {}
 

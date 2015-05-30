@@ -23,6 +23,8 @@ freely, subject to the following restrictions:
 #ifndef OCS_COMPONENT_H
 #define OCS_COMPONENT_H
 
+#include <type_traits>
+
 #include "OCS/Misc/Config.hpp"
 #include "OCS/Utilities/Serializer.hpp"
 #include "OCS/Misc/TemplateMacros.hpp"
@@ -57,9 +59,10 @@ struct BaseComponent
 
         ID ownerID;
         static Family familyCounter;
+        static std::string emptyName;
 };
 
-CREATE_HAS_MEMBER_FUNCTION(name, hasName);
+CREATE_HAS_MEMBER_FUNCTION(_name_, hasName);
 
 /*! \brief All created components should inherit from this in the following way:
  *
@@ -95,24 +98,24 @@ struct Component : public BaseComponent
 
     static const std::string& componentName()
     {
-        return _componentName; //ComponentName<Derived, hasName<Derived>::value>::name();
+        std::cout << "In component name. Has name?: " << hasName<Derived>::value << "\n";
+        return ComponentName<Derived, hasName<Derived>::value>::name();
     }
 
 protected:
 
-    // template <typename T, bool>
-    // struct ComponentName
-    // {
-    //     static const std::string& name() {return _name; }
-    // };
+    template <typename T, bool>
+    struct ComponentName
+    {
+        static const std::string& name() { return emptyName; }
+    };
 
-    // template <typename T>
-    // struct ComponentName<T, false>
-    // {
-    //     static const std::string& name() {return emptyName; }
-    // };
+    template <typename T>
+    struct ComponentName<T, true>
+    {
+        static const std::string& name() { return T::_name_(); }
+    };
 
-    static std::string _componentName;
 };
 
 }//ocs
