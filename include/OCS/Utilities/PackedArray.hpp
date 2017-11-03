@@ -49,6 +49,11 @@ class BasePackedArray
         static const Index INVALID_INDEX = std::numeric_limits<Index>::max();
 };
 
+namespace ocs
+{
+    const auto invalidID = BasePackedArray::INVALID_INDEX;
+}
+
 /** \brief A wrapper around a vector trades space efficiency for a constant time remove function. All other
  *         indexes are unaffected through the use of lookup tables.
  *

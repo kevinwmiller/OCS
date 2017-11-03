@@ -52,7 +52,7 @@ Set (SRC_FILES  ${SRC_DIR}/Components/Component.cc
 				${SRC_DIR}/Utilities/TimeStamp.cc)
 				
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -O3")
 # C++14: set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y")
 
 include_directories(${INCLUDE_PATH})
@@ -83,6 +83,7 @@ IF(NOT EXISTS ${PROJECT_SOURCE_DIR}/build/Otherfile.txt)
 ENDIF(NOT EXISTS ${PROJECT_SOURCE_DIR}/build/Otherfile.txt)
 
 add_library(${PROJECT_NAME} SHARED ${SRC_FILES})
+add_library(${PROJECT_NAME}_s STATIC ${SRC_FILES})
 
 add_subdirectory(${TEST_DIR})
 
